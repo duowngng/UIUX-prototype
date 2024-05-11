@@ -11,7 +11,9 @@ import {
   LayoutDashboard,
   UsersRound,
   Settings,
-  ChevronRight
+  ChevronRight,
+  ListTodo,
+  PieChart
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -50,15 +52,15 @@ export default function SideNavbar({}: Props) {
             variant: "default"
           },
           {
-            title: "Users",
-            href: "/users",
-            icon: UsersRound,
+            title: "KPI",
+            href: "/kpi",
+            icon: PieChart,
             variant: "ghost"
           },
           {
-            title: "Ordrs",
-            href: "/orders",
-            icon: ShoppingCart,
+            title: "Task",
+            href: "/task",
+            icon: ListTodo,
             variant: "ghost"
           },
           {
