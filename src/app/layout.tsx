@@ -1,11 +1,11 @@
 /** @format */
-
+import '@mantine/core/styles.css';
+import '@mantine/charts/styles.css';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "../lib/utils";
 import SideNavbar from "@/components/SideNavbar";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

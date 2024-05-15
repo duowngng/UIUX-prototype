@@ -1,107 +1,88 @@
 /** @format */
-
+"use client";
+import { MantineProvider } from '@mantine/core';
 import PageTitle from "@/components/PageTitle";
-import Image from "next/image";
-import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
+import { DollarSign } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
 import BarChart from "@/components/BarChart";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
+import { DonutChart } from '@mantine/charts';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import clsx from 'clsx';
+const containerClasses = clsx('container');
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import Link from 'next/link';
+import OverviewContent from "@/app/dashboard/OverViewContent";
+import GoalContent from "@/app/dashboard/GoalContent";
+import HistoryContent from "@/app/dashboard/HistoryContent";
 
-const cardData: CardProps[] = [
-  {
-    label: "Total Revenue",
-    amount: "$45,231.89",
-    discription: "+20.1% from last month",
-    icon: DollarSign
-  },
-  {
-    label: "Subscriptions",
-    amount: "+2350",
-    discription: "+180.1% from last month",
-    icon: Users
-  },
-  {
-    label: "Sales",
-    amount: "+12,234",
-    discription: "+19% from last month",
-    icon: CreditCard
-  },
-  {
-    label: "Active Now",
-    amount: "+573",
-    discription: "+201 since last hour",
-    icon: Activity
-  }
-];
 
-const uesrSalesData: SalesProps[] = [
-  {
-    name: "Olivia Martin",
-    email: "olivia.martin@email.com",
-    saleAmount: "+$1,999.00"
-  },
-  {
-    name: "Jackson Lee",
-    email: "isabella.nguyen@email.com",
-    saleAmount: "+$1,999.00"
-  },
-  {
-    name: "Isabella Nguyen",
-    email: "isabella.nguyen@email.com",
-    saleAmount: "+$39.00"
-  },
-  {
-    name: "William Kim",
-    email: "will@email.com",
-    saleAmount: "+$299.00"
-  },
-  {
-    name: "Sofia Davis",
-    email: "sofia.davis@email.com",
-    saleAmount: "+$39.00"
-  }
-];
+import { useState } from 'react';
 
-export default function Home() {
+export default function Home(){
+  const [selectedContent, setSelectedContent] = useState('Tổng quan');
+
   return (
-    <div className="flex flex-col gap-5  w-full p-8 pt-6">
-      <PageTitle title="Dashboard" />
-      <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
-        {cardData.map((d, i) => (
-          <Card
-            key={i}
-            amount={d.amount}
-            discription={d.discription}
-            icon={d.icon}
-            label={d.label}
-          />
-        ))}
-      </section>
-      <section className="grid grid-cols-1  gap-4 transition-all lg:grid-cols-2">
-        <CardContent>
-          <p className="p-4 font-semibold">Overview</p>
+    
+    <div className="flex flex-col gap-5  w-full">
+    <PageTitle title="Dashboard" /> 
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem >
+          
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedContent('Tổng quan')}
+            >
+              Tổng quan
+            </NavigationMenuLink>
+            
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedContent('Mục tiêu')}
+            >
+              Mục tiêu
+            </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => setSelectedContent('Lịch sử')}
+            >
+              Lịch sử
+            </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+</NavigationMenuItem>
 
-          <BarChart />
-        </CardContent>
-        <CardContent className="flex justify-between gap-4">
-          <section>
-            <p>Recent Sales</p>
-            <p className="text-sm text-gray-400">
-              You made 265 sales this month.
-            </p>
-          </section>
-          {uesrSalesData.map((d, i) => (
-            <SalesCard
-              key={i}
-              email={d.email}
-              name={d.name}
-              saleAmount={d.saleAmount}
-            />
-          ))}
-        </CardContent>
+        </NavigationMenuList>
+      </NavigationMenu>
 
-        {/*  */}
-      </section>
+      {/* Render nội dung dựa trên selectedContent */}
+      {selectedContent === 'Tổng quan' && <OverviewContent />}
+      {selectedContent === 'Mục tiêu' && <GoalContent />}
+      {selectedContent === 'Lịch sử' && <HistoryContent />}
     </div>
   );
-}
+};
