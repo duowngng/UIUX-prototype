@@ -1,35 +1,34 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator"
 import { DataTable } from "@/components/ui/data-table";
 
-import { BillboardColumn, columns } from "./columns";
+import { CycleColumn, columns } from "./columns";
 
-interface BillboardClientProps {
-  data: BillboardColumn[];
+interface CycleClientProps {
+  data: CycleColumn[];
 }
 
-export const BillboardClient: React.FC<BillboardClientProps> = ({
+export const CycleClient: React.FC<CycleClientProps> = ({
   data
 }) => {
   const router = useRouter();
-  const params = useParams();
   
   return (
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Cycles (${data.length})`}
-          description="Manage your cycles"
+          title={`Chu kỳ (${data.length})`}
+          description="Quản lý chu kỳ"
         />
-        <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
+        <Button onClick={() => router.push(`/cycles/new`)}>
           <Plus className="mr-2 h-4 w-4" />
-          Add New
+          Tạo mới
         </Button>
       </div>
       <Separator />

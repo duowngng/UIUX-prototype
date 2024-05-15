@@ -44,25 +44,25 @@ export default function SideNavbar({}: Props) {
         isCollapsed={mobileWidth ? true : isCollapsed}
         links={[
           {
-            title: "Dashboard",
+            title: "Trang chủ",
             href: "/",
             icon: LayoutDashboard,
             variant: "default"
           },
           {
-            title: "Cycles",
+            title: "Chu kỳ",
             href: "/cycles",
             icon: CalendarRange,
             variant: "ghost"
           },
           {
-            title: "Goal Templates",
+            title: "Mẫu mục tiêu",
             href: "/goal-templates",
             icon: ListTodo,
             variant: "ghost"
           },
           {
-            title: "Settings",
+            title: "Cài đặt",
             href: "/settings",
             icon: Settings,
             variant: "ghost"

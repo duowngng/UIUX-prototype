@@ -5,25 +5,25 @@ import { ColumnDef } from "@tanstack/react-table"
 import { CellAction } from "./cell-action"
 
 
-export type BillboardColumn = {
+export type CycleColumn = {
   id: string
   name: string
   startDate: string
   endDate: string
 }
 
-export const columns: ColumnDef<BillboardColumn>[] = [
+export const columns: ColumnDef<CycleColumn>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Tên chu kỳ",
   },
   {
     accessorKey: "startDate",
-    header: "Start date",
+    header: "Ngày bắt đầu",
   },
   {
     accessorKey: "endDate",
-    header: "End date",
+    header: "Ngày kết thúc",
   },
   {
     id: "actions",

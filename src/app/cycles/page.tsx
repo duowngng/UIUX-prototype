@@ -1,27 +1,27 @@
 import { format } from "date-fns";
 
-import { BillboardClient } from "./components/client";
-import { BillboardColumn } from "./components/columns";
-import {cycles} from "@/app/data.json";
+import { CycleClient } from "./components/client";
+import { CycleColumn } from "./components/columns";
+import data from "@/app/data.json";
 
 
-const BillboardsPage = () => {
-  const billboards: any[] = cycles
+const CyclesPage = () => {
+  const cycles: any[] = data.cycles;
 
-  const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
+  const formattedCycles: CycleColumn[] = cycles.map((item) => ({
     id: item.id,
     name: item.name,
-    startDate: format(item.startDate, "MMMM do, yyyy"),
-    endDate: format(item.endDate, "MMMM do, yyyy")
+    startDate: format(item.dateRange.from, "dd/MM/yyyy"),
+    endDate: format(item.dateRange.to, "dd/MM/yyyy")
   }))
 
   return ( 
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillboardClient data={formattedBillboards}/>
+        <CycleClient data={formattedCycles}/>
       </div>
     </div> 
   );
 }
 
-export default BillboardsPage;
+export default CyclesPage;
