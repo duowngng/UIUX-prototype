@@ -201,14 +201,23 @@
     {
       "id": "template-1",
       "name": "Giảng dạy",
-      "description": "",
-      "kpis": []
+      "description": "Giảng dạy tại trường CNTT-TT",
+      "weight": 0.75,
+      "kpis": []  
     },
     {
       "id": "template-2",
       "name": "Nghiên cứu",
-      "description": "",
-      "kpis": []
+      "description": "Nghiên cứu tại lab 914",
+      "weight": 0.15,
+      "kpis": []  
+    },
+    {
+      "id": "template-3",
+      "name": "Phục vụ",
+      "description": "Phục vụ tại ĐHBK",
+      "weight": 0.15,
+      "kpis": []  
     }
   ]
 }
