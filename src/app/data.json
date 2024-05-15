@@ -197,7 +197,7 @@
       "history": []
     }
   ],
-  "goal-templates": [
+  "goal_templates": [
     {
       "id": "template-1",
       "name": "Giảng dạy",
