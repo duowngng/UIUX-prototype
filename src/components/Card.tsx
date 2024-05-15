@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 export type CardProps = {
   label: string;
-  icon: LucideIcon;
   amount: string;
   progress: number;
 };
@@ -26,12 +25,19 @@ export default function Card(props: CardProps) {
         <p>{props.progress}%</p>
         </section>
       <section className="flex flex-col gap-1">
-        <div className="flex justify-between gap-2 items-center">
-        Crosshair;,Clock3,Calendar
-        
-          <Progress value={props.progress} />
-          <p>{props.progress}%</p>
+        <div className="flex gap-4 items-center">
+          <Crosshair className="h-4 w-4 text-gray-400" />
+          <p className="truncate">4 MT cá nhân - 0 MT gián tiếp</p>
         </div>
+        <div className="flex gap-4 items-center">
+          <Clock3 className="h-4 w-4 text-gray-400" />
+          <p className="truncate">Ngày thứ 0 trên 91</p>
+        </div>
+        <div className="flex gap-4 items-center">
+          <Calendar className="h-4 w-4 text-gray-400" />
+          <p className="truncate">Chu kì : Oct 01- Dec 31</p>
+        </div>
+
       </section>
     </CardContent>
   );
@@ -48,3 +54,5 @@ export function CardContent(props: React.HTMLAttributes<HTMLDivElement>) {
     />
   );
 }
+
+
