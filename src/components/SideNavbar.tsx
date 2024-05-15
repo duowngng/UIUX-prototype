@@ -7,13 +7,11 @@ import { Nav } from "./ui/nav";
 type Props = {};
 
 import {
-  ShoppingCart,
   LayoutDashboard,
-  UsersRound,
   Settings,
   ChevronRight,
   ListTodo,
-  PieChart
+  CalendarRange
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -52,14 +50,14 @@ export default function SideNavbar({}: Props) {
             variant: "default"
           },
           {
-            title: "KPI",
-            href: "/kpi",
-            icon: PieChart,
+            title: "Cycles",
+            href: "/cycles",
+            icon: CalendarRange,
             variant: "ghost"
           },
           {
-            title: "Task",
-            href: "/task",
+            title: "Goal Templates",
+            href: "/goal-templates",
             icon: ListTodo,
             variant: "ghost"
           },

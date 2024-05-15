@@ -1,0 +1,210 @@
+{
+  "cycles": [
+    {
+      "id": "HK1-2023-2024",
+      "name": "Học kỳ 1 năm 2023-2024",
+      "startDate": "2023-09-01",
+      "endDate": "2024-01-31",
+      "goals": [
+        {
+          "id": "goal-1",
+          "name": "Giảng dạy",
+          "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
+          "weight": 0.75, 
+          "kpis": [
+            {
+              "id": "kpi-1",
+              "name": "Số giờ giảng dạy",
+              "target": 120,
+              "actual": 115,
+              "weight": 0.5 
+            },
+            {
+              "id": "kpi-2",
+              "name": "Điểm đánh giá môn học",
+              "target": 8.5,
+              "actual": 8.2,
+              "weight": 0.25 
+            },
+            {
+              "id": "kpi-3",
+              "name": "Tỷ lệ sinh viên hài lòng",
+              "target": 90,
+              "actual": 88,
+              "weight": 0.25 
+            }
+          ]
+        },
+        {
+          "id": "goal-2",
+          "name": "Nghiên cứu",
+          "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
+          "weight": 0.15,
+          "kpis": [
+            {
+              "id": "kpi-4",
+              "name": "Số bài báo khoa học xuất bản",
+              "target": 2,
+              "actual": 1,
+              "weight": 0.5 
+            },
+            {
+              "id": "kpi-5",
+              "name": "Chỉ số H-index",
+              "target": 5,
+              "actual": 4,
+              "weight": 0.3  
+            },
+            {
+              "id": "kpi-6",
+              "name": "Số lần tham dự hội thảo khoa học",
+              "target": 3,
+              "actual": 2,
+              "weight": 0.2
+            }
+          ]
+        },
+        {
+          "id": "goal-3",
+          "name": "Phục vụ",
+          "description": "Tham gia hướng dẫn sinh viên.",
+          "weight": 0.1,
+          "kpis": [
+            {
+              "id": "kpi-7",
+              "name": "Số giờ hướng dẫn sinh viên",
+              "target": 20,
+              "actual": 18,
+              "weight": 0.4
+            },
+            {
+              "id": "kpi-8",
+              "name": "Số sinh viên hướng dẫn",
+              "target": 30,
+              "actual": 25,
+              "weight": 0.3
+            },
+            {
+              "id": "kpi-9",
+              "name": "Tỷ lệ sinh viên hài lòng",
+              "target": 95,
+              "actual": 92,
+              "weight": 0.3
+            }
+          ]
+        }
+      ],
+      "history": []
+    },
+    {
+      "id": "HK2-2023-2024",
+      "name": "Học kỳ 2 năm 2023-2024",
+      "startDate": "2024-02-01",
+      "endDate": "2024-06-30",
+      "goals": [
+        {
+          "id": "goal-4",
+          "name": "Giảng dạy",
+          "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
+          "weight": 0.75,  
+          "kpis": [
+            {
+              "id": "kpi-10",
+              "name": "Số giờ giảng dạy",
+              "target": 120,
+              "actual": 110,
+              "weight": 0.5  
+            },
+            {
+              "id": "kpi-11",
+              "name": "Điểm đánh giá môn học",
+              "target": 8.5,
+              "actual": 8.3,
+              "weight": 0.25  
+            },
+            {
+              "id": "kpi-12",
+              "name": "Tỷ lệ sinh viên hài lòng",
+              "target": 90,
+              "actual": 89,
+              "weight": 0.25  
+            }
+          ]
+        },
+        {
+          "id": "goal-5",
+          "name": "Nghiên cứu",
+          "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
+          "weight": 0.15,  
+          "kpis": [
+            {
+              "id": "kpi-13",
+              "name": "Số bài báo khoa học xuất bản",
+              "target": 3,
+              "actual": 2,
+              "weight": 0.5  
+            },
+            {
+              "id": "kpi-14",
+              "name": "Chỉ số H-index",
+              "target": 5,
+              "actual": 4.5,
+              "weight": 0.3  
+            },
+            {
+              "id": "kpi-15",
+              "name": "Số lần tham dự hội thảo khoa học",
+              "target": 4,
+              "actual": 3,
+              "weight": 0.2  
+            }
+          ]
+        },
+        {
+          "id": "goal-6",
+          "name": "Phục vụ",
+          "description": "Tham gia các hoạt động hướng dẫn sinh viên.",
+          "weight": 0.1,  
+          "kpis": [
+            {
+              "id": "kpi-16",
+              "name": "Số giờ hướng dẫn sinh viên",
+              "target": 25,
+              "actual": 22,
+              "weight": 0.4  
+            },
+            {
+              "id": "kpi-17",
+              "name": "Số sinh viên đhướng dẫn",
+              "target": 35,
+              "actual": 30,
+              "weight": 0.3  
+            },
+            {
+              "id": "kpi-18",
+              "name": "Tỷ lệ sinh viên hài lòng",
+              "target": 95,
+              "actual": 93,
+              "weight": 0.3
+            }
+          ]
+        }
+      ],
+      "history": []  
+    }
+  ],
+  "goal-templates": [
+    {
+      "id": "template-1",
+      "name": "Giảng dạy",
+      "description": "",
+      "kpis": []  
+    },
+    {
+      "id": "template-2",
+      "name": "Nghiên cứu",
+      "description": "",
+      "kpis": []  
+    }
+  ]
+}
