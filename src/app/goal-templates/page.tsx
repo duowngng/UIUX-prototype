@@ -1,10 +1,10 @@
 import { BillboardClient } from "./components/client";
 import { BillboardColumn } from "./components/columns";
-import {goal_templates} from "@/app/data.json";
+import goal_templates from "@/app/data.json";
 
 
 const BillboardsPage = () => {
-  const billboards: any[] = goal_templates
+  const billboards: any[] = goal_templates['goal-templates'];
 
   const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
     id: item.id,
