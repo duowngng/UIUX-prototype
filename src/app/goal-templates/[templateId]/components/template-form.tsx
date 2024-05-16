@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
+import axios from "axios";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -52,9 +53,9 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
   const [loading, setLoading] = useState(false);
 
   const title = initialData ? "Chỉnh sửa mẫu" : "Tạo mẫu";
-  const description = initialData ? "Chỉnh sửa mẫu mục tiêu" : "Thêm mới mẫu mục tiêu";
+  const description = initialData ? "Chỉnh sửa mẫu mục tiêu" : "Tạo mẫu mục tiêu mới";
   const toastMessage = initialData ? "Đã sửa mẫu" : "Đã tạo mẫu";
-  const action = initialData ? "Lưu thay đổi" : "Tạo";
+  const action = initialData ? "Lưu thay đổi" : "Tạo mới";
 
   const form = useForm<TemplateFormValues>({
     resolver: zodResolver(formSchema),
@@ -85,14 +86,15 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
     try {
       setLoading(true);
       if (initialData) {
-        console.log("Update template", data);
+        await axios.patch(`/api/goal-templates/${params.templateId}`, data);
       } else {
-        console.log("Create template", data);
+      await axios.post(`/api/goal-templates`, data);
       }
-
+      router.refresh();
+      window.location.assign(`/goal-templates`);
       toast.success(toastMessage);
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Có lỗi xảy ra");
     } finally {
       setLoading(false);
     }
@@ -101,10 +103,12 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-
-      toast.success("Template deleted");
+      await axios.delete(`/api/goal-templates/${params.templateId}`);
+      router.refresh();
+      window.location.assign(`/goal-templates`);
+      toast.success("Đã xóa thành công");
     } catch (error) {
-      toast.error("Make sure to delete all catergories using this template first");
+      toast.error("Có lỗi xảy ra");
     } finally {
       setLoading(false);
       setOpen(false);

@@ -66,10 +66,10 @@ export const CycleForm: React.FC<CycleFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit cycle" : "Create cycle";
-  const description = initialData ? "Edit a cycle" : "Add a new cycle";
-  const toastMessage = initialData ? "Cycle updated" : "Cycle created";
-  const action = initialData ? "Save changes" : "Create";
+  const title = initialData ? "Chỉnh sửa chu kỳ" : "Tạo chu kỳ";
+  const description = initialData ? "Chỉnh sửa chu kỳ" : "Tạo chu kỳ mới";
+  const toastMessage = initialData ? "Đã sửa chu kỳ" : "Đã tạo chu kỳ";
+  const action = initialData ? "Lưu thay đổi" : "Tạo mới";
 
   const form = useForm<CycleFormValues>({
     resolver: zodResolver(formSchema),

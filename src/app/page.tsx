@@ -24,31 +24,34 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {cycles} from "@/app/data.json";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 const currentCycle = cycles[0];
 export default function Home(){
+  const router = useRouter();
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
-    
-    
     <div className="flex flex-col gap-5  w-full">
       <div className="flex items-center justify-between">
-                <PageTitle title={'Chu kỳ: ' + currentCycle.name} />
-                <DropdownMenu>
-              <DropdownMenuTrigger style={{ backgroundColor: "#0F172A", borderRadius: "10px 10px 10px 10px", color: "white", width: 124, height: 42 }}>
-                Nhập Xuất
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-              <DropdownMenuLabel>Xuất chu kỳ</DropdownMenuLabel>
-                <DropdownMenuItem>CSV</DropdownMenuItem>
-                <DropdownMenuLabel>Nhập chu kỳ</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Excel</DropdownMenuItem>
-                <DropdownMenuItem>CSV</DropdownMenuItem>
-                <DropdownMenuItem>JSon</DropdownMenuItem>
-               
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <PageTitle title={'Chu kỳ: ' + currentCycle.name} />
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button onClick={() => router.push(`/cycles/new`)}>
+                <ChevronDown className="mr-2 h-4 w-4" />
+                Tạo mới
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
 
             </div>
       <NavigationMenu>

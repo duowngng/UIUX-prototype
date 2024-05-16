@@ -201,21 +201,21 @@
     {
       "id": "template-1",
       "name": "Giảng dạy",
-      "description": "Giảng dạy tại trường CNTT-TT",
+      "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
       "weight": 75,
       "kpis": []
     },
     {
       "id": "template-2",
       "name": "Nghiên cứu",
-      "description": "Nghiên cứu tại lab 914",
+      "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
       "weight": 15,
       "kpis": []
     },
     {
       "id": "template-3",
       "name": "Phục vụ",
-      "description": "Phục vụ tại ĐHBK",
+      "description": "Tham gia hướng dẫn sinh viên.",
       "weight": 15,
       "kpis": []
     }
