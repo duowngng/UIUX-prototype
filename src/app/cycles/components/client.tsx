@@ -23,7 +23,7 @@ export const CycleClient: React.FC<CycleClientProps> = ({
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Chu kỳ (${data.length})`}
+          title={`Chu kỳ`}
           description="Quản lý chu kỳ"
         />
         <Button onClick={() => router.push(`/cycles/new`)}>
