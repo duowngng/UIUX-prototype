@@ -33,7 +33,7 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Cycle ID copied to clipboard");
+    toast.success("ID đã được sao chép");
   }
 
   const onDelete = async () => {
@@ -42,9 +42,9 @@ export const CellAction: React.FC<CellActionProps> = ({
       await axios.delete(`/api/cycles/${data.id}`);
       router.refresh();
       window.location.assign(`/cycles`);
-      toast.success("Cycle deleted");
+      toast.success("Đã xóa thành công");
     } catch (error) {
-      toast.error("Make sure to delete all catergories using this cycle first");
+      toast.error("Có lỗi xảy ra");
     } finally {
       setLoading(false);
       setOpen(false);

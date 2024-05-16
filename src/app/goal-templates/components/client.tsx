@@ -8,13 +8,13 @@ import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator"
 import { DataTable } from "@/components/ui/data-table";
 
-import { BillboardColumn, columns } from "./columns";
+import { TemplateColumn, columns } from "./columns";
 
-interface BillboardClientProps {
-  data: BillboardColumn[];
+interface TemplateClientProps {
+  data: TemplateColumn[];
 }
 
-export const BillboardClient: React.FC<BillboardClientProps> = ({
+export const TemplateClient: React.FC<TemplateClientProps> = ({
   data
 }) => {
   const router = useRouter();
@@ -24,12 +24,12 @@ export const BillboardClient: React.FC<BillboardClientProps> = ({
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Nhiệm vụ`}
-          description="Quản lí nhiệm vụ"
+          title={`Mẫu mục tiêu`}
+          description="Quản lí mẫu mục tiêu"
         />
-        <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
+        <Button onClick={() => router.push(`/goal-templates/new`)}>
           <Plus className="mr-2 h-4 w-4" />
-          Thêm nhiệm vụ
+          Tạo mới
         </Button>
       </div>
       <Separator />
