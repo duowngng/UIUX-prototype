@@ -19,18 +19,18 @@ export type CardProps = {
 export default function Card(props: CardProps) {
   return (
     <CardContent>
-      <section className="flex justify-between gap-2">
+      <section className="flex justify-between gap-2 ">
         {/* label */}
         <p className="text-sm">{props.label}</p>
       </section>        
       <section className="flex flex-col gap-1">
-        <h2 className="text-2xl font-semibold">{props.amount}</h2>
+        <h2 className="text-8xl font-semibold">{props.amount}</h2>
       </section>
       <section className="flex justify-between gap-2 items-center">
         <Progress value={props.progress} />
         <p>{props.progress}%</p>
         </section>
-      <section className="flex flex-col gap-1">
+      <section className="align-bottom flex flex-col gap-1">
         <div className="flex gap-4 items-center">
           <Crosshair className="h-4 w-4 text-gray-400" />
           <p className="truncate">{props.amount} MT cá nhân - 0 MT gián tiếp</p>

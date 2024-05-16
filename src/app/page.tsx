@@ -8,6 +8,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import { IconFingerprint } from '@tabler/icons-react';
+import { ActionIcon, Group } from '@mantine/core';
 import Link from 'next/link';
 import OverviewContent from "@/app/dashboard/OverViewContent";
 import GoalContent from "@/app/dashboard/GoalContent";
@@ -33,14 +35,18 @@ export default function Home(){
       <div className="flex items-center justify-between">
                 <PageTitle title={'Chu kỳ: ' + currentCycle.name} />
                 <DropdownMenu>
-              <DropdownMenuTrigger>Thêm</DropdownMenuTrigger>
+              <DropdownMenuTrigger style={{ backgroundColor: "#0F172A", borderRadius: "10px 10px 10px 10px", color: "white", width: 124, height: 42 }}>
+                Nhập Xuất
+              </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>Xuất chu kỳ</DropdownMenuLabel>
+                <DropdownMenuItem>CSV</DropdownMenuItem>
+                <DropdownMenuLabel>Nhập chu kỳ</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <DropdownMenuItem>Excel</DropdownMenuItem>
+                <DropdownMenuItem>CSV</DropdownMenuItem>
+                <DropdownMenuItem>JSon</DropdownMenuItem>
+               
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -85,8 +91,8 @@ export default function Home(){
 
       {/* Render nội dung dựa trên selectedContent */}
       {selectedContent === 'Tổng quan' && <OverviewContent cycle={currentCycle}/>}
-      {selectedContent === 'Mục tiêu' && <GoalContent />}
-      {selectedContent === 'Lịch sử' && <HistoryContent />}
+      {selectedContent === 'Mục tiêu' && <GoalContent cycle={currentCycle} />}
+      {selectedContent === 'Lịch sử' && <HistoryContent cycle={currentCycle} />}
     </div>
   );
 };
