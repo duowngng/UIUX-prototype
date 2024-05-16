@@ -21,7 +21,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
+import {cycles} from "@/app/data.json";
+const currentCycle = cycles[0];
 export default function Home(){
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
@@ -30,7 +31,7 @@ export default function Home(){
     
     <div className="flex flex-col gap-5  w-full">
       <div className="flex items-center justify-between">
-                <PageTitle title="Dashboard" /> 
+                <PageTitle title={'Chu kỳ: ' + currentCycle.name} />
                 <DropdownMenu>
               <DropdownMenuTrigger>Thêm</DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -83,7 +84,7 @@ export default function Home(){
       </NavigationMenu>
 
       {/* Render nội dung dựa trên selectedContent */}
-      {selectedContent === 'Tổng quan' && <OverviewContent />}
+      {selectedContent === 'Tổng quan' && <OverviewContent cycle={currentCycle}/>}
       {selectedContent === 'Mục tiêu' && <GoalContent />}
       {selectedContent === 'Lịch sử' && <HistoryContent />}
     </div>
