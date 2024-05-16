@@ -195,6 +195,14 @@
         }
       ],
       "history": []
+    },
+    {
+      "id": "Onthiđaihoc",
+      "name": "Ôn thi đại học",
+      "dateRange": {
+        "from": "2024-05-16T14:38:03.954Z",
+        "to": "2024-06-27T17:00:00.000Z"
+      }
     }
   ],
   "templates": [
@@ -218,6 +226,22 @@
       "description": "Tham gia hướng dẫn sinh viên.",
       "weight": 15,
       "kpis": []
+    },
+    {
+      "id": "Hoctaptot",
+      "name": "Học tập tốt",
+      "description": "Học tại hust",
+      "weight": 10,
+      "kpis": [
+        {
+          "name": "Điểm số",
+          "weight": 10
+        },
+        {
+          "name": "Có học bổng",
+          "weight": 90
+        }
+      ]
     }
   ]
 }
