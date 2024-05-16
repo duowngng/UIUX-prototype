@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 
 import { TemplateColumn } from "./columns";
 import { AlertModal } from "@/components/modals/alert-modal";
+import axios from "axios";
 
 interface CellActionProps {
   data: TemplateColumn;
@@ -38,7 +39,9 @@ export const CellAction: React.FC<CellActionProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-
+      await axios.delete(`/api/goal-templates/${data.id}`);
+      router.refresh();
+      window.location.assign(`/goal-templates`);
       toast.success("Đã xóa thành công");
     } catch (error) {
       toast.error("Có lỗi xảy ra");
@@ -71,7 +74,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             <Copy className="mr-2 h-4 w-4" />
             Copy ID
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`/templates/${data.id}`)}>
+          <DropdownMenuItem onClick={() => router.push(`/goal-templates/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" />
             Chỉnh sửa
           </DropdownMenuItem>
