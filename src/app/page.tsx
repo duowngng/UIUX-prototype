@@ -27,15 +27,16 @@ import {cycles} from "@/app/data.json";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Heading } from "@/components/ui/heading";
 const currentCycle = cycles[0];
 export default function Home(){
   const router = useRouter();
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
-    <div className="flex flex-col gap-5  w-full">
-      <div className="flex items-center justify-between">
-        <PageTitle title={'Chu kỳ: ' + currentCycle.name} />
+    <div className="flex flex-col gap-5 p-8 pt-6 w-full">
+      <div className="flex flex-1 space-y-4 items-center justify-between">
+        <Heading title={'Chu kỳ: ' + currentCycle.name} description="" />
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button onClick={() => router.push(`/cycles/new`)}>
