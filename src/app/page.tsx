@@ -1,57 +1,60 @@
 /** @format */
 "use client";
-import { MantineProvider } from '@mantine/core';
 import PageTitle from "@/components/PageTitle";
-import { DollarSign } from "lucide-react";
-import Card, { CardContent, CardProps } from "@/components/Card";
-import BarChart from "@/components/BarChart";
-import SalesCard, { SalesProps } from "@/components/SalesCard";
-import { DonutChart } from '@mantine/charts';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import clsx from 'clsx';
-const containerClasses = clsx('container');
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import Link from 'next/link';
 import OverviewContent from "@/app/dashboard/OverViewContent";
 import GoalContent from "@/app/dashboard/GoalContent";
 import HistoryContent from "@/app/dashboard/HistoryContent";
-
-
 import { useState } from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export default function Home(){
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
     
+    
     <div className="flex flex-col gap-5  w-full">
-    <PageTitle title="Dashboard" /> 
+      <div className="flex items-center justify-between">
+                <PageTitle title="Dashboard" /> 
+                <DropdownMenu>
+              <DropdownMenuTrigger>Thêm</DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>Subscription</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            </div>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem >
-          
+          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedContent('Tổng quan')}
             >
               Tổng quan
             </NavigationMenuLink>
-            
+            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>

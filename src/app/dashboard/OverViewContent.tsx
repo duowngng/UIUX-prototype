@@ -1,125 +1,51 @@
 /** @format */
 "use client";
 import { MantineProvider } from '@mantine/core';
-import PageTitle from "@/components/PageTitle";
-import { DollarSign } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
-import BarChart from "@/components/BarChart";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
 import { DonutChart } from '@mantine/charts';
+import { Progress } from '@mantine/core';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import clsx from 'clsx';
-const containerClasses = clsx('container mx-auto w-100' );
+import {cycles} from "@/app/data.json";
 
-const goals = clsx('display: flex;',
-    'justify-content: space-between;',
-    'align-items: center;',
-    'flex: 1 0 0;');
-
-
-
-
-import { useState } from 'react';
-
-const cardData: CardProps[] = [
-    {
-      label: "Mục tiêu",
-      amount: "4",
-      progress: 20
+const Goals = cycles[0].goals;
+const currentCycle = cycles[0];
+const fromDate = new Date(currentCycle.dateRange.from.toString());
+const toDate = new Date(currentCycle.dateRange.to.toString());
+const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
+const Currentime = new Date();
+const ctimeDiff = Math.abs(Currentime.getTime() - fromDate.getTime());
+const numDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+const cnumDays = Math.ceil(ctimeDiff / (1000 * 3600 * 24));
+const cardData_1 = {
+      label: cycles[0].id,
+      amount: Goals.length,
+      progress: 20,
+      dateRange: cycles[0].dateRange,
+      numDays: numDays,
+      cnumDays: cnumDays
     }
-  ];
-  
-  const goalData: SalesProps[] = [
-    {
-      name: "Thực hiện các công việc",
-      email: "olivia.martin@email.com",
-      saleAmount: "+$1,999.00"
-    }
-  ];
-
-import * as React from "react"
-import { addDays, format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
-import { DateRange } from "react-day-picker"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-
-export function DatePickerWithRange({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
-  })
-
-  return (
-    <div className={cn("grid gap-2", className)}>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            id="date"
-            variant={"outline"}
-            className={cn(
-              "w-[300px] justify-start text-left font-normal",
-              !date && "text-muted-foreground"
-            )}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
-                </>
-              ) : (
-                format(date.from, "LLL dd, y")
-              )
-            ) : (
-              <span>Pick a date</span>
-            )}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            initialFocus
-            mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
-            numberOfMonths={2}
-          />
-        </PopoverContent>
-      </Popover>
-    </div>
-  )
-}
-
+  ;
 
 
   export default function OverviewContent() {
     return (
       <MantineProvider> 
         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between ">
-          {cardData.map((d, i) => (
+        
             <Card
-              key={i}
-              amount={d.amount}
-              progress={d.progress}
-              label={d.label}
+              amount={cardData_1.amount}
+              progress={cardData_1.progress}
+              label={cardData_1.label}
+              dateRange={cardData_1.dateRange}
+              numDays={cardData_1.numDays}
+              cnumDays={cardData_1.cnumDays}
             />
-          ))}
           <CardContent>
           <p className="text-sm">Trạng thái mục tiêu </p>
           <DonutChart size={140} thickness={17} data={[
@@ -143,26 +69,69 @@ export function DatePickerWithRange({
                 Cập nhật lần cuối lúc 12:00 PM
               </p>
             </section>
-            {[1,2,3,4].map(( i) => (
-             <Accordion type="single" collapsible className ={goals}>
+            {Goals.map((d,i) => (
+             <Accordion type="single" collapsible >
              <AccordionItem value="item-1">
                <AccordionTrigger>
-               <DonutChart size={50} thickness={8} chartLabel = {10} data={[
-                  { name: 'Số lượng đối tác cần tiếp đón', value: 30, color: 'indigo.6' },
-                  { name: 'Số lời khen của đối tác về việc tiếp đón', value: 20, color: 'yellow.6' },
-                  { name: 'Số lượng cuộc gọi liên hệ từ bên ngoài', value: 60, color: 'gray.6' },
-                  ]}  className={containerClasses}/>
+               <div className ='grid grid-cols-1 gap-4' style={{width:"100%"}}> 
+                  <div className='flex justify-between'>
+                  <div className='flex gap-4'>
+                      <div className = ''>
+                              <DonutChart
+                                size={50}
+                                thickness={8}
+                                chartLabel={10}
+                                data={d.kpis.map((kpi) => ({
+                                  name: kpi.name,
+                                  value: kpi.weight,
+                                  color: kpi.actual/(0.000001+cnumDays)<kpi.target/numDays?'yellow.6':(kpi.actual/cnumDays<kpi.target/numDays?'indigo.6':'teal.6'),
+                                }))}
+                              />
+                      </div>
+                      <div className = 'truncate text-left'>
+                              <p>{d.id}-{d.name}</p>
+                              <p className="text-sm text-gray-400 t">
+                                {d.description}
+                                </p>
+                      </div>
+                  </div>
+
+                  <div className='flex gap-8 items-center mr-4'>
+                  <div className = 'truncate text-left'>
+                          <p>{cardData_1.dateRange.from}:{cardData_1.dateRange.to}</p>
+                  </div>
                   
-                   <section>
-                    <p>Thực hiện các hoạt động với đối tác bên ngoài</p>
-                    <p className="text-sm text-gray-400">
-                      Goals description
-                      </p>
-                  </section>
-                  <DatePickerWithRange/>
+                  <div className = 'w-40'>
+                    <Progress style={{width:"100%"}} size="md" value={100*d.kpis.reduce((total, kpi) => total + kpi.actual*kpi.weight*1.0/kpi.target, 0) } />
+                  </div>
+                  </div>
+                  </div>
+                    
+                </div>
                </AccordionTrigger>    
                <AccordionContent>
-                 Yes. It adheres to the WAI-ARIA design pattern.
+                  <section className="flex flex-col gap-4">
+                    <p className="text-sm text-gray-400">Thang đo KPI</p>
+                    <div className="grid grid-cols-1 gap-4">
+                      {d.kpis.map((kpi) => (
+                        <div className="grid grid-cols-3 gap-4">
+                          <div>
+                            <p>{kpi.name}</p>
+                          </div>
+                          <div>
+                            <p>Hiện tại: {kpi.actual} - Chỉ tiêu:{kpi.target} </p>
+                          </div>
+                          <div>
+                            <Progress 
+                            value={kpi.actual * 100.0 / kpi.target} size={'sm'} 
+                            color= {kpi.actual/(0.000001+cnumDays)<kpi.target/numDays?'yellow.6':(kpi.actual/cnumDays<kpi.target/numDays?'indigo.6':'teal.6')}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                  </section>
                </AccordionContent>
              </AccordionItem>
            </Accordion>
