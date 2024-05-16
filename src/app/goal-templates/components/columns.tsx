@@ -5,15 +5,15 @@ import { ColumnDef } from "@tanstack/react-table"
 import { CellAction } from "./cell-action"
 
 
-export type BillboardColumn = {
+export type TemplateColumn = {
   id: string
   name: string
   description: string
   weight: number
-  kpis: string
+  kpis: any[]
 }
 
-export const columns: ColumnDef<BillboardColumn>[] = [
+export const columns: ColumnDef<TemplateColumn>[] = [
   {
     accessorKey: "name",
     header: "Tên nhiệm vụ",
@@ -24,7 +24,7 @@ export const columns: ColumnDef<BillboardColumn>[] = [
   },
   {
     accessorKey: "weight",
-    header: "Tỷ lệ",
+    header: "Trọng số",
   },
   {
     id: "actions",

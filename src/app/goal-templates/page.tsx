@@ -1,12 +1,12 @@
-import { BillboardClient } from "./components/client";
-import { BillboardColumn } from "./components/columns";
-import {goal_templates} from "@/app/data.json";
+import { TemplateClient } from "./components/client";
+import { TemplateColumn } from "./components/columns";
+import data from "@/app/data.json";
 
 
-const BillboardsPage = () => {
-  const billboards: any[] = goal_templates
+const TemplatesPage = () => {
+  const templates: any[] = data.templates
 
-  const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
+  const formattedTemplates: TemplateColumn[] = templates.map((item) => ({
     id: item.id,
     name: item.name,
     description: item.description,
@@ -17,10 +17,10 @@ const BillboardsPage = () => {
   return ( 
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillboardClient data={formattedBillboards}/>
+        <TemplateClient data={formattedTemplates}/>
       </div>
     </div> 
   );
 }
 
-export default BillboardsPage;
+export default TemplatesPage;

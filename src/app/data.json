@@ -12,28 +12,28 @@
           "id": "goal-1",
           "name": "Giảng dạy",
           "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
-          "weight": 0.75,
+          "weight": 75,
           "kpis": [
             {
               "id": "kpi-1",
               "name": "Số giờ giảng dạy",
               "target": 120,
               "actual": 115,
-              "weight": 0.5
+              "weight": 50
             },
             {
               "id": "kpi-2",
               "name": "Điểm đánh giá môn học",
               "target": 8.5,
               "actual": 8.2,
-              "weight": 0.25
+              "weight": 25
             },
             {
               "id": "kpi-3",
               "name": "Tỷ lệ sinh viên hài lòng",
               "target": 90,
               "actual": 88,
-              "weight": 0.25
+              "weight": 25
             }
           ]
         },
@@ -41,28 +41,28 @@
           "id": "goal-2",
           "name": "Nghiên cứu",
           "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
-          "weight": 0.15,
+          "weight": 15,
           "kpis": [
             {
               "id": "kpi-4",
               "name": "Số bài báo khoa học xuất bản",
               "target": 2,
               "actual": 1,
-              "weight": 0.5
+              "weight": 50
             },
             {
               "id": "kpi-5",
               "name": "Chỉ số H-index",
               "target": 5,
               "actual": 4,
-              "weight": 0.3
+              "weight": 30
             },
             {
               "id": "kpi-6",
               "name": "Số lần tham dự hội thảo khoa học",
               "target": 3,
               "actual": 2,
-              "weight": 0.2
+              "weight": 20
             }
           ]
         },
@@ -70,28 +70,28 @@
           "id": "goal-3",
           "name": "Phục vụ",
           "description": "Tham gia hướng dẫn sinh viên.",
-          "weight": 0.1,
+          "weight": 10,
           "kpis": [
             {
               "id": "kpi-7",
               "name": "Số giờ hướng dẫn sinh viên",
               "target": 20,
               "actual": 18,
-              "weight": 0.4
+              "weight": 40
             },
             {
               "id": "kpi-8",
               "name": "Số sinh viên hướng dẫn",
               "target": 30,
               "actual": 25,
-              "weight": 0.3
+              "weight": 30
             },
             {
               "id": "kpi-9",
               "name": "Tỷ lệ sinh viên hài lòng",
               "target": 95,
               "actual": 92,
-              "weight": 0.3
+              "weight": 30
             }
           ]
         }
@@ -197,27 +197,27 @@
       "history": []
     }
   ],
-  "goal_templates": [
+  "templates": [
     {
       "id": "template-1",
       "name": "Giảng dạy",
       "description": "Giảng dạy tại trường CNTT-TT",
-      "weight": 0.75,
-      "kpis": []  
+      "weight": 75,
+      "kpis": []
     },
     {
       "id": "template-2",
       "name": "Nghiên cứu",
       "description": "Nghiên cứu tại lab 914",
-      "weight": 0.15,
-      "kpis": []  
+      "weight": 15,
+      "kpis": []
     },
     {
       "id": "template-3",
       "name": "Phục vụ",
       "description": "Phục vụ tại ĐHBK",
-      "weight": 0.15,
-      "kpis": []  
+      "weight": 15,
+      "kpis": []
     }
   ]
 }

@@ -95,7 +95,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       window.location.assign(`/cycles`);
       toast.success(toastMessage);
     } catch (error) {
-      toast.error("Đã xảy ra lỗi");
+      toast.error("Có lỗi xảy ra");
     } finally {
       setLoading(false);
     }
@@ -107,9 +107,9 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       await axios.delete(`/api/cycles/${params.cycleId}`);
       router.refresh();
       window.location.assign(`/cycles`);
-      toast.success("Cycle deleted");
+      toast.success("Đã xóa thành công");
     } catch (error) {
-      toast.error("Make sure to delete all catergories using this cycle first");
+      toast.error("Có lỗi xảy ra");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -186,7 +186,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                           format(field.value.from, "LLL dd, y")
                         )
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Chọn ngày</span>
                       )}
                     </Button>
                   </PopoverTrigger>
@@ -204,7 +204,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                     />
                   </PopoverContent>
                 </Popover>
-                <FormDescription>Select the start and end date</FormDescription>
+                <FormDescription>Lựa chọn thời gian bắt đầu và kết thúc</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
