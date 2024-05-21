@@ -43,8 +43,11 @@ export default function Home(){
                 <ChevronDown className="mr-2 h-4 w-4" />
                 Tạo mới
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
+          {/* <DropdownMenu> */}
+            {/* <DropdownMenuTrigger> */}
+              
+            {/* </DropdownMenuTrigger> */}
+            {/* <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
@@ -52,7 +55,7 @@ export default function Home(){
               <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuItem>Subscription</DropdownMenuItem>
             </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
 
             </div>
       <NavigationMenu>
