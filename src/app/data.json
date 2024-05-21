@@ -203,21 +203,60 @@
       "name": "Giảng dạy",
       "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
       "weight": 75,
-      "kpis": []
+      "kpis": [
+        {
+          "name": "Số giờ giảng dạy",
+          "weight": 50
+        },
+        {
+          "name": "Điểm đánh giá môn học",
+          "weight": 25
+        },
+        {
+          "name": "Tỷ lệ sinh viên hài lòng",
+          "weight": 25
+        }
+      ]
     },
     {
       "id": "template-2",
       "name": "Nghiên cứu",
       "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
       "weight": 15,
-      "kpis": []
+      "kpis": [
+        {
+          "name": "Số bài báo khoa học xuất bản",
+          "weight": 50
+        },
+        {
+          "name": "Chỉ số H-index",
+          "weight": 30
+        },
+        {
+          "name": "Số lần tham dự hội thảo khoa học",
+          "weight": 20
+        }
+      ]
     },
     {
       "id": "template-3",
       "name": "Phục vụ",
       "description": "Tham gia hướng dẫn sinh viên.",
       "weight": 15,
-      "kpis": []
+      "kpis": [
+        {
+          "name": "Số giờ hướng dẫn sinh viên",
+          "weight": 40
+        },
+        {
+          "name": "Số sinh viên hướng dẫn",
+          "weight": 30
+        },
+        {
+          "name": "Tỷ lệ sinh viên hài lòng",
+          "weight": 30
+        }
+      ]
     }
   ]
 }

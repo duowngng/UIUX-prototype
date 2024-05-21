@@ -213,6 +213,9 @@ export const CycleForm: React.FC<CycleFormProps> = ({
           <Button disabled={loading} className="ml-auto" type="submit" >
             {action}
           </Button>
+          <Button disabled={loading} variant="destructive" className="ml-4" type="button" onClick={() => router.push(`/cycles`)} >
+            Hủy
+          </Button>
         </form>
       </Form>
     </>

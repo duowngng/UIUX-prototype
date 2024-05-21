@@ -36,7 +36,7 @@ export default function Home(){
   return (
     <div className="flex flex-col gap-5 p-8 pt-6 w-full">
       <div className="flex flex-1 space-y-4 items-center justify-between">
-        <Heading title={'Chu kỳ: ' + currentCycle.name} description="" />
+        <Heading title={'Chu kỳ: ' + currentCycle.name} description="⠀" />
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button onClick={() => router.push(`/cycles/new`)}>

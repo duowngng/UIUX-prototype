@@ -16,7 +16,7 @@ export type TemplateColumn = {
 export const columns: ColumnDef<TemplateColumn>[] = [
   {
     accessorKey: "name",
-    header: "Tên nhiệm vụ",
+    header: "Tên mẫu mục tiêu",
   },
   {
     accessorKey: "description",

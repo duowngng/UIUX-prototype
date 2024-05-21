@@ -4,7 +4,7 @@ import * as z from "zod";
 
 import { useState } from "react";
 
-import { Trash } from "lucide-react";
+import { Plus, Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -129,7 +129,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
           <Button
             disabled={loading}
             variant="destructive"
-            size="sm"
+            size="icon"
             onClick={() => setOpen(true)}
           >
             <Trash className="h-4 w-4" />
@@ -197,12 +197,11 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
             control={control}
             name="kpis"
             render={() => (
-              <FormItem className="flex flex-col space-y-8">
+              <FormItem className="flex flex-col space-y-6">
                 <FormLabel>KPIs</FormLabel>
                 {fields.map((field, index) => (
                   <div key={field.id} className="flex flex-col gap-5 ml-20 ">
-                    
-                    <div className="grid grid-cols-12 gap-8">
+                    <div className="grid grid-cols-12 gap-8 mb-2">
                       <div className="flex flex-row col-span-11 gap-8">
                         <FormField
                           control={control}
@@ -239,12 +238,13 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
                         />
                       </div>
                       <Button
-                        className="w-fit mt-auto"
-                        type="button"
+                        className="mt-auto ml-auto"
+                        disabled={loading}
                         variant="destructive"
+                        size="icon"
                         onClick={() => remove(index)}
                       >
-                        Xóa
+                        <Trash className="h-4 w-4" />
                       </Button>
                     </div>
                     <Separator />
@@ -252,11 +252,13 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
                 ))}
                 <FormMessage />
                 <Button
-                  className="w-fit mt-4"
+                  className="mt-4"
+                  variant="secondary"
+                  size="icon"
                   type="button"
                   onClick={() => append({ name: "", weight: NaN })}
                 >
-                  Thêm KPI
+                  <Plus className="h-4 w-4" />
                 </Button>
               </FormItem>
             )}
@@ -264,6 +266,9 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
           <Separator />
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}
+          </Button>
+          <Button disabled={loading} variant="destructive" className="ml-4" type="button" onClick={() => router.push(`/cycles`)} >
+            Hủy
           </Button>
         </form>
       </Form>

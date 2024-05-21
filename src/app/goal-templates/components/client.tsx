@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { DataTable } from "@/components/ui/data-table";
 
 import { TemplateColumn, columns } from "./columns";
+import TemplatesTable from "./TemplateTable";
 
 interface TemplateClientProps {
   data: TemplateColumn[];
@@ -34,6 +35,7 @@ export const TemplateClient: React.FC<TemplateClientProps> = ({
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data}/>
+      {/* <TemplatesTable/> */}
     </>
   );
 }
