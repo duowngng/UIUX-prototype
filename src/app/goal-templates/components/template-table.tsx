@@ -41,7 +41,6 @@ export default function TemplatesTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [searchTerm, setSearchTerm] = useState('');
-
   const [openStates, setOpenStates] = useState({});
 
   const toggleOpenState = (id: any) => {
@@ -115,7 +114,7 @@ export default function TemplatesTable() {
           );
         },
         cell: ({ row }) => <div className="w-[150px]">{row.original.weight}</div>,
-        style: { width: '250px' },
+        style: { width: '150px' },
       },
       {
         id: 'actions',

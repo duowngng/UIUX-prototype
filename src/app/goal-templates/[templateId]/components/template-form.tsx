@@ -2,9 +2,9 @@
 
 import * as z from "zod";
 
-import { useState } from "react";
+import { use, useRef, useState } from "react";
 
-import { Plus, Trash } from "lucide-react";
+import { FilePlus2, Plus, Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,7 +56,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
   const description = initialData ? "Chỉnh sửa mẫu mục tiêu" : "Tạo mẫu mục tiêu mới";
   const toastMessage = initialData ? "Đã sửa mẫu" : "Đã tạo mẫu";
   const action = initialData ? "Lưu thay đổi" : "Tạo mới";
-
+  
   const form = useForm<TemplateFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
@@ -66,8 +66,8 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
       kpis: [],
     },
   });
-
-  const { control, register, handleSubmit } = useForm<TemplateFormValues>({
+  
+  const { control, setValue, handleSubmit } = useForm<TemplateFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
       name: "",
@@ -76,11 +76,40 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
       kpis: [],
     },
   });
-
+  
   const { fields, append, remove } = useFieldArray({
     control,
     name: "kpis",
   });
+  
+  const fileInputRef = useRef(null);
+
+  const handleFileChange = () => {
+    const sampleData = {
+      name: "Mẫu 1",
+      description: "Mô tả mẫu 1",
+      weight: 50,
+      kpis: [
+        {
+          name: "KPI 1",
+          weight: 50
+        },
+        {
+          name: "KPI 2",
+          weight: 50
+        }
+      ]
+    
+    };
+    setValue("name", sampleData.name);
+    setValue("description", sampleData.description);
+    setValue("weight", sampleData.weight);
+    setValue("kpis", sampleData.kpis);
+  };
+
+  const handleOpenFileChooser = () => {
+    fileInputRef.current.click();
+  };
 
   const onSubmit = async (data: TemplateFormValues) => {
     try {
@@ -135,6 +164,24 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
             <Trash className="h-4 w-4" />
           </Button>
         )}
+        {!initialData && (
+        <label htmlFor="fileInput">
+          <Button
+            disabled={loading}
+            onClick={handleOpenFileChooser}
+          >
+            <FilePlus2 className="mr-2 h-4 w-4" />
+            Tạo mới từ File
+          </Button>
+          <input
+            ref={fileInputRef}
+            id="fileInput"
+            type="file"
+            hidden
+            onChange={handleFileChange}
+          />
+        </label>
+      )}
       </div>
       <Separator />
       <Form {...form}>
@@ -267,7 +314,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}
           </Button>
-          <Button disabled={loading} variant="destructive" className="ml-4" type="button" onClick={() => router.push(`/cycles`)} >
+          <Button disabled={loading} variant="destructive" className="ml-4" type="button" onClick={() => router.push(`/goal-templates`)} >
             Hủy
           </Button>
         </form>
