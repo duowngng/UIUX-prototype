@@ -66,6 +66,12 @@ export default function SideNavbar({}: Props) {
             href: "/settings",
             icon: Settings,
             variant: "ghost"
+          },
+          {
+            title: "Cài đặt",
+            href: "/documents",
+            icon: Settings,
+            variant: "ghost"
           }
         ]}
       />

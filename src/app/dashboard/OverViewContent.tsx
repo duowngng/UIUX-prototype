@@ -11,10 +11,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import {cycles} from "@/app/data.json";
+import data from "@/app/data.json";
 
 import { List, ThemeIcon, rem } from '@mantine/core';
-import {  IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
+import { IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
 import { IconFingerprint } from '@tabler/icons-react';
 import { ActionIcon, Group } from '@mantine/core'; 
 
@@ -22,7 +22,7 @@ import { ActionIcon, Group } from '@mantine/core';
     
 
 
-export type Cycle = typeof cycles[0];
+export type Cycle = typeof data.cycles[0];
 export type CycleProps = {
   cycle: Cycle;
 };
@@ -150,7 +150,7 @@ export type CycleProps = {
                           />
                           </div>
                           <p className= 'col-start-11'>{progressData[1].progressKPIs[1].progressKPI.toFixed(1)}%</p>
-                         
+                        
                       </div>
             
             </div>
@@ -166,10 +166,10 @@ export type CycleProps = {
               </p>
             </section>
             {Goals.map((d,j) => (
-             <Accordion type="single" collapsible >
-             <AccordionItem value="item-1">
-               <AccordionTrigger>
-               <div className ='grid grid-cols-1 gap-4' style={{width:"100%"}}> 
+            <Accordion type="single" collapsible >
+            <AccordionItem value="item-1">
+              <AccordionTrigger>
+              <div className ='grid grid-cols-1 gap-4' style={{width:"100%"}}> 
                   <div className='flex justify-between'>
                   <div className='flex gap-4 '>
                       <div className = 'w-20 '>
@@ -208,24 +208,24 @@ export type CycleProps = {
                   </div>
                     
                 </div>
-               </AccordionTrigger>    
-               <AccordionContent>
+              </AccordionTrigger>    
+              <AccordionContent>
                   <section className="flex flex-col gap-4" style={{width:"100%"}}>
                     
                     <div className="grid grid-cols-12 ">
-                           <p className="text-sm text-gray-400">Thang đo KPI</p>
-                           <p className="text-sm text-gray-400 text-right col-start-5 ">Đã đạt</p>
-                           <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
-                           <p className="text-sm text-gray-400 text-center col-start-7">Đơn vị đo</p>
-                           <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
-                           <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
+                          <p className="text-sm text-gray-400">Thang đo KPI</p>
+                          <p className="text-sm text-gray-400 text-right col-start-5 ">Đã đạt</p>
+                          <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
+                          <p className="text-sm text-gray-400 text-center col-start-7">Đơn vị đo</p>
+                          <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
+                          <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
 
                     </div>
                       {d.kpis.map((kpi,i) => (
                         <div className="grid grid-cols-12  items-center">
                           
                             <p className='truncate col-span-3'>{kpi.name}</p>
-                            <p className="text-right col-start-4 col-start-5">{kpi.actual} </p>
+                            <p className="text-right col-start-5">{kpi.actual} </p>
                             <p className="text-right col-start-6">{kpi.target} </p>
                             <p className="text-center col-start-7">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
@@ -250,13 +250,11 @@ export type CycleProps = {
                       ))}
                     
                   </section>
-               </AccordionContent>
-             </AccordionItem>
-           </Accordion>
-           
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
             ))}
           </CardContent>
-  
           {/*  */}
         </section>
       </MantineProvider>
