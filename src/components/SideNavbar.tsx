@@ -1,80 +1,247 @@
-/** @format */
 "use client";
 
-import { useState } from "react";
-import { Nav } from "./ui/nav";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
-type Props = {};
+import { useEffect, useState } from "react";
 
 import {
+  CalendarRange,
+  FolderIcon as FolderLucideIcon,
+  FolderOpenIcon,
   LayoutDashboard,
-  Settings,
-  ChevronRight,
   ListTodo,
-  CalendarRange
+  PaletteIcon,
+  ServerIcon,
 } from "lucide-react";
-import { Button } from "./ui/button";
 
-import { useWindowWidth } from "@react-hook/window-size";
+import MenuIcon from "@/components/shared/icons/menu";
+import SettingsIcon from "@/components/shared/icons/settings";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-export default function SideNavbar({}: Props) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+import { cn } from "@/lib/utils";
 
-  const onlyWidth = useWindowWidth();
-  const mobileWidth = onlyWidth < 768;
+import ProfileMenu from "./profile-menu";
 
-  function toggleSidebar() {
-    setIsCollapsed(!isCollapsed);
-  }
+import { ScrollArea } from "./ui/scroll-area";
 
+export default function Sidebar() {
   return (
-    <div className="relative min-w-[80px] border-r px-3  pb-10 pt-24 ">
-      {!mobileWidth && (
-        <div className="absolute right-[-20px] top-7">
-          <Button
-            onClick={toggleSidebar}
-            variant="secondary"
-            className=" rounded-full p-2"
-          >
-            <ChevronRight />
-          </Button>
+    <>
+      <nav>
+        {/* sidebar for desktop */}
+        <SidebarComponent className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex" />
+
+        {/* move main screen to the right by width of the sidebar on desktop */}
+        <div className="lg:pl-72"></div>
+        {/* sidebar for mobile */}
+        <div className="sticky top-0 z-40 mb-1 flex h-14 shrink-0 items-center border-b border-gray-50/90 bg-gray-50 px-6 dark:border-none dark:border-black/10 dark:bg-black/95 sm:px-12 lg:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="mt-1 p-0.5 text-muted-foreground lg:hidden">
+                <MenuIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </SheetTrigger>
+            <SheetContent
+              side="left"
+              className="m-0 w-[280px] p-0 sm:w-[300px] lg:hidden"
+            >
+              <SidebarComponent className="flex" />
+            </SheetContent>
+          </Sheet>
+          <div className="flex flex-1 items-center justify-end gap-x-4 self-stretch lg:gap-x-6">
+            <ProfileMenu size="small" className="mr-3 mt-1.5" />
+          </div>
         </div>
-      )}
-      <Nav
-        isCollapsed={mobileWidth ? true : isCollapsed}
-        links={[
-          {
-            title: "Trang chủ",
-            href: "/",
-            icon: LayoutDashboard,
-            variant: "default"
-          },
-          {
-            title: "Chu kỳ",
-            href: "/cycles",
-            icon: CalendarRange,
-            variant: "ghost"
-          },
-          {
-            title: "Mẫu mục tiêu",
-            href: "/goal-templates",
-            icon: ListTodo,
-            variant: "ghost"
-          },
-          {
-            title: "Cài đặt",
-            href: "/settings",
-            icon: Settings,
-            variant: "ghost"
-          },
-          {
-            title: "Cài đặt",
-            href: "/documents",
-            icon: Settings,
-            variant: "ghost"
-          }
-        ]}
-      />
-    </div>
+      </nav>
+    </>
   );
 }
+
+export const SidebarComponent = ({ className }: { className?: string }) => {
+  const [showProBanner, setShowProBanner] = useState<boolean | null>(null);
+
+  const pathname = usePathname();
+  const params = useParams();
+  const router = useRouter();
+
+  const navigation = [
+    // {
+    //   name: "Overview",
+    //   href: "/overview",
+    //   icon: HomeIcon,
+    //   current: pathname.includes("overview"),
+    //   disabled: true,
+    // },
+    {
+      name: "Trang chủ",
+      href: "/",
+      icon: LayoutDashboard,
+      current: pathname === `/${params.cycleId}`,
+      active: false,
+      disabled: false,
+    },
+    {
+      name: "Chu kỳ",
+      href: "/cycles",
+      icon: CalendarRange,
+      current: pathname.includes("cycles"),
+      active: false,
+      disabled: false,
+    },
+    {
+      name: "Mẫu mục tiêu",
+      href: "/goal-templates",
+      icon: ListTodo,
+      current: pathname.includes("goal-templates"),
+      active: false,
+      disabled: false,
+    },
+    {
+      name: "Settings",
+      href: "/settings",
+      icon: SettingsIcon,
+      current:
+        pathname.includes("settings") &&
+        !pathname.includes("branding") &&
+        !pathname.includes("datarooms") &&
+        !pathname.includes("documents"),
+      active: false,
+      disabled: false,
+    },
+  ];
+
+  return (
+    <div>
+      <aside
+        className={cn(
+          "h-screen w-full flex-shrink-0 flex-col justify-between gap-y-6 bg-gray-50 px-4 pt-4 dark:bg-black lg:w-72 lg:px-6 lg:pt-6",
+          className,
+        )}
+      >
+        {/* Sidebar component, swap this element with another sidebar if you like */}
+
+        <div className="flex h-16 shrink-0 items-center space-x-3">
+          <p className="flex items-center text-3xl font-bold  tracking-tighter text-black dark:text-white">
+            Kapiota{" "}
+          </p>
+        </div>
+
+        {/* <div className="flex items-center gap-x-1">
+          <AddDocumentModal>
+            <Button
+              className="flex-1 text-left group flex gap-x-3 items-center justify-start px-3"
+              title="Add New Document"
+            >
+              <PlusIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <span>Add New Document</span>
+            </Button>
+          </AddDocumentModal>
+          <AddFolderModal>
+            <Button
+              size="icon"
+              variant="outline"
+              className="bg-gray-50 dark:bg-black border-gray-500 hover:bg-gray-200 hover:dark:bg-muted"
+            >
+              <FolderPlusIcon className="w-5 h-5 shrink-0" aria-hidden="true" />
+            </Button>
+          </AddFolderModal>
+        </div> */}
+
+        <ScrollArea className="flex-grow" showScrollbar>
+          <section className="flex flex-1 flex-col gap-y-6">
+            <div className="space-y-2">
+              {navigation.map((item) => {
+                if (item.name === "Documents") {
+                  return (
+                    <div key={item.name}>
+                      <button
+                        onClick={() => router.push(item.href)}
+                        disabled={item.disabled}
+                        className={cn(
+                          item.current
+                            ? "bg-gray-200 font-semibold text-foreground dark:bg-secondary"
+                            : " duration-200 hover:bg-gray-200 hover:dark:bg-muted",
+                          "group flex w-full items-center gap-x-2 rounded-md px-3 py-2 text-sm leading-6 disabled:cursor-default disabled:text-muted-foreground disabled:hover:bg-transparent",
+                        )}
+                      >
+                        <item.icon
+                          className="h-5 w-5 shrink-0"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </button>
+                      {/* {item.active ? <SiderbarFolders /> : null} */}
+                    </div>
+                  );
+                }
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => router.push(item.href)}
+                    disabled={item.disabled}
+                    className={cn(
+                      item.current
+                        ? "bg-gray-200 font-semibold text-foreground dark:bg-secondary"
+                        : " duration-200 hover:bg-gray-200 hover:dark:bg-muted",
+                      "group flex w-full items-center gap-x-2 rounded-md px-3 py-2 text-sm leading-6 disabled:cursor-default disabled:text-muted-foreground disabled:hover:bg-transparent",
+                    )}
+                  >
+                    <item.icon
+                      className="h-5 w-5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        </ScrollArea>
+        <div className="mb-4">
+          <div className="hidden w-full lg:block">
+            <ProfileMenu size="large" />
+          </div>
+        </div>
+      </aside>
+    </div>
+  );
+};
+
+//       <Nav
+//         isCollapsed={mobileWidth ? true : isCollapsed}
+//         links={[
+//           {
+//             title: "Trang chủ",
+//             href: "/",
+//             icon: LayoutDashboard,
+//             variant: "default"
+//           },
+//           {
+//             title: "Chu kỳ",
+//             href: "/cycles",
+//             icon: CalendarRange,
+//             variant: "ghost"
+//           },
+//           {
+//             title: "Mẫu mục tiêu",
+//             href: "/goal-templates",
+//             icon: ListTodo,
+//             variant: "ghost"
+//           },
+//           {
+//             title: "Cài đặt",
+//             href: "/settings",
+//             icon: Settings,
+//             variant: "ghost"
+//           },
+//           {
+//             title: "Cài đặt",
+//             href: "/documents",
+//             icon: Settings,
+//             variant: "ghost"
+//           }
+//         ]}
+//       />
+//     </div>
+//   );
+// }

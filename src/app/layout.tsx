@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen w-full bg-white text-black flex ",
+          "flex min-h-screen flex-col bg-gray-50 dark:bg-black lg:flex-row",
           inter.className,
           {
             "debug-screens": process.env.NODE_ENV === "development"
@@ -33,7 +33,7 @@ export default function RootLayout({
         {/* <p className="border">Sidebar</p> */}
         <SideNavbar />
         {/* main page */}
-        <div className="p-8 w-full">{children}</div>
+        <div className="w-full grow overflow-y-auto rounded-xl bg-white ring-1 ring-gray-200 dark:border-none dark:bg-gray-900 dark:ring-gray-800 lg:m-2">{children}</div>
       </body>
     </html>
   );
