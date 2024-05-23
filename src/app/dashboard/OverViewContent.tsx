@@ -186,7 +186,7 @@ export type CycleProps = {
                                 style={{zIndex: -j }}
                               />
                       </div>
-                      <div className = 'truncate text-left'>
+                      <div className = 'truncate text-left '>
                               <p>{d.id}-{d.name}</p>
                               <p className="text-sm text-gray-400 t">
                                 {d.description}
@@ -194,17 +194,18 @@ export type CycleProps = {
                       </div>
                   </div>
 
-                  <div className='flex gap-8 items-center mr-4'>
-                  <div className = 'truncate text-left'>
-                          <p>{cardData_1.dateRange.from}:{cardData_1.dateRange.to}</p>
+                  <div className='flex gap-8 items-center mr-4' style={{ flexWrap: 'wrap' }}>
+                    <div className='truncate text-left' style={{ flex: '1 1 auto' }}>
+                      <p>{cardData_1.dateRange.from}:{cardData_1.dateRange.to}</p>
+                    </div>
+
+                    <div className='w-40' style={{ flex: '0 0 auto' }}>
+                      <Progress style={{ width: '100%' }} size="md" value={progressData[j].progressGoal} 
+                        color={getProgressColor(progressData[j].dpg)} 
+                      />
+                    </div>
                   </div>
                   
-                  <div className = 'w-40'>
-                    <Progress style={{width:"100%"}} size="md" value={progressData[j].progressGoal} 
-                    color= {getProgressColor(progressData[j].dpg)} 
-                    />
-                  </div>
-                  </div>
                   </div>
                     
                 </div>
@@ -216,7 +217,7 @@ export type CycleProps = {
                           <p className="text-sm text-gray-400">Thang đo KPI</p>
                           <p className="text-sm text-gray-400 text-right col-start-5 ">Đã đạt</p>
                           <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
-                          <p className="text-sm text-gray-400 text-center col-start-7">Đơn vị đo</p>
+                          <p className="text-sm text-gray-400 text-center col-start-7 overflow-hidden">Đơn vị đo</p>
                           <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
                           <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
 
@@ -227,7 +228,7 @@ export type CycleProps = {
                             <p className='truncate col-span-3'>{kpi.name}</p>
                             <p className="text-right col-start-5">{kpi.actual} </p>
                             <p className="text-right col-start-6">{kpi.target} </p>
-                            <p className="text-center col-start-7">_</p>
+                            <p className="text-center col-start-7 overflow-hidden">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
                             
                             <div className='col-span-1 col-start-11'>

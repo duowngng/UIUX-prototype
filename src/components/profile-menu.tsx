@@ -44,12 +44,12 @@ const ProfileMenu = ({ className, size }: ProfileMenuProps) => {
               {/* )} */}
               {isSize && (
                 <span className="flex w-full items-center justify-between">
-                  <span className="sr-only">Your profile</span>
+                  <span className="sr-only">Thông tin cá nhân</span>
                   <span aria-hidden="true" className="line-clamp-2">
                     {/* {session?.user?.name
                       ? session?.user?.name
                       : session?.user?.email?.split("@")[0]} */}
-                      User
+                      Người dùng
                   </span>
                   <ChevronUp
                     className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
@@ -73,7 +73,7 @@ const ProfileMenu = ({ className, size }: ProfileMenuProps) => {
                   className="my-1 flex items-center px-3 py-2 text-sm duration-200 hover:bg-gray-200 dark:hover:bg-muted"
                 >
                   <HelpCircle className="mr-2 h-4 w-4" />
-                  Need Help?
+                  Trợ giúp?
                 </a>
 
                 <Link
@@ -82,7 +82,7 @@ const ProfileMenu = ({ className, size }: ProfileMenuProps) => {
                   href={""}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
-                  Sign Out
+                  Đăng xuất
                 </Link>
               </>
             {/* ) : null} */}
