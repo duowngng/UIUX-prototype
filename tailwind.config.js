@@ -6,6 +6,9 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
   theme: {
@@ -58,6 +61,14 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "gauge_fadeIn": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "gauge_fill": {
+          from: { "stroke-dashoffset": "332", opacity: "0" },
+          to: { opacity: "1" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -76,6 +87,8 @@ module.exports = {
         },
       },
       animation: {
+        "gauge_fadeIn": "gauge_fadeIn 1s ease forwards",
+        "gauge_fill": "gauge_fill 1s ease forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         'collapsible-down': 'collapsible-down 0.2s ease-out',

@@ -1,11 +1,11 @@
 {
   "cycles": [
     {
-      "id": "HK2-2023-2024",
-      "name": "Học kỳ 2 năm 2023-2024",
+      "id": "HK1-2023-2024",
+      "name": "Học kỳ 1 năm 2023-2024",
       "dateRange": {
-        "from": "2024-01-31",
-        "to": "2024-05-31"
+        "from": "2023-09-5",
+        "to": "2024-1-31"
       },
       "goals": [
         {
@@ -116,21 +116,21 @@
               "id": "kpi-10",
               "name": "Số giờ giảng dạy",
               "target": 120,
-              "actual": 110,
+              "actual": 60,
               "weight": 0.5
             },
             {
               "id": "kpi-11",
               "name": "Điểm đánh giá môn học",
               "target": 8.5,
-              "actual": 8.3,
+              "actual": 0,
               "weight": 0.25
             },
             {
               "id": "kpi-12",
               "name": "Tỷ lệ sinh viên hài lòng",
               "target": 90,
-              "actual": 89,
+              "actual": 20,
               "weight": 0.25
             }
           ]
@@ -195,14 +195,6 @@
         }
       ],
       "history": []
-    },
-    {
-      "id": "Onthiđaihoc",
-      "name": "Ôn thi đại học",
-      "dateRange": {
-        "from": "2024-05-16T14:38:03.954Z",
-        "to": "2024-06-27T17:00:00.000Z"
-      }
     }
   ],
   "templates": [

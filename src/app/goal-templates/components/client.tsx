@@ -10,6 +10,7 @@ import { DataTable } from "@/components/ui/data-table";
 
 import { TemplateColumn, columns } from "./columns";
 import TemplatesTable from "./template-table";
+import CycleList from "@/app/cycles/components/cycle-list";
 
 interface TemplateClientProps {
   data: TemplateColumn[];

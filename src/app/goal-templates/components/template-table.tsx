@@ -40,7 +40,7 @@ export default function TemplatesTable() {
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [openStates, setOpenStates] = useState({});
 
   const toggleOpenState = (id: any) => {
@@ -50,7 +50,7 @@ export default function TemplatesTable() {
     });
   };
 
-  const renderSortIcon = (column) => {
+  const renderSortIcon = (column: any) => {
     const sort = column.getIsSorted();
     if (!sort) {
       return <ChevronsLeftRightIcon className="ml-2 h-4 w-4 rotate-90" />;
@@ -145,8 +145,8 @@ export default function TemplatesTable() {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+  const handleSearch = (e: any) => {
+    setSearchQuery(e.target.value);
     setColumnFilters([{ id: 'name', value: e.target.value }]);
   };
 
@@ -155,11 +155,11 @@ export default function TemplatesTable() {
       <div className="relative flex items-center py-4 max-w-sm">
         <Input
           placeholder="Tìm kiếm"
-          value={searchTerm}
+          value={searchQuery}
           onChange={handleSearch}
           className="max-w-sm"
         />
-        {searchTerm && (
+        {searchQuery && (
           <X
             onClick={() => handleSearch({ target: { value: '' } })}
             size={16}

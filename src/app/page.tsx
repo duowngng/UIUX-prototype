@@ -23,12 +23,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {cycles} from "@/app/data.json";
+import data from "@/app/data.json";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Heading } from "@/components/ui/heading";
-const currentCycle = cycles[0];
+const currentCycle = data.cycles[0];
 export default function Home(){
   const router = useRouter();
   const [selectedContent, setSelectedContent] = useState('Tổng quan');

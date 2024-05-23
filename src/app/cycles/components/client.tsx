@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { DataTable } from "@/components/ui/data-table";
 
 import { CycleColumn, columns } from "./columns";
+import CycleList from "./cycle-list";
 
 interface CycleClientProps {
   data: CycleColumn[];
@@ -32,7 +33,8 @@ export const CycleClient: React.FC<CycleClientProps> = ({
         </Button>
       </div>
       <Separator />
-      <DataTable searchKey="name" columns={columns} data={data}/>
+      {/* <DataTable searchKey="name" columns={columns} data={data}/> */}
+      <CycleList data={data}/>
     </>
   );
 }

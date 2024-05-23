@@ -21,6 +21,14 @@ import {
   FormLabel, 
   FormMessage
 } from "@/components/ui/form";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
 import axios from "axios";
@@ -56,6 +64,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
   const description = initialData ? "Chỉnh sửa mẫu mục tiêu" : "Tạo mẫu mục tiêu mới";
   const toastMessage = initialData ? "Đã sửa mẫu" : "Đã tạo mẫu";
   const action = initialData ? "Lưu thay đổi" : "Tạo mới";
+  const breadcrumb = initialData? "Chỉnh sửa" : "Tạo mới"
   
   const form = useForm<TemplateFormValues>({
     resolver: zodResolver(formSchema),
@@ -152,6 +161,17 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
         onConfirm={onDelete}
         loading={loading}
       />
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/goal-templates">Mẫu mục tiêu</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{breadcrumb}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (

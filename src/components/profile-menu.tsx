@@ -27,12 +27,6 @@ const ProfileMenu = ({ className, size }: ProfileMenuProps) => {
   const isSize = size === "large";
   return (
     <div className="flex items-center justify-between space-x-2">
-      {status === "loading" ? (
-        <div className="flex w-full items-center gap-x-3 rounded-md p-2">
-          <Skeleton className="h-8 w-8 rounded-full" />
-          {isSize && <Skeleton className="h-7 w-[90%]" />}
-        </div>
-      ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="w-full">
             <div className="group flex w-full items-center rounded-full text-sm font-semibold leading-6 text-foreground hover:bg-gray-200 hover:dark:bg-secondary lg:gap-x-3 lg:rounded-md lg:p-2">
@@ -94,7 +88,6 @@ const ProfileMenu = ({ className, size }: ProfileMenuProps) => {
             {/* ) : null} */}
           </DropdownMenuContent>
         </DropdownMenu>
-      )}
     </div>
   );
 };
