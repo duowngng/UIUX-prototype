@@ -8,8 +8,6 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-import { IconFingerprint } from '@tabler/icons-react';
-import { ActionIcon, Group } from '@mantine/core';
 import Link from 'next/link';
 import OverviewContent from "./components/OverViewContent";
 import GoalContent from "./components/GoalContent";
@@ -26,17 +24,33 @@ import {
 import data from "@/app/data.json";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { Heading } from "@/components/ui/heading";
-const currentCycle = data.cycles[0];
-export default function Home(){
+
+import { useRouter } from "next/navigation";
+
+
+const Home = ({
+  params
+}: {
+  params: { cycleId: string}
+}) => {
+  let curCycle;
+  for (const key in data.cycles) {
+    if (data.cycles[key].id === params.cycleId) {
+      curCycle = data.cycles[key]  ;
+      break;
+    }
+  }
+  if (curCycle === undefined) {
+    curCycle = data.cycles[0];
+  }
   const router = useRouter();
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
     <div className="flex flex-col gap-5 p-8 pt-6 w-full">
       <div className="flex flex-1 space-y-4 items-center justify-between">
-        <Heading title={'Chu kỳ: ' + currentCycle.name} description="⠀" />
+        <Heading title={'Chu kỳ: ' + curCycle.name} description="⠀" />
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button onClick={() => router.push(`/cycles/new`)}>
@@ -45,19 +59,17 @@ export default function Home(){
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>Tạo </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
+              <DropdownMenuItem>Tạo chu kỳ</DropdownMenuItem>
+              <DropdownMenuItem>Tạo mẫu mục tiêu</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
             </div>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem >
-          <Link href="/" legacyBehavior passHref>
+         
             <NavigationMenuLink
               className={navigationMenuTriggerStyle() }
               onClick={() => setSelectedContent('Tổng quan')}
@@ -65,27 +77,22 @@ export default function Home(){
             >
               Tổng quan
             </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedContent('Mục tiêu')}
             >
               Mục tiêu
             </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedContent('Lịch sử')}
             >
               Lịch sử
             </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
           </NavigationMenuItem>
@@ -93,9 +100,10 @@ export default function Home(){
       </NavigationMenu>
 
       {/* Render nội dung dựa trên selectedContent */}
-      {selectedContent === 'Tổng quan' && <OverviewContent cycle={currentCycle}/>}
-      {selectedContent === 'Mục tiêu' && <GoalContent cycle={currentCycle} />}
-      {selectedContent === 'Lịch sử' && <HistoryContent cycle={currentCycle} />}
+      {selectedContent === 'Tổng quan' && <OverviewContent cycle={curCycle}/>}
+      {selectedContent === 'Mục tiêu' && <GoalContent cycle={curCycle} />}
+      {selectedContent === 'Lịch sử' && <HistoryContent cycle={curCycle} />}
     </div>
   );
 };
+export default Home;

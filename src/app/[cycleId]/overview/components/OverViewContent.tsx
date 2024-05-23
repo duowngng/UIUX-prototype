@@ -29,8 +29,8 @@ export type CycleProps = {
   cycle: Cycle;
 };
   export default function OverviewContent(props: CycleProps) {
-    const Goals = props.cycle.goals;
     const currentCycle = props.cycle;
+    const Goals = currentCycle.goals;
     const fromDate = new Date(currentCycle.dateRange.from.toString());
     const toDate = new Date(currentCycle.dateRange.to.toString());
     const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
@@ -40,15 +40,6 @@ export type CycleProps = {
     const cnumDays = Math.ceil(ctimeDiff / (1000 * 3600 * 24));
     const cycleProgress = (Number)(Goals.reduce((total, goal) => total + goal.weight*goal.kpis.reduce((total, kpi) => total + kpi.actual*kpi.weight*1.0/kpi.target, 0)/100, 0).toFixed(1));
     
-    const cardData_1 = {
-          label: 'Tổng quan mục tiêu',
-          amount: Goals.length,
-          progress: cycleProgress,
-          dateRange: currentCycle.dateRange,
-          numDays: numDays,
-          cnumDays: cnumDays
-        }
-      ;
       const f = (cnumDays+0.000001)/numDays;
       const dpc = cycleProgress/f;
       function getProgressColor(dp:number){
@@ -83,11 +74,11 @@ export type CycleProps = {
             <CardContent className= "grid content-between">
       <section className="flex justify-between ">
         {/* label */}
-        <p className="text-sm">{cardData_1.label}</p>
+        <p className="text-sm">Tổng quan mục tiêu</p>
       </section> 
       <div>
           <section className="flex flex-col py-4">
-            <h2 className="text-3xl font-semibold">{Number(cardData_1.progress)}%</h2>
+            <h2 className="text-3xl font-semibold">{Number(cycleProgress)}%</h2>
           </section>
           
           <Progress 
@@ -100,17 +91,17 @@ export type CycleProps = {
         <div className="flex gap-4 items-center">
           
           <Crosshair className="h-4 w-4 text-gray-400" />
-          <p className="truncate text-xs">{cardData_1.amount} MT cá nhân - 0 MT gián tiếp</p>
+          <p className="truncate text-xs">{Goals.length} MT cá nhân - 0 MT gián tiếp</p>
         </div>
         <div className="flex gap-4 items-center">
           <Clock3 className="h-4 w-4 text-gray-400" />
           <p className={`truncate text-xs`  }>
-            Ngày thứ <span className={`truncate  text-xs ${cnumDays > numDays ? 'text-red-600' : 'text-green-600'}` }>{cardData_1.cnumDays}</span>/{cardData_1.numDays}
+            Ngày thứ <span className={`truncate  text-xs ${cnumDays > numDays ? 'text-red-600' : 'text-green-600'}` }>{cnumDays}</span>/{numDays}
           </p>
         </div>
         <div className="flex gap-4 items-center">
           <Calendar className="h-4 w-4 text-gray-400" />
-          <p className="truncate text-xs">Chu kì :{cardData_1.dateRange.from} đến {cardData_1.dateRange.to}</p>
+          <p className="truncate text-xs">Chu kì :{currentCycle.dateRange.from} đến {currentCycle.dateRange.to}</p>
         </div>
 
       </section>
@@ -229,12 +220,12 @@ export type CycleProps = {
                                   color: getProgressColor(progressData[j].progressKPIs[i].dpk),
                                 }))} 
                                 className="absolute"
-                                style={{zIndex: -j }}
+                                style={{zIndex: -j+10 }}
                               />
                       </div>
                       <div className = 'truncate text-left '>
                               <p>{d.id}-{d.name}</p>
-                              <p className="text-sm text-gray-400 t">
+                              <p className="text-sm text-gray-400 truncate hover:text-clip">
                                 {d.description}
                                 </p>
                       </div>
@@ -242,7 +233,7 @@ export type CycleProps = {
 
                   <div className='flex gap-8 items-center mr-4' style={{ flexWrap: 'wrap' }}>
                     <div className='truncate text-left' style={{ flex: '1 1 auto' }}>
-                      <p>{cardData_1.dateRange.from}:{cardData_1.dateRange.to}</p>
+                      <p>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
                     </div>
 
                     <div className='w-40' style={{ flex: '0 0 auto' }}>
