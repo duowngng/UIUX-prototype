@@ -5,6 +5,7 @@ import Card, { CardContent, CardProps } from "@/components/Card";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
 import { DonutChart } from '@mantine/charts';
 import { Progress } from '@mantine/core';
+import { LucideIcon,Crosshair,Clock3,Calendar} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -13,10 +14,11 @@ import {
 } from "@/components/ui/accordion"
 import data from "@/app/data.json";
 
-import { List, ThemeIcon, rem } from '@mantine/core';
+import { List, ThemeIcon, rem ,Text } from '@mantine/core';
 import { IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
-import { IconFingerprint } from '@tabler/icons-react';
+// import { Edit } from '@tabler/icons-react';
 import { ActionIcon, Group } from '@mantine/core'; 
+import {Edit} from 'lucide-react';
 
 
     
@@ -36,9 +38,10 @@ export type CycleProps = {
     const ctimeDiff = Math.abs(Currentime.getTime() - fromDate.getTime());
     const numDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     const cnumDays = Math.ceil(ctimeDiff / (1000 * 3600 * 24));
-    const cycleProgress = Goals.reduce((total, goal) => total + goal.weight*goal.kpis.reduce((total, kpi) => total + kpi.actual*kpi.weight*1.0/kpi.target, 0)/100, 0).toFixed(1);
+    const cycleProgress = (Number)(Goals.reduce((total, goal) => total + goal.weight*goal.kpis.reduce((total, kpi) => total + kpi.actual*kpi.weight*1.0/kpi.target, 0)/100, 0).toFixed(1));
+    
     const cardData_1 = {
-          label: 'Số mục tiêu',
+          label: 'Tổng quan mục tiêu',
           amount: Goals.length,
           progress: cycleProgress,
           dateRange: currentCycle.dateRange,
@@ -47,6 +50,7 @@ export type CycleProps = {
         }
       ;
       const f = (cnumDays+0.000001)/numDays;
+      const dpc = cycleProgress/f;
       function getProgressColor(dp:number){
         if(dp==0){
           return 'gray.6';
@@ -76,51 +80,93 @@ export type CycleProps = {
       <MantineProvider> 
         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between ">
         
-            <Card
-              amount={cardData_1.amount}
-              progress={Number(cardData_1.progress)}
-              label={cardData_1.label}
-              dateRange={cardData_1.dateRange}
-              numDays={cardData_1.numDays}
-              cnumDays={cardData_1.cnumDays}
-            />
+            <CardContent className= "grid content-between">
+      <section className="flex justify-between ">
+        {/* label */}
+        <p className="text-sm">{cardData_1.label}</p>
+      </section> 
+      <div>
+          <section className="flex flex-col py-4">
+            <h2 className="text-3xl font-semibold">{Number(cardData_1.progress)}%</h2>
+          </section>
+          
+          <Progress 
+                          value={cycleProgress} size={'lg'} 
+                          color= {getProgressColor(dpc)}
+                          />
+        </div>       
+      
+      <section className="align-bottom flex flex-col gap-1">
+        <div className="flex gap-4 items-center">
+          
+          <Crosshair className="h-4 w-4 text-gray-400" />
+          <p className="truncate text-xs">{cardData_1.amount} MT cá nhân - 0 MT gián tiếp</p>
+        </div>
+        <div className="flex gap-4 items-center">
+          <Clock3 className="h-4 w-4 text-gray-400" />
+          <p className={`truncate text-xs`  }>
+            Ngày thứ <span className={`truncate  text-xs ${cnumDays > numDays ? 'text-red-600' : 'text-green-600'}` }>{cardData_1.cnumDays}</span>/{cardData_1.numDays}
+          </p>
+        </div>
+        <div className="flex gap-4 items-center">
+          <Calendar className="h-4 w-4 text-gray-400" />
+          <p className="truncate text-xs">Chu kì :{cardData_1.dateRange.from} đến {cardData_1.dateRange.to}</p>
+        </div>
+
+      </section>
+    </CardContent>
           <CardContent>
           <p className="text-sm">Trạng thái mục tiêu </p>
-          <div className ='flex gap-10 items-center'>
-            <div className='absolute text-5xl font-black ml-16'>{cycleProgress} </div>
+          <div className ='flex gap-10 items-center flex-wrap justify-center'>
+            {/* <div className='absolute text-5xl font-black ml-16'>{cycleProgress} </div> */}
+            <div>
           <DonutChart   
-          withLabelsLine withLabels style={{zIndex: 1 }}   size={150} thickness={17} 
+            chartLabel= {Goals.length}
+          withLabelsLine withLabels style={{zIndex: 1 }}   size={100} thickness={17} 
           data={Goals.map((goal,i) => ({
+                                  
                                   name: goal.name,
                                   value: Number(progressData[i].progressGoal.toFixed(1)),
                                   color: getProgressColor(progressData[i].dpg),         
                                 }))} />
-                      <List
+                                </div>
+                                
+                                <List
                           spacing="xs"
                           size="sm"
                           center
+                          className="md:flex-auto md:flex-wrap "
                         >
+                      
+                            
+                  
                           <List.Item  icon={
-                              <ThemeIcon color="teal.6" size={24} radius="xl">
+                              <ThemeIcon color="teal.6" size={14} radius="xl">
                                 <IconCircleCheck style={{ width: rem(16), height: rem(16) }} />
                               </ThemeIcon>
-                            }>Xuất sắc</List.Item>
+                            } className='text-xs'>Xuất sắc</List.Item>
                           <List.Item  icon={
-                              <ThemeIcon color="indigo.6" size={24} radius="xl">
+                              <ThemeIcon color="indigo.6" size={14} radius="xl">
                                 <IconCircle style={{ width: rem(16), height: rem(16) }} />
                               </ThemeIcon>
-                            }>Đúng tiến độ</List.Item>
+                            } className='text-xs'>Đúng tiến độ</List.Item>
                           <List.Item  icon={
-                              <ThemeIcon color="yellow.6" size={24} radius="xl">
+                              <ThemeIcon color="yellow.6" size={14} radius="xl">
                                 <IconCircleDashed style={{ width: rem(16), height: rem(16) }} />
                               </ThemeIcon>
-                            }>Chậm tiến độ</List.Item>
+                              
+                            }
+                            className='text-xs'>Chậm tiến độ</List.Item>
                           <List.Item  icon={
-                              <ThemeIcon color="gray.6" size={24} radius="xl">
+                              <ThemeIcon color="gray.6" size={14} radius="xl">
                                 <IconCircleDotted style={{ width: rem(16), height: rem(16) }} />
                               </ThemeIcon>
-                            }>Chưa làm</List.Item>
+                            }
+                            className='text-xs'>Chưa làm</List.Item>
                         </List>
+                        <div>
+                                </div>
+                      
           </div>
           
           </CardContent>
@@ -135,7 +181,7 @@ export type CycleProps = {
             <div className= " col-span-1 col-start-1 text-right"> 
                           <Group>
                             <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
-                              <IconFingerprint size={20} />
+                              <Edit size={20} />
                             </ActionIcon>
                           </Group>
                           
@@ -241,7 +287,7 @@ export type CycleProps = {
                             <div className= " col-span-1 col-start-13 text-right"> 
                             <Group>
                               <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
-                                <IconFingerprint size={20} />
+                                <Edit size={20} />
                               </ActionIcon>
                             </Group>
                             

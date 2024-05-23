@@ -59,8 +59,9 @@ export default function Home(){
           <NavigationMenuItem >
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
-              className={navigationMenuTriggerStyle()}
+              className={navigationMenuTriggerStyle() }
               onClick={() => setSelectedContent('Tổng quan')}
+              
             >
               Tổng quan
             </NavigationMenuLink>
