@@ -121,7 +121,7 @@ export type CycleProps = {
             {/* <div className='absolute text-5xl font-black ml-16'>{cycleProgress} </div> */}
             <div>
           <DonutChart   
-            chartLabel= {Goals.length}
+            chartLabel= {'SL: '+ Goals.length}
           withLabelsLine withLabels style={{zIndex: 1 }}   size={100} thickness={17} 
           data={Goals.map((goal,i) => ({
                                   
