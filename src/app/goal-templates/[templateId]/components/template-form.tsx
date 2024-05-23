@@ -129,7 +129,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
       await axios.post(`/api/goal-templates`, data);
       }
       router.refresh();
-      window.location.assign(`/goal-templates`);
+      router.push(`/goal-templates`); 
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Có lỗi xảy ra");
@@ -143,7 +143,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
       setLoading(true);
       await axios.delete(`/api/goal-templates/${params.templateId}`);
       router.refresh();
-      window.location.assign(`/goal-templates`);
+      router.push(`/goal-templates`);
       toast.success("Đã xóa thành công");
     } catch (error) {
       toast.error("Có lỗi xảy ra");
