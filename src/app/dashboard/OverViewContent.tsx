@@ -89,7 +89,7 @@ export type CycleProps = {
           <div className ='flex gap-10 items-center'>
             <div className='absolute text-5xl font-black ml-16'>{cycleProgress} </div>
           <DonutChart   
-          withLabelsLine withLabels style={{zIndex: 9999 }}   size={150} thickness={17} 
+          withLabelsLine withLabels style={{zIndex: 1 }}   size={150} thickness={17} 
           data={Goals.map((goal,i) => ({
                                   name: goal.name,
                                   value: Number(progressData[i].progressGoal.toFixed(1)),
@@ -183,7 +183,7 @@ export type CycleProps = {
                                   color: getProgressColor(progressData[j].progressKPIs[i].dpk),
                                 }))} 
                                 className="absolute"
-                                style={{zIndex: 1000-j }}
+                                style={{zIndex: -j }}
                               />
                       </div>
                       <div className = 'truncate text-left'>

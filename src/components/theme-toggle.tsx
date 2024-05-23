@@ -22,7 +22,7 @@ export function ModeToggle() {
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger className="flex w-full items-center rounded-none !py-2 px-3 pr-2 text-sm duration-200 hover:!bg-gray-200 dark:hover:!bg-muted">
-        <Palette className="mr-2 h-4 w-4" /> Themes
+        <Palette className="mr-2 h-4 w-4" /> Giao diện
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent className="w-[180px]">
@@ -33,15 +33,15 @@ export function ModeToggle() {
           >
             <DropdownMenuRadioItem value="light">
               <Sun className="mr-2 h-4 w-4" />
-              Light
+              Sáng
             </DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="dark">
               <Moon className="mr-2 h-4 w-4" />
-              Dark
+              Tối
             </DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="system">
               <Monitor className="mr-2 h-4 w-4" />
-              System
+              Hệ thống
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuSubContent>
