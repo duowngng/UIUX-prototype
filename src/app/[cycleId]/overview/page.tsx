@@ -11,9 +11,9 @@ import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { IconFingerprint } from '@tabler/icons-react';
 import { ActionIcon, Group } from '@mantine/core';
 import Link from 'next/link';
-import OverviewContent from "@/app/dashboard/OverViewContent";
-import GoalContent from "@/app/dashboard/GoalContent";
-import HistoryContent from "@/app/dashboard/HistoryContent";
+import OverviewContent from "./components/OverViewContent";
+import GoalContent from "./components/GoalContent";
+import HistoryContent from "./components/HistoryContent";
 import { useState } from 'react';
 import {
   DropdownMenu,

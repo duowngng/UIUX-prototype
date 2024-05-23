@@ -23,6 +23,7 @@ import {
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { AlertModal } from "@/components/modals/alert-modal";
 
 type CyclesCardProps = {
   cycle: any;
@@ -98,7 +99,7 @@ export default function CyclesCard({
       setLoading(true);
       await axios.delete(`/api/cycles/${cycle.id}`);
       router.refresh();
-      window.location.assign(`/cycles`);
+      router.push(`/cycles`);
       toast.success("Đã xóa thành công");
     } catch (error) {
       toast.error("Có lỗi xảy ra");
@@ -140,6 +141,10 @@ export default function CyclesCard({
     }
   };
 
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  }
+
   return (
     <>
       <li className="group/row relative flex items-center justify-between rounded-lg border-0 p-3 ring-1 ring-gray-200 transition-all hover:bg-secondary hover:ring-gray-300 dark:bg-secondary dark:ring-gray-700 hover:dark:ring-gray-500 sm:p-4">
@@ -152,7 +157,7 @@ export default function CyclesCard({
             <div className="flex-col items-center">
               <h1 className="min-w-0 max-w-[150px] truncate font-bold leading-6 text-foreground sm:max-w-md">
                 <Link
-                  href={`/${cycle.id}`}
+                  href={`/${cycle.id}/overview`}
                   className="w-full truncate"
                 >
                   <span>{cycle.name}</span>
@@ -192,6 +197,12 @@ export default function CyclesCard({
         </div>
         
         <div className="flex flex-row space-x-2">
+          <AlertModal 
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            onConfirm={onDelete}
+            loading={loading}
+          />
           <DropdownMenu open={menuOpen} onOpenChange={handleMenuStateChange}>
             <DropdownMenuTrigger asChild>
               <Button
@@ -203,17 +214,17 @@ export default function CyclesCard({
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" ref={dropdownRef}>
+            <DropdownMenuContent align="end" ref={dropdownRef} onClick={handleDropdownClick}>
               <DropdownMenuLabel>Hành động</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => onCopy(cycle.id)}>
+              <DropdownMenuItem onClick={(e) => { handleDropdownClick(e); onCopy(cycle.id); }}>
                 <Copy className="mr-2 h-4 w-4" />
                 Copy ID
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push(`/cycles/${cycle.id}`)}>
+              <DropdownMenuItem onClick={(e) => { handleDropdownClick(e); router.push(`/cycles/${cycle.id}`); }}>
                 <Edit className="mr-2 h-4 w-4" />
                 Chỉnh sửa
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setOpen(true)}>
+              <DropdownMenuItem onClick={(e) => { handleDropdownClick(e); setOpen(true); }}>
                 <Trash className="mr-2 h-4 w-4" />
                 Xóa
               </DropdownMenuItem>

@@ -2,7 +2,7 @@
 "use client";
 import { MantineProvider } from '@mantine/core';
 import Card, { CardContent, CardProps } from "@/components/Card";
-import {CycleProps} from "@/app/dashboard/OverViewContent";
+import {CycleProps} from "./OverViewContent";
 
   export default function HistoryContent(props: CycleProps) {
 

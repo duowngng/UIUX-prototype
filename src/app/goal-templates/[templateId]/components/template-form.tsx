@@ -114,6 +114,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
     setValue("description", sampleData.description);
     setValue("weight", sampleData.weight);
     setValue("kpis", sampleData.kpis);
+    toast.success("Đã nhập dữ liệu từ file");
   };
 
   const handleOpenFileChooser = () => {

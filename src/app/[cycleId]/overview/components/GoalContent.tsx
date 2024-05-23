@@ -17,7 +17,7 @@ import { List, ThemeIcon, rem } from '@mantine/core';
 import {  IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
 import { IconFingerprint } from '@tabler/icons-react';
 import { ActionIcon, Group } from '@mantine/core'; 
-import { CycleProps } from "@/app/dashboard/OverViewContent";
+import { CycleProps } from "./OverViewContent";
 
 
 
@@ -137,7 +137,7 @@ import { CycleProps } from "@/app/dashboard/OverViewContent";
                         <div className="grid grid-cols-12  items-center">
                           
                             <p className='truncate col-span-3'>{kpi.name}</p>
-                            <p className="text-right col-start-4 col-start-5">{kpi.actual} </p>
+                            <p className="text-right col-start-5">{kpi.actual} </p>
                             <p className="text-right col-start-6">{kpi.target} </p>
                             <p className="text-center col-start-7">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>

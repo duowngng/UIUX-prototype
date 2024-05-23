@@ -51,6 +51,10 @@ export const CellAction: React.FC<CellActionProps> = ({
     }
   }
 
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  }
+
   return (
     <>
       <AlertModal 
@@ -66,19 +70,19 @@ export const CellAction: React.FC<CellActionProps> = ({
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" onClick={handleDropdownClick}>
           <DropdownMenuLabel>
             Hành động
           </DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => onCopy(data.id)}>
+          <DropdownMenuItem onClick={(e) => { handleDropdownClick(e); onCopy(data.id); }}>
             <Copy className="mr-2 h-4 w-4" />
             Copy ID
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`/goal-templates/${data.id}`)}>
+          <DropdownMenuItem onClick={(e) => { handleDropdownClick(e); router.push(`/goal-templates/${data.id}`); }}>
             <Edit className="mr-2 h-4 w-4" />
             Chỉnh sửa
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
+          <DropdownMenuItem onClick={(e) => { handleDropdownClick(e); setOpen(true); }}>
             <Trash className="mr-2 h-4 w-4" />
             Xóa
           </DropdownMenuItem>
