@@ -106,7 +106,7 @@ export type CycleProps = {
 
       </section>
     </CardContent>
-          <CardContent>
+          <CardContent >
           <p className="text-sm">Trạng thái mục tiêu </p>
           <div className ='flex gap-10 items-center flex-wrap justify-center'>
             {/* <div className='absolute text-5xl font-black ml-16'>{cycleProgress} </div> */}
@@ -161,8 +161,8 @@ export type CycleProps = {
           </div>
           
           </CardContent>
-          <CardContent>
-              <p className="p-4 font-semibold text-red-500 ">KPI đến lịch cập nhật</p>
+          <CardContent className='row-start-1'>
+              <p className="font-semibold text-red-600 ">KPI đến lịch cập nhật</p>
               <div className="grid grid-cols-12  items-center">
               <p className= 'text-sm text-gray-400 col-span-3 sm:col-span-2'>Cập nhật</p>
               <p className= 'text-sm text-gray-400 col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>Tên KPI</p>
@@ -206,8 +206,7 @@ export type CycleProps = {
             <Accordion type="single" collapsible >
             <AccordionItem value="item-1">
               <AccordionTrigger>
-              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between' > 
-                  <div className=''>
+              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between md:grid-cols-8' > 
                 
                   <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3'>
                       <div className = 'row-span-full row-start-1'>
@@ -223,27 +222,23 @@ export type CycleProps = {
                                 style={{zIndex: -j+10 }}
                               />
                       </div>
-                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left '>
+                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-5'>
                               <p>{d.id}-{d.name}</p>
                               <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                                 {d.description}
                                 </p>
                       </div>
-                        <div className='truncate text-left row-start-3 row-span-1 col-span-2 '>
+                        <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-5'>
                       <p className='text-xs sm:text-sm text-indigo-600 '>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
                     </div>
                   </div>
-                  <div className='' style={{ flexWrap: 'wrap' }}>
-                    
-
-                    <div className='' style={{ flex: '0 0 auto' }}>
+                  <div className='md:col-end-8 md:col-span-4 md:self-center mr-4' >
                       <Progress style={{ width: '100%' }} size="md" value={progressData[j].progressGoal} 
                         color={getProgressColor(progressData[j].dpg)} 
                       />
-                    </div>
                   </div>
                   
-                  </div>
+            
                     
                 </div>
               </AccordionTrigger>    
