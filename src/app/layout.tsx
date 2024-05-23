@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "../lib/utils";
 import SideNavbar from "@/components/SideNavbar";
+import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function RootLayout({
           }
         )}
       >
+        <Toaster /> 
         {/* sidebar */}
         {/* <p className="border">Sidebar</p> */}
         <SideNavbar />
