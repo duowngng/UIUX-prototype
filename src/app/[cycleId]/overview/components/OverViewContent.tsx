@@ -164,8 +164,8 @@ export type CycleProps = {
           <CardContent>
               <p className="p-4 font-semibold text-red-500 ">KPI đến lịch cập nhật</p>
               <div className="grid grid-cols-12  items-center">
-              <p className= 'text-sm text-gray-400 col-span-2'>Cập nhật</p>
-              <p className= 'text-sm text-gray-400 col-start-3 col-span-3'>Tên KPI</p>
+              <p className= 'text-sm text-gray-400 col-span-3 sm:col-span-2'>Cập nhật</p>
+              <p className= 'text-sm text-gray-400 col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>Tên KPI</p>
               </div>
             <div>
             <div className="grid grid-cols-12  items-center">
@@ -178,7 +178,7 @@ export type CycleProps = {
                           
                           
                         </div>
-                          <p className='truncate col-start-3 col-span-3'>{Goals[1].kpis[1].name}</p>
+                          <p className='truncate col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>{Goals[1].kpis[1].name}</p>
                           
                           <div className='col-span-2 col-start-8'>
                           <Progress 
@@ -206,37 +206,37 @@ export type CycleProps = {
             <Accordion type="single" collapsible >
             <AccordionItem value="item-1">
               <AccordionTrigger>
-              <div className ='grid grid-cols-1 gap-4' style={{width:"100%"}}> 
-                  <div className='flex justify-between'>
-                  <div className='flex gap-4 '>
-                      <div className = 'w-20 '>
+              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between' > 
+                  <div className=''>
+                
+                  <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3'>
+                      <div className = 'row-span-full row-start-1'>
                               <DonutChart 
+                              size={45}
+                              thickness={8}
                               chartLabel = { d.weight}
-                                size={50}
-                                thickness={8}
                                 data={d.kpis.map((kpi,i) => ({
                                   name: kpi.name,
                                   value: kpi.weight,
                                   color: getProgressColor(progressData[j].progressKPIs[i].dpk),
                                 }))} 
-                                className="absolute"
                                 style={{zIndex: -j+10 }}
                               />
                       </div>
-                      <div className = 'truncate text-left '>
+                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left '>
                               <p>{d.id}-{d.name}</p>
-                              <p className="text-sm text-gray-400 truncate hover:text-clip">
+                              <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                                 {d.description}
                                 </p>
                       </div>
-                  </div>
-
-                  <div className='flex gap-8 items-center mr-4' style={{ flexWrap: 'wrap' }}>
-                    <div className='truncate text-left' style={{ flex: '1 1 auto' }}>
-                      <p>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
+                        <div className='truncate text-left row-start-3 row-span-1 col-span-2 '>
+                      <p className='text-xs sm:text-sm text-indigo-600 '>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
                     </div>
+                  </div>
+                  <div className='' style={{ flexWrap: 'wrap' }}>
+                    
 
-                    <div className='w-40' style={{ flex: '0 0 auto' }}>
+                    <div className='' style={{ flex: '0 0 auto' }}>
                       <Progress style={{ width: '100%' }} size="md" value={progressData[j].progressGoal} 
                         color={getProgressColor(progressData[j].dpg)} 
                       />
@@ -252,9 +252,9 @@ export type CycleProps = {
                     
                     <div className="grid grid-cols-12 ">
                           <p className="text-sm text-gray-400">Thang đo KPI</p>
-                          <p className="text-sm text-gray-400 text-right col-start-5 ">Đã đạt</p>
+                          <p className="text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
                           <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
-                          <p className="text-sm text-gray-400 text-center col-start-7 overflow-hidden">Đơn vị đo</p>
+                          <p className="text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
                           <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
                           <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
 
@@ -263,9 +263,9 @@ export type CycleProps = {
                         <div className="grid grid-cols-12  items-center">
                           
                             <p className='truncate col-span-3'>{kpi.name}</p>
-                            <p className="text-right col-start-5">{kpi.actual} </p>
+                            <p className="text-right col-start-5 hidden">{kpi.actual} </p>
                             <p className="text-right col-start-6">{kpi.target} </p>
-                            <p className="text-center col-start-7 overflow-hidden">_</p>
+                            <p className="text-center col-start-7 hidden ">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
                             
                             <div className='col-span-1 col-start-11'>
@@ -274,7 +274,7 @@ export type CycleProps = {
                             color= {getProgressColor(progressData[j].progressKPIs[i].dpk)}
                             />
                             </div>
-                            <p>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
+                            <p className = 'hidden'>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
                             <div className= " col-span-1 col-start-13 text-right"> 
                             <Group>
                               <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">

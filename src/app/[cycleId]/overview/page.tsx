@@ -1,6 +1,5 @@
 /** @format */
 "use client";
-import PageTitle from "@/components/PageTitle";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -48,23 +47,27 @@ const Home = ({
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
-    <div className="flex flex-col gap-5 p-8 pt-6 w-full">
-      <div className="flex flex-1 space-y-4 items-center justify-between">
-        <Heading title={'Chu kỳ: ' + curCycle.name} description="⠀" />
+    
+    <div className="flex-col p-8 space-y-4 pt-6 w-full">
+      <div className="flex flex-1 gap-2 justify-between align-top">
+        <Heading title={'Chu kỳ: ' + curCycle.id}  description=""/>
+        <div>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button onClick={() => router.push(`/cycles/new`)}>
                 <ChevronDown className="mr-2 h-4 w-4" />
-                Tạo mới
+                Xuất
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Tạo </DropdownMenuLabel>
+              <DropdownMenuLabel>Kết quả chu kỳ </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Tạo chu kỳ</DropdownMenuItem>
-              <DropdownMenuItem>Tạo mẫu mục tiêu</DropdownMenuItem>
+              <DropdownMenuItem>CSV</DropdownMenuItem>
+              <DropdownMenuItem>PDF</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
+        </div>
+        
             </div>
       <NavigationMenu>
         <NavigationMenuList>
