@@ -257,29 +257,6 @@
           "weight": 30
         }
       ]
-    },
-    {
-      "id": "Mau1",
-      "name": "Mẫu 1",
-      "description": "Mô tả mẫu 1",
-      "weight": 15,
-      "kpis": []
-    },
-    {
-      "id": "Mau1",
-      "name": "Mẫu 1",
-      "description": "Mô tả mẫu 1",
-      "weight": 50,
-      "kpis": [
-        {
-          "name": "KPI 1",
-          "weight": 50
-        },
-        {
-          "name": "KPI 2",
-          "weight": 50
-        }
-      ]
     }
   ]
 }
