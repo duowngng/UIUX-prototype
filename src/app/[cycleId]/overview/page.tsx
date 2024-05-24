@@ -1,6 +1,5 @@
 /** @format */
 "use client";
-import PageTitle from "@/components/PageTitle";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -8,13 +7,13 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-import { IconFingerprint } from '@tabler/icons-react';
-import { ActionIcon, Group } from '@mantine/core';
 import Link from 'next/link';
 import OverviewContent from "./components/OverViewContent";
 import GoalContent from "./components/GoalContent";
 import HistoryContent from "./components/HistoryContent";
 import { useState } from 'react';
+import { MantineProvider, Progress,Select} from '@mantine/core';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,65 +25,90 @@ import {
 import data from "@/app/data.json";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { Heading } from "@/components/ui/heading";
-const currentCycle = data.cycles[0];
-export default function Home(){
+
+import { useRouter } from "next/navigation";
+
+
+const Home = ({
+  params
+}: {
+  params: { cycleId: string}
+}) => {
+  const selectData = data.cycles.map((cycle) => `${cycle.id}`);
+  let curCycle;
+  for (const key in data.cycles) {
+    if (data.cycles[key].id === params.cycleId) {
+      curCycle = data.cycles[key]  ;
+      break;
+    }
+  }
+  if (curCycle === undefined) {
+    curCycle = data.cycles[0];
+  }
   const router = useRouter();
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
-    <div className="flex flex-col gap-5 p-8 pt-6 w-full">
-      <div className="flex flex-1 space-y-4 items-center justify-between">
-        <Heading title={'Chu kỳ: ' + currentCycle.name} description="⠀" />
-          <DropdownMenu>
+    <MantineProvider>
+    <div className="flex-col p-8 space-y-4 pt-6 w-full">
+      <div className="flex flex-1 gap-x-2 gap-y-0 justify-between align-top">
+      
+        <Heading title={'Chu kỳ: ' + curCycle.id}  description=""/>
+        <div className ='flex flex-col justify-end' >
+          <div className='w-fit mr-0'>
+          <DropdownMenu >
             <DropdownMenuTrigger>
-              <Button onClick={() => router.push(`/cycles/new`)}>
+              <Button >
                 <ChevronDown className="mr-2 h-4 w-4" />
-                Tạo mới
+                Xuất
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>Kết quả chu kỳ </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
+              <DropdownMenuItem>CSV</DropdownMenuItem>
+              <DropdownMenuItem>PDF</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
+        </div>
+        <Select
+        placeholder="Chu kỳ mặc định"
+        data={selectData}
+        withScrollArea={false}
+        styles={{ dropdown: { maxHeight: 200, overflowY: 'auto' } }}
+        mt="md"
+        onChange={(value) => router.push(`/${value}/overview`)}
+      />
+        </div>  
             </div>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem >
-          <Link href="/" legacyBehavior passHref>
+         
             <NavigationMenuLink
-              className={navigationMenuTriggerStyle()}
+              className={navigationMenuTriggerStyle() }
               onClick={() => setSelectedContent('Tổng quan')}
+              
             >
               Tổng quan
             </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedContent('Mục tiêu')}
             >
               Mục tiêu
             </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink
               className={navigationMenuTriggerStyle()}
               onClick={() => setSelectedContent('Lịch sử')}
             >
               Lịch sử
             </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
           </NavigationMenuItem>
@@ -92,9 +116,11 @@ export default function Home(){
       </NavigationMenu>
 
       {/* Render nội dung dựa trên selectedContent */}
-      {selectedContent === 'Tổng quan' && <OverviewContent cycle={currentCycle}/>}
-      {selectedContent === 'Mục tiêu' && <GoalContent cycle={currentCycle} />}
-      {selectedContent === 'Lịch sử' && <HistoryContent cycle={currentCycle} />}
+      {selectedContent === 'Tổng quan' && <OverviewContent cycle={curCycle}/>}
+      {selectedContent === 'Mục tiêu' && <GoalContent cycle={curCycle} />}
+      {selectedContent === 'Lịch sử' && <HistoryContent cycle={curCycle} />}
     </div>
+    </MantineProvider>
   );
 };
+export default Home;
