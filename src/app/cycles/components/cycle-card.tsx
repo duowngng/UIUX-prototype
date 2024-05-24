@@ -180,9 +180,13 @@ export default function CyclesCard({
                 </button>
               </div> */}
               <div className="mt-1 flex items-center space-x-1 text-sm leading-5 text-muted-foreground">
-                <p className="truncate">
-                {cycle.goals ? cycle.goals.length : 0} mục tiêu
-                </p>
+                  <p className="truncate inline md:hidden">{cycle.startDate}</p> 
+                  <p className="truncate inline md:hidden">–</p> 
+                  <p className="truncate inline md:hidden">{cycle.endDate}</p> 
+                  <p className="truncate inline md:hidden">•</p>
+                  <p className="truncate">
+                      {cycle.goals ? cycle.goals.length : 0} mục tiêu
+                  </p>
               </div>
             </div>
             
@@ -190,10 +194,10 @@ export default function CyclesCard({
           </div>
         </div>
         
-        <div className="mt-1 mr-20 ml-auto flex items-center space-x-1">
-          <h2 className="truncate">{cycle.startDate}</h2>
+        <div className="mt-1 mr-20 ml-auto items-center space-x-1 truncate hidden md:flex">
+          <h2>{cycle.startDate}</h2>
           <h2>–</h2>
-          <h2 className="truncate">{cycle.endDate}</h2>
+          <h2>{cycle.endDate}</h2>
         </div>
         
         <div className="flex flex-row space-x-2">
