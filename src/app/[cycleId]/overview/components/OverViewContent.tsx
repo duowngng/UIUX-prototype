@@ -4,7 +4,7 @@ import { MantineProvider } from '@mantine/core';
 import Card, { CardContent, CardProps } from "@/components/Card";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
 import { DonutChart } from '@mantine/charts';
-import { Progress } from '@mantine/core';
+import { Progress,Select} from '@mantine/core';
 import { LucideIcon,Crosshair,Clock3,Calendar} from "lucide-react";
 import {
   Accordion,
@@ -29,8 +29,10 @@ export type CycleProps = {
   cycle: Cycle;
 };
   export default function OverviewContent(props: CycleProps) {
+    
     const currentCycle = props.cycle;
     const Goals = currentCycle.goals;
+    
     const fromDate = new Date(currentCycle.dateRange.from.toString());
     const toDate = new Date(currentCycle.dateRange.to.toString());
     const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
@@ -161,15 +163,15 @@ export type CycleProps = {
           </div>
           
           </CardContent>
-          <CardContent className='row-start-1'>
+          <CardContent className='row-start-1 h-60 md:h-full md:col-start-3'>
               <p className="font-semibold text-red-600 ">KPI đến lịch cập nhật</p>
               <div className="grid grid-cols-12  items-center">
-              <p className= 'text-sm text-gray-400 col-span-3 sm:col-span-2'>Cập nhật</p>
-              <p className= 'text-sm text-gray-400 col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>Tên KPI</p>
+              <p className= 'text-sm text-nowrap text-gray-400 col-span-3 col-start-11 sm:col-span-2'>Cập nhật</p>
+              <p className= 'text-sm text-nowrap text-gray-400 col-start-1 col-span-3 sm:col-start-3 sm:col-span-3'>Tên KPI</p>
               </div>
             <div>
             <div className="grid grid-cols-12  items-center">
-            <div className= " col-span-1 col-start-1 text-right"> 
+            <div className= " col-span-1 col-start-12 text-right"> 
                           <Group>
                             <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
                               <Edit size={20} />
@@ -178,15 +180,15 @@ export type CycleProps = {
                           
                           
                         </div>
-                          <p className='truncate col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>{Goals[1].kpis[1].name}</p>
+                          <p className='truncate col-start-1 col-span-3 sm:col-start-3 sm:col-span-3'>{Goals[1].kpis[1].name}</p>
                           
-                          <div className='col-span-2 col-start-8'>
+                          <div className='col-span-2 col-start-5'>
                           <Progress 
                           value={Goals[1].kpis[1].actual * 100.0 / Goals[1].kpis[1].target} size={'sm'} 
                           color= {getProgressColor(progressData[1].progressKPIs[1].dpk)}
                           />
                           </div>
-                          <p className= 'col-start-11'>{progressData[1].progressKPIs[1].progressKPI.toFixed(1)}%</p>
+                          <p className= 'col-start-8 col-span-1'>{progressData[1].progressKPIs[1].progressKPI.toFixed(1)}%</p>
                         
                       </div>
             
@@ -246,12 +248,12 @@ export type CycleProps = {
                   <section className="flex flex-col gap-4" style={{width:"100%"}}>
                     
                     <div className="grid grid-cols-12 ">
-                          <p className="text-sm text-gray-400">Thang đo KPI</p>
-                          <p className="text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
-                          <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
-                          <p className="text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
-                          <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
-                          <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400">Thang đo KPI</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
+                          <p className=" text-xs text-nowrap md:text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-8">Trọng số</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-left col-start-13">Cập nhật</p>
 
                     </div>
                       {d.kpis.map((kpi,i) => (

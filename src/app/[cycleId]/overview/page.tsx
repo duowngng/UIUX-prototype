@@ -12,6 +12,8 @@ import OverviewContent from "./components/OverViewContent";
 import GoalContent from "./components/GoalContent";
 import HistoryContent from "./components/HistoryContent";
 import { useState } from 'react';
+import { MantineProvider, Progress,Select} from '@mantine/core';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +35,7 @@ const Home = ({
 }: {
   params: { cycleId: string}
 }) => {
+  const selectData = data.cycles.map((cycle) => `${cycle.id}`);
   let curCycle;
   for (const key in data.cycles) {
     if (data.cycles[key].id === params.cycleId) {
@@ -47,14 +50,16 @@ const Home = ({
   const [selectedContent, setSelectedContent] = useState('Tổng quan');
 
   return (
-    
+    <MantineProvider>
     <div className="flex-col p-8 space-y-4 pt-6 w-full">
-      <div className="flex flex-1 gap-2 justify-between align-top">
+      <div className="flex flex-1 gap-x-2 gap-y-0 justify-between align-top">
+      
         <Heading title={'Chu kỳ: ' + curCycle.id}  description=""/>
-        <div>
-          <DropdownMenu>
+        <div className ='flex flex-col justify-end' >
+          <div className='w-fit mr-0'>
+          <DropdownMenu >
             <DropdownMenuTrigger>
-              <Button onClick={() => router.push(`/cycles/new`)}>
+              <Button >
                 <ChevronDown className="mr-2 h-4 w-4" />
                 Xuất
               </Button>
@@ -67,7 +72,15 @@ const Home = ({
             </DropdownMenuContent>
         </DropdownMenu>
         </div>
-        
+        <Select
+        placeholder="Chu kỳ mặc định"
+        data={selectData}
+        withScrollArea={false}
+        styles={{ dropdown: { maxHeight: 200, overflowY: 'auto' } }}
+        mt="md"
+        onChange={(value) => router.push(`/${value}/overview`)}
+      />
+        </div>  
             </div>
       <NavigationMenu>
         <NavigationMenuList>
@@ -107,6 +120,7 @@ const Home = ({
       {selectedContent === 'Mục tiêu' && <GoalContent cycle={curCycle} />}
       {selectedContent === 'Lịch sử' && <HistoryContent cycle={curCycle} />}
     </div>
+    </MantineProvider>
   );
 };
 export default Home;
