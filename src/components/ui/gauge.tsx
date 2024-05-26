@@ -5,14 +5,20 @@ export const Gauge = ({
   color = "text-[hsla(131,41%,46%,1)]",
   bgcolor = "text-[#333]",
 }: {
-  value: number;
+  value: number | string;
   size: "small" | "medium" | "large";
   showValue: boolean;
   color?: String;
   bgcolor?: String;
 }) => {
   const circumference = 332; //2 * Math.PI * 53; // 2 * pi * radius
-  const valueInCircumference = (value / 100) * circumference;
+  let valueInCircumference;
+
+  if (typeof value === "number") {
+    valueInCircumference = (value / 100) * circumference;
+  } else {
+    valueInCircumference = 0;
+  }
   const strokeDasharray = `${circumference} ${circumference}`;
   const initialOffset = circumference;
   const strokeDashoffset = initialOffset - valueInCircumference;

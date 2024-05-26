@@ -51,6 +51,14 @@ const formSchema = z.object({
       z.object({
         id: z.string(),
         name: z.string(),
+        description: z.string(),
+        weight: z.number(),
+        kpis: z.array(
+          z.object({
+            name: z.string(),
+            weight: z.number(),
+          })
+        ),
       })
     ).optional(),
   })
@@ -95,13 +103,19 @@ export const CycleForm: React.FC<CycleFormProps> = ({
   const onSubmit = async (data: CycleFormValues) => {
     try {
       setLoading(true);
+      let cycleId;
       if (initialData) {
         await axios.patch(`/api/cycles/${params.cycleId}`, data);
       } else {
-      await axios.post(`/api/cycles`, data);
+        const response = await axios.post(`/api/cycles`, data);
+        cycleId = response.data.id;
       }
       router.refresh();
-      window.location.assign(`/cycles`);
+      if (cycleId) {
+        window.location.assign(`/cycles/${cycleId}`);
+      } else {
+        window.location.assign(`/cycles`);
+      }
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Có lỗi xảy ra");
@@ -229,7 +243,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                   <FormItem>
                     <FormLabel>Mục tiêu</FormLabel>
                     <FormControl>
-                      <FancyMultiSelect options={templates} control={form.control} name="goals" />
+                      <FancyMultiSelect onChange={field.onChange}/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
