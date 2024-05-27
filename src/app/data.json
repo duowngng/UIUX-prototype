@@ -195,6 +195,56 @@
         }
       ],
       "history": []
+    },
+    {
+      "name": "new",
+      "dateRange": {
+        "from": "01/05/2024",
+        "to": "11/06/2024"
+      },
+      "goals": [
+        {
+          "id": "template-1",
+          "name": "Giảng dạy",
+          "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
+          "weight": 75,
+          "kpis": [
+            {
+              "name": "Số giờ giảng dạy",
+              "weight": 50
+            },
+            {
+              "name": "Điểm đánh giá môn học",
+              "weight": 25
+            },
+            {
+              "name": "Tỷ lệ sinh viên hài lòng",
+              "weight": 25
+            }
+          ]
+        },
+        {
+          "id": "template-2",
+          "name": "Nghiên cứu",
+          "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
+          "weight": 15,
+          "kpis": [
+            {
+              "name": "Số bài báo khoa học xuất bản",
+              "weight": 50
+            },
+            {
+              "name": "Chỉ số H-index",
+              "weight": 30
+            },
+            {
+              "name": "Số lần tham dự hội thảo khoa học",
+              "weight": 20
+            }
+          ]
+        }
+      ],
+      "id": "new-1716702920609"
     }
   ],
   "templates": [
@@ -255,29 +305,6 @@
         {
           "name": "Tỷ lệ sinh viên hài lòng",
           "weight": 30
-        }
-      ]
-    },
-    {
-      "id": "Mau1",
-      "name": "Mẫu 1",
-      "description": "Mô tả mẫu 1",
-      "weight": 15,
-      "kpis": []
-    },
-    {
-      "id": "Mau1",
-      "name": "Mẫu 1",
-      "description": "Mô tả mẫu 1",
-      "weight": 50,
-      "kpis": [
-        {
-          "name": "KPI 1",
-          "weight": 50
-        },
-        {
-          "name": "KPI 2",
-          "weight": 50
         }
       ]
     }

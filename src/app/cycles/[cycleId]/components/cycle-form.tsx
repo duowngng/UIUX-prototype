@@ -33,6 +33,8 @@ import {
 } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
+import { FancyMultiSelect } from "./fancy-multi-select";
+import data from "@/app/data.json";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name must be at least 1 characters." }),
@@ -45,6 +47,20 @@ const formSchema = z.object({
         required_error: "Please select a date range",
       }
     ),
+    goals: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        description: z.string(),
+        weight: z.number(),
+        kpis: z.array(
+          z.object({
+            name: z.string(),
+            weight: z.number(),
+          })
+        ),
+      })
+    ).optional(),
   })
   .refine((data) => data.dateRange.from < data.dateRange.to, {
     path: ["dateRange"],
@@ -79,6 +95,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
         from: new Date(),
         to: new Date(),
       },
+      goals: [],
     },
   });
 
@@ -86,13 +103,19 @@ export const CycleForm: React.FC<CycleFormProps> = ({
   const onSubmit = async (data: CycleFormValues) => {
     try {
       setLoading(true);
+      let cycleId;
       if (initialData) {
         await axios.patch(`/api/cycles/${params.cycleId}`, data);
       } else {
-      await axios.post(`/api/cycles`, data);
+        const response = await axios.post(`/api/cycles`, data);
+        cycleId = response.data.id;
       }
       router.refresh();
-      window.location.assign(`/cycles`);
+      if (cycleId) {
+        window.location.assign(`/cycles/${cycleId}`);
+      } else {
+        window.location.assign(`/cycles`);
+      }
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Có lỗi xảy ra");
@@ -115,6 +138,8 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       setOpen(false);
     }
   }
+
+  const templates = data.templates;
 
   return (
     <>
@@ -179,11 +204,11 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                       {field.value.from ? (
                         field.value.to ? (
                           <>
-                            {format(field.value.from, "LLL dd, y")} -{" "}
-                            {format(field.value.to, "LLL dd, y")}
+                            {format(field.value.from, "dd/MM/yyyy")} -{" "}
+                            {format(field.value.to, "dd/MM/yyyy")}
                           </>
                         ) : (
-                          format(field.value.from, "LLL dd, y")
+                          format(field.value.from, "dd/MM/yyyy")
                         )
                       ) : (
                         <span>Chọn ngày</span>
@@ -209,6 +234,21 @@ export const CycleForm: React.FC<CycleFormProps> = ({
               </FormItem>
             )}
           />
+          </div>
+          <div className="grid grid-cols-3 gap-8">
+            <FormField
+                control={form.control}
+                name="goals"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mục tiêu</FormLabel>
+                    <FormControl>
+                      <FancyMultiSelect onChange={field.onChange}/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
           </div>
           <Button disabled={loading} className="ml-auto" type="submit" >
             {action}

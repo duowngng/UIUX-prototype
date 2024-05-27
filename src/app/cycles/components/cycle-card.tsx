@@ -150,7 +150,7 @@ export default function CyclesCard({
       <li className="group/row relative flex items-center justify-between rounded-lg border-0 p-3 ring-1 ring-gray-200 transition-all hover:bg-secondary hover:ring-gray-300 dark:bg-secondary dark:ring-gray-700 hover:dark:ring-gray-500 sm:p-4">
         <div className="flex min-w-0 shrink items-center space-x-2 sm:space-x-4">
           <div className="mx-0.5 flex w-8 items-center justify-center text-center sm:mx-1">
-            <Gauge value={cycleCompletion} size="small" showValue={true} color={progressColorClass} bgcolor="text-gray-200" />
+            <Gauge value={cycleCompletion ? cycleCompletion : "New"} size="small" showValue={true} color={progressColorClass} bgcolor="text-gray-200" />
           </div>
 
           <div className="flex">
@@ -180,9 +180,13 @@ export default function CyclesCard({
                 </button>
               </div> */}
               <div className="mt-1 flex items-center space-x-1 text-sm leading-5 text-muted-foreground">
-                <p className="truncate">
-                {cycle.goals ? cycle.goals.length : 0} mục tiêu
-                </p>
+                  <p className="truncate inline md:hidden">{cycle.startDate}</p> 
+                  <p className="truncate inline md:hidden">–</p> 
+                  <p className="truncate inline md:hidden">{cycle.endDate}</p> 
+                  <p className="truncate inline md:hidden">•</p>
+                  <p className="truncate">
+                      {cycle.goals ? cycle.goals.length : 0} mục tiêu
+                  </p>
               </div>
             </div>
             
@@ -190,10 +194,10 @@ export default function CyclesCard({
           </div>
         </div>
         
-        <div className="mt-1 mr-20 ml-auto flex items-center space-x-1">
-          <h2 className="truncate">{cycle.startDate}</h2>
+        <div className="mt-1 mr-20 ml-auto items-center space-x-1 truncate hidden md:flex">
+          <h2>{cycle.startDate}</h2>
           <h2>–</h2>
-          <h2 className="truncate">{cycle.endDate}</h2>
+          <h2>{cycle.endDate}</h2>
         </div>
         
         <div className="flex flex-row space-x-2">

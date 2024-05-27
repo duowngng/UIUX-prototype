@@ -95,6 +95,11 @@ export default function TemplatesTable() {
             </div>
           );
         },
+        cell: ({ row }) => (
+          <div className="overflow-hidden text-ellipsis whitespace-nowrap max-w-[250px] md:max-w-[350px] lg:max-w-[500px]">
+            {row.original.description}
+          </div>
+        ),        
       },
       {
         accessorKey: 'weight',
@@ -114,7 +119,6 @@ export default function TemplatesTable() {
           );
         },
         cell: ({ row }) => <div className="w-[150px]">{row.original.weight}</div>,
-        style: { width: '150px' },
       },
       {
         id: 'actions',
