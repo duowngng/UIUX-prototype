@@ -73,7 +73,7 @@ const Home = ({
         </DropdownMenu>
         </div>
         <Select
-        placeholder="Chu kỳ mặc định"
+        placeholder={curCycle.id}
         data={selectData}
         withScrollArea={false}
         styles={{ dropdown: { maxHeight: 200, overflowY: 'auto' } }}

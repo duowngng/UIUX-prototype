@@ -5,7 +5,7 @@ import { CardContent } from "@/components/Card";
 import { DonutChart } from '@mantine/charts';
 import { Progress} from '@mantine/core';
 import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+import {  Modal } from 'antd';
 import { Crosshair,Clock3,Calendar} from "lucide-react";
 import {
   Accordion,
@@ -18,9 +18,8 @@ import data from "@/app/data.json";
 import { List, ThemeIcon, rem ,Text } from '@mantine/core';
 import { IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
 // import { Edit } from '@tabler/icons-react';
-import { ActionIcon, Group } from '@mantine/core'; 
+import { ActionIcon, Group,Button } from '@mantine/core'; 
 import {Edit} from 'lucide-react';
-
 
     
 
@@ -69,10 +68,11 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
         }}),
       }
     });
+    //modal 
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
-  
+    const [loading, setLoading] = useState(false);
     const showModal = () => {
       setOpen(true);
     };
@@ -91,6 +91,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
       setOpen(false);
     };
     return (
+      <>
       <MantineProvider> 
         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between ">
         
@@ -185,8 +186,8 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           
           </CardContent>
           
-          <CardContent className='row-start-1 h-60 md:h-full md:col-start-3'>
-              <p className="text-sm font-semibold text-red-600   ">KPI đến lịch cập nhật</p>
+          <CardContent className='row-start-1 h-60  md:col-start-3 md:h-64 '>
+              <p className="text-sm  ">KPI đến lịch cập nhật</p>
               <div className="grid grid-cols-12  items-center border-b-2 pb-2">
               <p className= 'text-xs md:text-sm text-gray-400 col-start-1 col-span-2'>Tên KPI</p>
               <p className= 'text-xs md:text-sm text-gray-400 col-end-13 col-span-3 text-right'>Cập nhật</p>
@@ -204,19 +205,11 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                           <p className= 'col-start-6 text-xs'>{progressData[i].progressKPIs[j].progressKPI.toFixed(1)}%</p>
                           <div className= " col-span-1 col-end-9 text-right"> 
                           <Group>
-                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4" onClick={showModal}>
+                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="teal.4" onClick={showModal}>
                               <Edit size={20} />
                             </ActionIcon>
                           </Group>
-                          <Modal
-                              title="Title"
-                              open={open}
-                              onOk={handleOk}
-                              confirmLoading={confirmLoading}
-                              onCancel={handleCancel}
-                            >
-                              <p>{modalText}</p>
-                            </Modal>
+                       
                         </div>
                       </div>
               )}))}
@@ -230,17 +223,17 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
             <section>
               <p>Mục tiêu</p>
               <p className="text-sm text-gray-400">
-                Cập nhật lần cuối lúc 12:00 PM
+                Cập nhật lần cuối lúc 12:00 PM 27-05-2024
               </p>
             </section>
             {Goals.map((d,j) => (
             <Accordion type="single" collapsible >
             <AccordionItem value="item-1">
               <AccordionTrigger>
-              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between md:grid-cols-8' > 
+              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2  justify-between md:grid-cols-4' > 
                 
-                  <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3'>
-                      <div className = 'row-span-full row-start-1'>
+                  <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3 md:col-start-1 md:col-span-2  md:grid-cols-10' >
+                      <div className = 'row-span-full row-start-1 self-center justify-self-center' style={{zIndex: -j+Goals.length}}>
                               <DonutChart 
                               size={45}
                               thickness={8}
@@ -250,21 +243,20 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                                   value: kpi.weight,
                                   color: getProgressColor(progressData[j].progressKPIs[i].dpk),
                                 }))} 
-                                style={{zIndex: -j+10 }}
                               />
                       </div>
-                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-5'>
+                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-7 md:col-start-2'>
                               <p>{d.id}-{d.name}</p>
                               <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                                 {d.description}
                                 </p>
                       </div>
-                        <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-5'>
-                      <p className='text-xs sm:text-sm text-indigo-600 '>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
+                        <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-4 md:col-start-2'>
+                      <p className='text-xs sm:text-sm text-gray-600 md:col-span-4 md:col-start-2'>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
                     </div>
                   </div>
-                  <div className='md:col-end-8 md:col-span-4 md:self-center mr-4' >
-                      <Progress style={{ width: '100%' }} size="md" value={progressData[j].progressGoal} 
+                  <div className='md:col-end-5 md:col-span-2 md:self-center mr-4' >
+                      <Progress style={{ width: '100%' ,zIndex: 0}} size="md" value={progressData[j].progressGoal} 
                         color={getProgressColor(progressData[j].dpg)} 
                       />
                   </div>
@@ -303,12 +295,12 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             <p className = 'hidden'>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
                             <div className= " col-span-1 col-start-13 text-right"> 
                             <Group>
-                              <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
+                              <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="teal.4"  onClick={showModal}>
                                 <Edit size={20} />
                               </ActionIcon>
                             </Group>
                             
-                            
+                           
                           </div>
                         </div>
                       ))}
@@ -321,7 +313,24 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           </CardContent>
           {/*  */}
         </section>
+                           
       </MantineProvider>
+      <Modal
+                              title="Title"
+                              open={open}
+                              closable ={false}
+                              // onOk={handleOk}
+                              // confirmLoading={confirmLoading}
+
+                              // onCancel={handleCancel}
+                              footer={[
+                               
+                              ]}
+                            >
+                              
+                            </Modal>
+      </>
+      
     );
   }
   

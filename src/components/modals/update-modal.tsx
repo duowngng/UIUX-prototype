@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 
-const App: React.FC = () => {
+const updateModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
@@ -25,10 +25,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal with async logic
-      </Button>
+  
       <Modal
         title="Title"
         open={open}
@@ -38,8 +35,8 @@ const App: React.FC = () => {
       >
         <p>{modalText}</p>
       </Modal>
-    </>
+  
   );
 };
 
-export default App;
+export default updateModal;
