@@ -1,29 +1,37 @@
 /** @format */
 "use client";
 import { MantineProvider } from '@mantine/core';
-import Card, { CardContent, CardProps } from "@/components/Card";
-import SalesCard, { SalesProps } from "@/components/SalesCard";
+import { CardContent } from "@/components/Card";
 import { DonutChart } from '@mantine/charts';
-import { Progress } from '@mantine/core';
+import { Progress} from '@mantine/core';
+import { Crosshair,Clock3,Calendar} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import {cycles} from "@/app/data.json";
+import data from "@/app/data.json";
 
-import { List, ThemeIcon, rem } from '@mantine/core';
-import {  IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
-import { IconFingerprint } from '@tabler/icons-react';
+import { List, ThemeIcon, rem ,Text } from '@mantine/core';
+import { IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
+// import { Edit } from '@tabler/icons-react';
 import { ActionIcon, Group } from '@mantine/core'; 
-import { CycleProps } from "./OverViewContent";
+import {Edit} from 'lucide-react';
 
 
+    
 
-  export default function GoalContent(props: CycleProps) {
-    const Goals = props.cycle.goals;
+
+export type Cycle = typeof data.cycles[0];
+export type CycleProps = {
+  cycle: Cycle;
+};
+  export default function OverviewContent(props: CycleProps) {
+    
     const currentCycle = props.cycle;
+    const Goals = currentCycle.goals;
+    
     const fromDate = new Date(currentCycle.dateRange.from.toString());
     const toDate = new Date(currentCycle.dateRange.to.toString());
     const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
@@ -31,17 +39,10 @@ import { CycleProps } from "./OverViewContent";
     const ctimeDiff = Math.abs(Currentime.getTime() - fromDate.getTime());
     const numDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     const cnumDays = Math.ceil(ctimeDiff / (1000 * 3600 * 24));
-    const cycleProgress = Goals.reduce((total, goal) => total + goal.weight*goal.kpis.reduce((total, kpi) => total + kpi.actual*kpi.weight*1.0/kpi.target, 0)/100, 0).toFixed(1);
-    const cardData_1 = {
-          label: 'Số mục tiêu',
-          amount: Goals.length,
-          progress: cycleProgress,
-          dateRange: currentCycle.dateRange,
-          numDays: numDays,
-          cnumDays: cnumDays
-        }
-      ;
+    const cycleProgress = (Number)(Goals.reduce((total, goal) => total + goal.weight*goal.kpis.reduce((total, kpi) => total + kpi.actual*kpi.weight*1.0/kpi.target, 0)/100, 0).toFixed(1));
+    
       const f = (cnumDays+0.000001)/numDays;
+      const dpc = cycleProgress/f;
       function getProgressColor(dp:number){
         if(dp==0){
           return 'gray.6';
@@ -67,7 +68,6 @@ import { CycleProps } from "./OverViewContent";
       }
     });
 
-
     return (
       <MantineProvider> 
           <CardContent className="flex justify-between gap-4">
@@ -78,68 +78,64 @@ import { CycleProps } from "./OverViewContent";
               </p>
             </section>
             {Goals.map((d,j) => (
-             <Accordion type="single" collapsible >
-             <AccordionItem value="item-1">
-               <AccordionTrigger>
-               <div className ='grid grid-cols-1 gap-4' style={{width:"100%"}}> 
-                  <div className='flex justify-between'>
-                  <div className='flex gap-4 '>
-                      <div className = 'w-20 '>
+            <Accordion type="single"  >
+            <AccordionItem value="item-1">
+              <AccordionTrigger>
+              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between md:grid-cols-8' > 
+                
+                  <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3'>
+                      <div className = 'row-span-full row-start-1'>
                               <DonutChart 
+                              size={45}
+                              thickness={8}
                               chartLabel = { d.weight}
-                                size={50}
-                                thickness={8}
                                 data={d.kpis.map((kpi,i) => ({
                                   name: kpi.name,
                                   value: kpi.weight,
                                   color: getProgressColor(progressData[j].progressKPIs[i].dpk),
                                 }))} 
-                                className="absolute"
-                                style={{zIndex: 1000-j }}
+                                style={{zIndex: -j+10 }}
                               />
                       </div>
-                      <div className = 'truncate text-left'>
+                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-5'>
                               <p>{d.id}-{d.name}</p>
-                              <p className="text-sm text-gray-400 t">
+                              <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                                 {d.description}
                                 </p>
                       </div>
+                        <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-5'>
+                      <p className='text-xs sm:text-sm text-indigo-600 '>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
+                    </div>
                   </div>
-
-                  <div className='flex gap-8 items-center mr-4'>
-                  <div className = 'truncate text-left'>
-                          <p>{cardData_1.dateRange.from}:{cardData_1.dateRange.to}</p>
+                  <div className='md:col-end-8 md:col-span-4 md:self-center mr-4' >
+                      <Progress style={{ width: '100%' }} size="md" value={progressData[j].progressGoal} 
+                        color={getProgressColor(progressData[j].dpg)} 
+                      />
                   </div>
                   
-                  <div className = 'w-40'>
-                    <Progress style={{width:"100%"}} size="md" value={progressData[j].progressGoal} 
-                    color= {getProgressColor(progressData[j].dpg)} 
-                    />
-                  </div>
-                  </div>
-                  </div>
+            
                     
                 </div>
-               </AccordionTrigger>    
-               <AccordionContent>
+              </AccordionTrigger>    
+              <AccordionContent>
                   <section className="flex flex-col gap-4" style={{width:"100%"}}>
                     
-                    <div className="grid grid-cols-12 ">
-                           <p className="text-sm text-gray-400">Thang đo KPI</p>
-                           <p className="text-sm text-gray-400 text-right col-start-5 ">Đã đạt</p>
-                           <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
-                           <p className="text-sm text-gray-400 text-center col-start-7">Đơn vị đo</p>
-                           <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
-                           <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
+                    <div className="grid grid-cols-12 border-b-2 pb-2">
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400">Thang KPI</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-left md:text-right col-start-5">Chỉ tiêu</p>
+                          <p className=" text-xs text-nowrap md:text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-8">Trọng số</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-left col-start-13">Cập nhật</p>
 
                     </div>
                       {d.kpis.map((kpi,i) => (
                         <div className="grid grid-cols-12  items-center">
                           
                             <p className='truncate col-span-3'>{kpi.name}</p>
-                            <p className="text-right col-start-5">{kpi.actual} </p>
-                            <p className="text-right col-start-6">{kpi.target} </p>
-                            <p className="text-center col-start-7">_</p>
+                            <p className="text-right col-start-5 hidden">{kpi.actual} </p>
+                            <p className="text-right col-start-5">{kpi.target} </p>
+                            <p className="text-center col-start-7 hidden ">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
                             
                             <div className='col-span-1 col-start-11'>
@@ -148,11 +144,11 @@ import { CycleProps } from "./OverViewContent";
                             color= {getProgressColor(progressData[j].progressKPIs[i].dpk)}
                             />
                             </div>
-                            <p>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
+                            <p className = 'hidden'>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
                             <div className= " col-span-1 col-start-13 text-right"> 
                             <Group>
                               <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
-                                <IconFingerprint size={20} />
+                                <Edit size={20} />
                               </ActionIcon>
                             </Group>
                             
@@ -162,13 +158,14 @@ import { CycleProps } from "./OverViewContent";
                       ))}
                     
                   </section>
-               </AccordionContent>
-             </AccordionItem>
-           </Accordion>
-           
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
             ))}
           </CardContent>
+          {/*  */}
       </MantineProvider>
     );
   }
   
+

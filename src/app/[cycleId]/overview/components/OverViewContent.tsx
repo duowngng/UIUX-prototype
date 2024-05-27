@@ -1,11 +1,12 @@
 /** @format */
 "use client";
 import { MantineProvider } from '@mantine/core';
-import Card, { CardContent, CardProps } from "@/components/Card";
-import SalesCard, { SalesProps } from "@/components/SalesCard";
+import { CardContent } from "@/components/Card";
 import { DonutChart } from '@mantine/charts';
-import { Progress } from '@mantine/core';
-import { LucideIcon,Crosshair,Clock3,Calendar} from "lucide-react";
+import { Progress} from '@mantine/core';
+import React, { useState } from 'react';
+import {  Modal } from 'antd';
+import { Crosshair,Clock3,Calendar} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -17,9 +18,8 @@ import data from "@/app/data.json";
 import { List, ThemeIcon, rem ,Text } from '@mantine/core';
 import { IconCircleDotted,IconCircleDashed ,IconCircle, IconCircleCheck} from '@tabler/icons-react';
 // import { Edit } from '@tabler/icons-react';
-import { ActionIcon, Group } from '@mantine/core'; 
+import { ActionIcon, Group,Button } from '@mantine/core'; 
 import {Edit} from 'lucide-react';
-
 
     
 
@@ -28,9 +28,11 @@ export type Cycle = typeof data.cycles[0];
 export type CycleProps = {
   cycle: Cycle;
 };
-  export default function OverviewContent(props: CycleProps) {
+const OverviewContent: React.FC<CycleProps> = (props) => {
+    
     const currentCycle = props.cycle;
     const Goals = currentCycle.goals;
+    
     const fromDate = new Date(currentCycle.dateRange.from.toString());
     const toDate = new Date(currentCycle.dateRange.to.toString());
     const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
@@ -66,8 +68,30 @@ export type CycleProps = {
         }}),
       }
     });
-
+    //modal 
+    const [open, setOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
+    const [modalText, setModalText] = useState('Content of the modal');
+    const [loading, setLoading] = useState(false);
+    const showModal = () => {
+      setOpen(true);
+    };
+  
+    const handleOk = () => {
+      setModalText('Đang phát triển chức năng cập nhật KPI');
+      setConfirmLoading(true);
+      setTimeout(() => {
+        setOpen(false);
+        setConfirmLoading(false);
+      }, 2000);
+    };
+  
+    const handleCancel = () => {
+      console.log('Clicked cancel button');
+      setOpen(false);
+    };
     return (
+      <>
       <MantineProvider> 
         <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between ">
         
@@ -161,34 +185,34 @@ export type CycleProps = {
           </div>
           
           </CardContent>
-          <CardContent className='row-start-1'>
-              <p className="font-semibold text-red-600 ">KPI đến lịch cập nhật</p>
-              <div className="grid grid-cols-12  items-center">
-              <p className= 'text-sm text-gray-400 col-span-3 sm:col-span-2'>Cập nhật</p>
-              <p className= 'text-sm text-gray-400 col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>Tên KPI</p>
+          
+          <CardContent className='row-start-1 h-60  md:col-start-3 md:h-64 '>
+              <p className="text-sm  ">KPI đến lịch cập nhật</p>
+              <div className="grid grid-cols-12  items-center border-b-2 pb-2">
+              <p className= 'text-xs md:text-sm text-gray-400 col-start-1 col-span-2'>Tên KPI</p>
+              <p className= 'text-xs md:text-sm text-gray-400 col-end-13 col-span-3 text-right'>Cập nhật</p>
               </div>
-            <div>
-            <div className="grid grid-cols-12  items-center">
-            <div className= " col-span-1 col-start-1 text-right"> 
+            <div className=' overflow-y-scroll text-sm'>
+             {Goals.map((goal,i) => goal.kpis.map((kpi,j)=>{if(progressData[i].progressKPIs[j].dpk<100) return(
+            <div className="grid grid-cols-8  items-center gap-0.5">
+                          <p className='truncate col-start-1 col-span-2'>{kpi.name}</p>
+                          <div className='col-span-2 col-start-4'>
+                          <Progress 
+                          value={kpi.actual * 100.0 / kpi.target} size={'sm'} 
+                          color= {getProgressColor(progressData[i].progressKPIs[j].dpk)}
+                          />
+                          </div>
+                          <p className= 'col-start-6 text-xs'>{progressData[i].progressKPIs[j].progressKPI.toFixed(1)}%</p>
+                          <div className= " col-span-1 col-end-9 text-right"> 
                           <Group>
-                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
+                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="teal.4" onClick={showModal}>
                               <Edit size={20} />
                             </ActionIcon>
                           </Group>
-                          
-                          
+                       
                         </div>
-                          <p className='truncate col-start-4 col-span-3 sm:col-start-3 sm:col-span-3'>{Goals[1].kpis[1].name}</p>
-                          
-                          <div className='col-span-2 col-start-8'>
-                          <Progress 
-                          value={Goals[1].kpis[1].actual * 100.0 / Goals[1].kpis[1].target} size={'sm'} 
-                          color= {getProgressColor(progressData[1].progressKPIs[1].dpk)}
-                          />
-                          </div>
-                          <p className= 'col-start-11'>{progressData[1].progressKPIs[1].progressKPI.toFixed(1)}%</p>
-                        
                       </div>
+              )}))}
             
             </div>
           </CardContent>
@@ -199,17 +223,17 @@ export type CycleProps = {
             <section>
               <p>Mục tiêu</p>
               <p className="text-sm text-gray-400">
-                Cập nhật lần cuối lúc 12:00 PM
+                Cập nhật lần cuối lúc 12:00 PM 27-05-2024
               </p>
             </section>
             {Goals.map((d,j) => (
             <Accordion type="single" collapsible >
             <AccordionItem value="item-1">
               <AccordionTrigger>
-              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between md:grid-cols-8' > 
+              <div className ='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2  justify-between md:grid-cols-4' > 
                 
-                  <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3'>
-                      <div className = 'row-span-full row-start-1'>
+                  <div className='grid grid-rows-3 grid-flow-col gap-y-1 gap-x-3 md:col-start-1 md:col-span-2  md:grid-cols-10' >
+                      <div className = 'row-span-full row-start-1 self-center justify-self-center' style={{zIndex: -j+Goals.length}}>
                               <DonutChart 
                               size={45}
                               thickness={8}
@@ -219,21 +243,20 @@ export type CycleProps = {
                                   value: kpi.weight,
                                   color: getProgressColor(progressData[j].progressKPIs[i].dpk),
                                 }))} 
-                                style={{zIndex: -j+10 }}
                               />
                       </div>
-                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-5'>
+                      <div className = 'col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-7 md:col-start-2'>
                               <p>{d.id}-{d.name}</p>
                               <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                                 {d.description}
                                 </p>
                       </div>
-                        <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-5'>
-                      <p className='text-xs sm:text-sm text-indigo-600 '>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
+                        <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-4 md:col-start-2'>
+                      <p className='text-xs sm:text-sm text-gray-600 md:col-span-4 md:col-start-2'>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
                     </div>
                   </div>
-                  <div className='md:col-end-8 md:col-span-4 md:self-center mr-4' >
-                      <Progress style={{ width: '100%' }} size="md" value={progressData[j].progressGoal} 
+                  <div className='md:col-end-5 md:col-span-2 md:self-center mr-4' >
+                      <Progress style={{ width: '100%' ,zIndex: 0}} size="md" value={progressData[j].progressGoal} 
                         color={getProgressColor(progressData[j].dpg)} 
                       />
                   </div>
@@ -245,13 +268,13 @@ export type CycleProps = {
               <AccordionContent>
                   <section className="flex flex-col gap-4" style={{width:"100%"}}>
                     
-                    <div className="grid grid-cols-12 ">
-                          <p className="text-sm text-gray-400">Thang đo KPI</p>
-                          <p className="text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
-                          <p className="text-sm text-gray-400 text-right col-start-6">Chỉ tiêu</p>
-                          <p className="text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
-                          <p className="text-sm text-gray-400 text-right col-start-8">Trọng số</p>
-                          <p className="text-sm text-gray-400 text-right col-start-12">Cập nhật</p>
+                    <div className="grid grid-cols-12 border-b-2 pb-2">
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400">Thang đo KPI</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-5">Chỉ tiêu</p>
+                          <p className=" text-xs text-nowrap md:text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-8">Trọng số</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-left col-start-13">Cập nhật</p>
 
                     </div>
                       {d.kpis.map((kpi,i) => (
@@ -259,7 +282,7 @@ export type CycleProps = {
                           
                             <p className='truncate col-span-3'>{kpi.name}</p>
                             <p className="text-right col-start-5 hidden">{kpi.actual} </p>
-                            <p className="text-right col-start-6">{kpi.target} </p>
+                            <p className="text-right col-start-5">{kpi.target} </p>
                             <p className="text-center col-start-7 hidden ">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
                             
@@ -272,12 +295,12 @@ export type CycleProps = {
                             <p className = 'hidden'>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
                             <div className= " col-span-1 col-start-13 text-right"> 
                             <Group>
-                              <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="lime.4">
+                              <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="teal.4"  onClick={showModal}>
                                 <Edit size={20} />
                               </ActionIcon>
                             </Group>
                             
-                            
+                           
                           </div>
                         </div>
                       ))}
@@ -290,8 +313,26 @@ export type CycleProps = {
           </CardContent>
           {/*  */}
         </section>
+                           
       </MantineProvider>
+      <Modal
+                              title="Title"
+                              open={open}
+                              closable ={false}
+                              // onOk={handleOk}
+                              // confirmLoading={confirmLoading}
+
+                              // onCancel={handleCancel}
+                              footer={[
+                               
+                              ]}
+                            >
+                              
+                            </Modal>
+      </>
+      
     );
   }
   
 
+  export default OverviewContent;

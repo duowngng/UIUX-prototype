@@ -97,14 +97,6 @@
         }
       ],
       "history": []
-    },
-    {
-      "id": "abcd",
-      "name": "abcd",
-      "dateRange": {
-        "from": "2024-04-02T17:00:00.000Z",
-        "to": "2024-04-11T17:00:00.000Z"
-      }
     }
   ],
   "templates": [
@@ -165,29 +157,6 @@
         {
           "name": "Tỷ lệ sinh viên hài lòng",
           "weight": 30
-        }
-      ]
-    },
-    {
-      "id": "Mau1",
-      "name": "Mẫu 1",
-      "description": "Mô tả mẫu 1",
-      "weight": 15,
-      "kpis": []
-    },
-    {
-      "id": "Mau1",
-      "name": "Mẫu 1",
-      "description": "Mô tả mẫu 1",
-      "weight": 50,
-      "kpis": [
-        {
-          "name": "KPI 1",
-          "weight": 50
-        },
-        {
-          "name": "KPI 2",
-          "weight": 50
         }
       ]
     }
