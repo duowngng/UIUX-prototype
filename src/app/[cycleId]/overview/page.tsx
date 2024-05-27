@@ -4,15 +4,18 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuTrigger,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import { Tabs, rem } from '@mantine/core';
+import { Separator } from "@/components/ui/separator"
 import Link from 'next/link';
 import OverviewContent from "./components/OverViewContent";
 import GoalContent from "./components/GoalContent";
 import HistoryContent from "./components/HistoryContent";
 import { useState } from 'react';
-import { MantineProvider, Progress,Select} from '@mantine/core';
+import { Input, MantineProvider, Progress,Select} from '@mantine/core';
 
 import {
   DropdownMenu,
@@ -51,15 +54,19 @@ const Home = ({
 
   return (
     <MantineProvider>
-    <div className="flex-col p-8 space-y-4 pt-6 w-full">
-      <div className="flex flex-1 gap-x-2 gap-y-0 justify-between align-top">
-      
-        <Heading title={'Chu kỳ: ' + curCycle.id}  description=""/>
-        <div className ='flex flex-col justify-end' >
-          <div className='w-fit mr-0'>
+      <div className="flex-col">
+      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex items-center justify-between">
+        
+        <Heading
+          title={`Trang chủ`}
+          description="Thông tin chu kỳ"
+        />
+        <div className='w-fit mr-0'>
           <DropdownMenu >
             <DropdownMenuTrigger>
               <Button >
+              
                 <ChevronDown className="mr-2 h-4 w-4" />
                 Xuất
               </Button>
@@ -72,54 +79,57 @@ const Home = ({
             </DropdownMenuContent>
         </DropdownMenu>
         </div>
+      </div>
+      <Separator />
+        <div className ='grid  grid-cols-2 gap-8' >
+        
+        <Input
+        className= "self-end"
+         placeholder="Tìm kiếm" 
+      />
+
         <Select
         placeholder={curCycle.id}
         data={selectData}
         withScrollArea={false}
+        className="self-center"
+        description="Chọn chu kỳ"
         styles={{ dropdown: { maxHeight: 200, overflowY: 'auto' } }}
         mt="md"
         onChange={(value) => router.push(`/${value}/overview`)}
       />
-        </div>  
-            </div>
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem >
-         
-            <NavigationMenuLink
-              className={navigationMenuTriggerStyle() }
-              onClick={() => setSelectedContent('Tổng quan')}
-              
-            >
-              Tổng quan
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink
-              className={navigationMenuTriggerStyle()}
-              onClick={() => setSelectedContent('Mục tiêu')}
-            >
-              Mục tiêu
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink
-              className={navigationMenuTriggerStyle()}
-              onClick={() => setSelectedContent('Lịch sử')}
-            >
-              Lịch sử
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+      
 
-      {/* Render nội dung dựa trên selectedContent */}
-      {selectedContent === 'Tổng quan' && <OverviewContent cycle={curCycle}/>}
-      {selectedContent === 'Mục tiêu' && <GoalContent cycle={curCycle} />}
-      {selectedContent === 'Lịch sử' && <HistoryContent cycle={curCycle} />}
+        </div>  
+        <Tabs defaultValue="Tổng quan">
+      <Tabs.List className="mb-4">
+        <Tabs.Tab value="Tổng quan" leftSection={""}>
+        Tổng quan
+        </Tabs.Tab>
+        <Tabs.Tab value="Mục tiêu" leftSection={""}>
+        Mục tiêu
+        </Tabs.Tab>
+        <Tabs.Tab value="Lịch sử" leftSection={""}>
+        Lịch sử
+        </Tabs.Tab>
+      </Tabs.List>
+
+      <Tabs.Panel value="Tổng quan">
+      <OverviewContent cycle={curCycle}/>
+      </Tabs.Panel>
+
+      <Tabs.Panel value="Mục tiêu">
+      <GoalContent cycle={curCycle} />
+      </Tabs.Panel>
+
+      <Tabs.Panel value="Lịch sử">
+      <HistoryContent cycle={curCycle} />
+      </Tabs.Panel>
+    </Tabs>
+
+    
     </div>
+    </div>  
     </MantineProvider>
   );
 };
