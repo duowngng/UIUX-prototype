@@ -7,10 +7,15 @@ export async function POST(
   try {
     const templatesData = await fs.readJson('./src/app/data.json'); // Read existing data
     const newData = await req.json(); // Type assertion for request body
-    templatesData.templates.push({ 
+    newData.kpis = newData.kpis.map(kpi => ({
+      ...kpi,
+      unit: kpi.unit.label // Extract only the 'label' value from the unit object
+  }));
+
+  templatesData.templates.push({
       id: newData?.name.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, ''),
       ...newData,
-    }); // Add new data
+  });
     await fs.writeFile('./src/app/data.json', JSON.stringify(templatesData, null, 2)); // Write updated data
     return NextResponse.json({ message: 'Template created successfully!' }, { status: 201 });
 } catch (error) {

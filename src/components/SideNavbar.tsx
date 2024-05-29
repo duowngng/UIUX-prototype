@@ -27,7 +27,7 @@ import { ScrollArea } from "./ui/scroll-area";
 export default function Sidebar() {
   return (
     <>
-      <nav>
+      <nav className="sticky top-0 z-40">
         {/* sidebar for desktop */}
         <SidebarComponent className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex" />
 
@@ -65,13 +65,6 @@ export const SidebarComponent = ({ className }: { className?: string }) => {
   const router = useRouter();
 
   const navigation = [
-    // {
-    //   name: "Overview",
-    //   href: "/overview",
-    //   icon: HomeIcon,
-    //   current: pathname.includes("overview"),
-    //   disabled: true,
-    // },
     {
       name: "Trang chủ",
       href: "/",
@@ -126,74 +119,28 @@ export const SidebarComponent = ({ className }: { className?: string }) => {
           </p>
         </div>
 
-        {/* <div className="flex items-center gap-x-1">
-          <AddDocumentModal>
-            <Button
-              className="flex-1 text-left group flex gap-x-3 items-center justify-start px-3"
-              title="Add New Document"
-            >
-              <PlusIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
-              <span>Add New Document</span>
-            </Button>
-          </AddDocumentModal>
-          <AddFolderModal>
-            <Button
-              size="icon"
-              variant="outline"
-              className="bg-gray-50 dark:bg-black border-gray-500 hover:bg-gray-200 hover:dark:bg-muted"
-            >
-              <FolderPlusIcon className="w-5 h-5 shrink-0" aria-hidden="true" />
-            </Button>
-          </AddFolderModal>
-        </div> */}
-
         <ScrollArea className="flex-grow" showScrollbar>
           <section className="flex flex-1 flex-col gap-y-6">
             <div className="space-y-2">
-              {navigation.map((item) => {
-                if (item.name === "Documents") {
-                  return (
-                    <div key={item.name}>
-                      <button
-                        onClick={() => router.push(item.href)}
-                        disabled={item.disabled}
-                        className={cn(
-                          item.current
-                            ? "bg-gray-200 font-semibold text-foreground dark:bg-secondary"
-                            : " duration-200 hover:bg-gray-200 hover:dark:bg-muted",
-                          "group flex w-full items-center gap-x-2 rounded-md px-3 py-2 text-sm leading-6 disabled:cursor-default disabled:text-muted-foreground disabled:hover:bg-transparent",
-                        )}
-                      >
-                        <item.icon
-                          className="h-5 w-5 shrink-0"
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </button>
-                      {/* {item.active ? <SiderbarFolders /> : null} */}
-                    </div>
-                  );
-                }
-                return (
-                  <button
-                    key={item.name}
-                    onClick={() => router.push(item.href)}
-                    disabled={item.disabled}
-                    className={cn(
-                      item.current
-                        ? "bg-gray-200 font-semibold text-foreground dark:bg-secondary"
-                        : " duration-200 hover:bg-gray-200 hover:dark:bg-muted",
-                      "group flex w-full items-center gap-x-2 rounded-md px-3 py-2 text-sm leading-6 disabled:cursor-default disabled:text-muted-foreground disabled:hover:bg-transparent",
-                    )}
-                  >
-                    <item.icon
-                      className="h-5 w-5 shrink-0"
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </button>
-                );
-              })}
+              {navigation.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => router.push(item.href)}
+                  disabled={item.disabled}
+                  className={cn(
+                    item.current
+                      ? "bg-gray-200 font-semibold text-foreground dark:bg-secondary"
+                      : " duration-200 hover:bg-gray-200 hover:dark:bg-muted",
+                    "group flex w-full items-center gap-x-2 rounded-md px-3 py-2 text-sm leading-6 disabled:cursor-default disabled:text-muted-foreground disabled:hover:bg-transparent",
+                  )}
+                >
+                  <item.icon
+                    className="h-5 w-5 shrink-0"
+                    aria-hidden="true"
+                  />
+                  {item.name}
+                </button>
+              ))}
             </div>
           </section>
         </ScrollArea>
@@ -206,42 +153,3 @@ export const SidebarComponent = ({ className }: { className?: string }) => {
     </div>
   );
 };
-
-//       <Nav
-//         isCollapsed={mobileWidth ? true : isCollapsed}
-//         links={[
-//           {
-//             title: "Trang chủ",
-//             href: "/",
-//             icon: LayoutDashboard,
-//             variant: "default"
-//           },
-//           {
-//             title: "Chu kỳ",
-//             href: "/cycles",
-//             icon: CalendarRange,
-//             variant: "ghost"
-//           },
-//           {
-//             title: "Mẫu mục tiêu",
-//             href: "/goal-templates",
-//             icon: ListTodo,
-//             variant: "ghost"
-//           },
-//           {
-//             title: "Cài đặt",
-//             href: "/settings",
-//             icon: Settings,
-//             variant: "ghost"
-//           },
-//           {
-//             title: "Cài đặt",
-//             href: "/documents",
-//             icon: Settings,
-//             variant: "ghost"
-//           }
-//         ]}
-//       />
-//     </div>
-//   );
-// }

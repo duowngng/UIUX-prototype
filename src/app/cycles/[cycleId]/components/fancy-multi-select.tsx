@@ -19,11 +19,15 @@ type Template = Record<"id" | "name", string>;
 const TEMPLATES = data.templates satisfies Template[];
 
 export function FancyMultiSelect({ 
-  onChange }: { onChange: (value: Template[]) => void }
-) {
+  onChange,
+  value, 
+}: { 
+  onChange: (value: Template[]) => void;
+  value?: Template[];
+}) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<Template[]>([]);
+  const [selected, setSelected] = React.useState<Template[]>(value || []);
   const [inputValue, setInputValue] = React.useState("");
 
   const handleSelect = React.useCallback((template: Template) => {

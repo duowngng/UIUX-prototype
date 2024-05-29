@@ -204,8 +204,8 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                       {field.value.from ? (
                         field.value.to ? (
                           <>
-                            {format(field.value.from, "dd/MM/yyyy")} -{" "}
-                            {format(field.value.to, "dd/MM/yyyy")}
+                            {field.value.from} -{" "}
+                            {field.value.to}
                           </>
                         ) : (
                           format(field.value.from, "dd/MM/yyyy")
@@ -243,7 +243,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                   <FormItem>
                     <FormLabel>Mục tiêu</FormLabel>
                     <FormControl>
-                      <FancyMultiSelect onChange={field.onChange}/>
+                      <FancyMultiSelect onChange={field.onChange} value={field.value}/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -63,7 +63,7 @@ export default function TemplatesTable() {
         {
           accessorKey: 'name',
           header: ({ column }) => {
-            const className = "cursor-pointer select-none flex items-center";
+            const className = "sticky top-0 z-40 cursor-pointer select-none flex items-center";
             const title = "Tên mẫu mục tiêu";
             if (!column.getCanSort()) {
               return <div className={className}>{title}</div>;
@@ -79,27 +79,37 @@ export default function TemplatesTable() {
           },
         },
         {
-        accessorKey: 'description',
-        header: ({ column }) => {
-          const className = "cursor-pointer select-none flex items-center";
-          const title = "Mô tả";
-          if (!column.getCanSort()) {
-            return <div className={className}>{title}</div>;
-          }
-          return (
-            <div className={className}>
-              <Button variant="ghost" size="icon" className="h-8 w-fit" onClick={column.getToggleSortingHandler()}>
-                <span>{title}</span>
-                {renderSortIcon(column)}
-              </Button>
+          accessorKey: 'description',
+          header: ({ column }) => {
+            const className = "cursor-pointer select-none flex items-center";
+            const title = "Mô tả";
+            if (!column.getCanSort()) {
+              return <div className={className}>{title}</div>;
+            }
+            return (
+              <div className={className}>
+                <Button variant="ghost" size="icon" className="h-8 w-fit" onClick={column.getToggleSortingHandler()}>
+                  <span>{title}</span>
+                  {renderSortIcon(column)}
+                </Button>
+              </div>
+            );
+          },
+          cell: ({ row }) => (
+            <div className="overflow-hidden text-ellipsis max-h-[6em] line-clamp-3 break-words w-[200px] md:w-[350px] lg:w-[500px]">
+              {row.original.description}
             </div>
-          );
-        },
-        cell: ({ row }) => (
-          <div className="overflow-hidden text-ellipsis whitespace-nowrap max-w-[250px] md:max-w-[350px] lg:max-w-[500px]">
-            {row.original.description}
-          </div>
         ),        
+      },
+      {
+        id: 'emptyColumn1', 
+        header: '', 
+        cell: () => <div className="w-[90px]"></div>, 
+      },
+      {
+        id: 'emptyColumn2', 
+        header: '', 
+        cell: () => <div className="w-[90px]"></div>, 
       },
       {
         accessorKey: 'weight',
@@ -118,11 +128,11 @@ export default function TemplatesTable() {
             </div>
           );
         },
-        cell: ({ row }) => <div className="w-[150px]">{row.original.weight}</div>,
+        cell: ({ row }) => <div className="w-[90px]">{row.original.weight}</div>,
       },
       {
         id: 'actions',
-        cell: ({ row }) => <CellAction data={row.original} />,
+        cell: ({ row }) => <div className="w-[90px]"><CellAction data={row.original} /></div>,
       },
       {
         id: 'toggle',

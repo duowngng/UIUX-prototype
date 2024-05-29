@@ -4,8 +4,8 @@
       "id": "HK1-2023-2024",
       "name": "Học kỳ 1 năm 2023-2024",
       "dateRange": {
-        "from": "2023-09-5",
-        "to": "2024-1-31"
+        "from": "05/09/2023",
+        "to": "31/01/2024"
       },
       "goals": [
         {
@@ -53,8 +53,8 @@
             {
               "id": "kpi-5",
               "name": "Chỉ số H-index",
-              "target": 5,
-              "actual": 4,
+              "target": 30,
+              "actual": 26,
               "weight": 30
             },
             {
@@ -102,8 +102,8 @@
       "id": "HK2-2023-2024",
       "name": "Học kỳ 2 năm 2023-2024",
       "dateRange": {
-        "from": "2024-02-01",
-        "to": "2024-06-30"
+        "from": "01/02/2024",
+        "to": "30/06/2024"
       },
       "goals": [
         {
@@ -151,8 +151,8 @@
             {
               "id": "kpi-14",
               "name": "Chỉ số H-index",
-              "target": 5,
-              "actual": 4.5,
+              "target": 30,
+              "actual": 33,
               "weight": 30
             },
             {
@@ -195,56 +195,6 @@
         }
       ],
       "history": []
-    },
-    {
-      "name": "new",
-      "dateRange": {
-        "from": "01/05/2024",
-        "to": "11/06/2024"
-      },
-      "goals": [
-        {
-          "id": "template-1",
-          "name": "Giảng dạy",
-          "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
-          "weight": 75,
-          "kpis": [
-            {
-              "name": "Số giờ giảng dạy",
-              "weight": 50
-            },
-            {
-              "name": "Điểm đánh giá môn học",
-              "weight": 25
-            },
-            {
-              "name": "Tỷ lệ sinh viên hài lòng",
-              "weight": 25
-            }
-          ]
-        },
-        {
-          "id": "template-2",
-          "name": "Nghiên cứu",
-          "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
-          "weight": 15,
-          "kpis": [
-            {
-              "name": "Số bài báo khoa học xuất bản",
-              "weight": 50
-            },
-            {
-              "name": "Chỉ số H-index",
-              "weight": 30
-            },
-            {
-              "name": "Số lần tham dự hội thảo khoa học",
-              "weight": 20
-            }
-          ]
-        }
-      ],
-      "id": "new-1716702920609"
     }
   ],
   "templates": [
@@ -256,15 +206,21 @@
       "kpis": [
         {
           "name": "Số giờ giảng dạy",
-          "weight": 50
+          "weight": 50,
+          "target": 120,
+          "unit": "Giờ"
         },
         {
           "name": "Điểm đánh giá môn học",
-          "weight": 25
+          "weight": 25,
+          "target": 8.5,
+          "unit": "Điểm"
         },
         {
           "name": "Tỷ lệ sinh viên hài lòng",
-          "weight": 25
+          "weight": 25,
+          "target": 90,
+          "unit": "%"
         }
       ]
     },
@@ -276,15 +232,21 @@
       "kpis": [
         {
           "name": "Số bài báo khoa học xuất bản",
-          "weight": 50
+          "weight": 50,
+          "target": 2,
+          "unit": "Bài báo"
         },
         {
           "name": "Chỉ số H-index",
-          "weight": 30
+          "weight": 30,
+          "target": 30,
+          "unit": "Điểm"
         },
         {
           "name": "Số lần tham dự hội thảo khoa học",
-          "weight": 20
+          "weight": 20,
+          "target": 3,
+          "unit": "Lần"
         }
       ]
     },
@@ -296,15 +258,21 @@
       "kpis": [
         {
           "name": "Số giờ hướng dẫn sinh viên",
-          "weight": 40
+          "weight": 40,
+          "target": 20,
+          "unit": "Giờ"
         },
         {
           "name": "Số sinh viên hướng dẫn",
-          "weight": 30
+          "weight": 30,
+          "target": 30,
+          "unit": "Sinh viên"
         },
         {
           "name": "Tỷ lệ sinh viên hài lòng",
-          "weight": 30
+          "weight": 30,
+          "target": 95,
+          "unit": "%"
         }
       ]
     }
