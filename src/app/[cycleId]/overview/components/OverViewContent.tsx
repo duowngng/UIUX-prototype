@@ -292,8 +292,8 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             <p className='truncate col-span-3'>{kpi.name}</p>
                             <p className="text-right col-start-4 hidden md:block">{kpi.actual} </p>
                             <p className="text-right col-start-5">{kpi.target} </p>
-                            <p className="text-right col-start-6 hidden md:block">_</p>
-                            <p className="text-right col-start-7 hidden md:block">_</p>
+                            <p className="text-right col-start-6 hidden md:block">{kpi.unit}</p>
+                            <p className="text-right col-start-7 hidden md:block">{kpi.frequency}</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
                             
                             <div className='col-span-1 col-start-11'>
