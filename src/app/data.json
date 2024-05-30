@@ -17,13 +17,17 @@
             {
               "id": "kpi-1",
               "name": "Số giờ giảng dạy",
+              "unit": "Giờ",
               "target": 120,
+              "frequency": "Hàng tuần",
               "actual": 115,
               "weight": 50
             },
             {
               "id": "kpi-2",
               "name": "Điểm đánh giá môn học",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 8.5,
               "actual": 8.2,
               "weight": 25
@@ -31,6 +35,8 @@
             {
               "id": "kpi-3",
               "name": "Tỷ lệ sinh viên hài lòng",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 90,
               "actual": 88,
               "weight": 25
@@ -46,6 +52,8 @@
             {
               "id": "kpi-4",
               "name": "Số bài báo khoa học xuất bản",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 2,
               "actual": 1,
               "weight": 50
@@ -53,7 +61,9 @@
             {
               "id": "kpi-5",
               "name": "Chỉ số H-index",
+              "frequency": "Hàng tuần",
               "target": 30,
+              "unit": "",
               "actual": 26,
               "weight": 30
             },
@@ -61,6 +71,8 @@
               "id": "kpi-6",
               "name": "Số lần tham dự hội thảo khoa học",
               "target": 3,
+              "frequency": "Hàng tuần",
+              "unit": "",
               "actual": 2,
               "weight": 20
             }
@@ -75,6 +87,8 @@
             {
               "id": "kpi-7",
               "name": "Số giờ hướng dẫn sinh viên",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 20,
               "actual": 18,
               "weight": 40
@@ -83,13 +97,17 @@
               "id": "kpi-8",
               "name": "Số sinh viên hướng dẫn",
               "target": 30,
+              "frequency": "Hàng tuần",
+              "unit": "",
               "actual": 25,
               "weight": 30
             },
             {
               "id": "kpi-9",
               "name": "Tỷ lệ sinh viên hài lòng",
+              "frequency": "Hàng tuần",
               "target": 95,
+              "unit": "",
               "actual": 92,
               "weight": 30
             }
@@ -103,7 +121,7 @@
       "name": "Học kỳ 2 năm 2023-2024",
       "dateRange": {
         "from": "2024-02-01",
-        "to": "2024-06-30"
+        "to": "2024-07-30"
       },
       "goals": [
         {
@@ -116,6 +134,8 @@
               "id": "kpi-10",
               "name": "Số giờ giảng dạy",
               "target": 120,
+              "frequency": "Hàng tuần",
+              "unit": "",
               "actual": 60,
               "weight": 50
             },
@@ -123,13 +143,17 @@
               "id": "kpi-11",
               "name": "Điểm đánh giá môn học",
               "target": 8.5,
+              "frequency": "Hàng tuần",
+              "unit": "",
               "actual": 0,
               "weight": 25
             },
             {
               "id": "kpi-12",
               "name": "Tỷ lệ sinh viên hài lòng",
+              "frequency": "Hàng tuần",
               "target": 90,
+              "unit": "",
               "actual": 20,
               "weight": 25
             }
@@ -144,6 +168,8 @@
             {
               "id": "kpi-13",
               "name": "Số bài báo khoa học xuất bản",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 3,
               "actual": 2,
               "weight": 50
@@ -151,6 +177,8 @@
             {
               "id": "kpi-14",
               "name": "Chỉ số H-index",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 30,
               "actual": 33,
               "weight": 30
@@ -159,6 +187,8 @@
               "id": "kpi-15",
               "name": "Số lần tham dự hội thảo khoa học",
               "target": 4,
+              "frequency": "Hàng tuần",
+              "unit": "",
               "actual": 3,
               "weight": 20
             }
@@ -173,20 +203,26 @@
             {
               "id": "kpi-16",
               "name": "Số giờ hướng dẫn sinh viên",
+              "unit": "",
               "target": 25,
+              "frequency": "Hàng tuần",
               "actual": 22,
               "weight": 40
             },
             {
               "id": "kpi-17",
               "name": "Số sinh viên hướng dẫn",
+              "frequency": "Hàng tuần",
               "target": 35,
+              "unit": "",
               "actual": 30,
               "weight": 30
             },
             {
               "id": "kpi-18",
               "name": "Tỷ lệ sinh viên hài lòng",
+              "frequency": "Hàng tuần",
+              "unit": "",
               "target": 95,
               "actual": 93,
               "weight": 30
@@ -209,7 +245,8 @@
           "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
           "weight": 75,
           "kpis": [
-            {
+            { 
+              "id": "kpi-19",
               "name": "Số giờ giảng dạy",
               "weight": 50,
               "target": 120,
@@ -218,6 +255,7 @@
               "actual": 0
             },
             {
+              "id": "kpi-20",
               "name": "Điểm đánh giá môn học",
               "weight": 25,
               "target": 8.5,
@@ -226,6 +264,7 @@
               "actual": 0
             },
             {
+              "id": "kpi-10",
               "name": "Tỷ lệ sinh viên hài lòng",
               "weight": 25,
               "target": 90,
@@ -242,6 +281,7 @@
           "weight": 15,
           "kpis": [
             {
+              "id": "kpi-21",
               "name": "Số bài báo khoa học xuất bản",
               "weight": 50,
               "target": 2,
@@ -250,6 +290,7 @@
               "actual": 0
             },
             {
+              "id": "kpi-22",
               "name": "Chỉ số H-index",
               "weight": 30,
               "target": 30,
@@ -258,6 +299,7 @@
               "actual": 0
             },
             {
+              "id": "kpi-23",
               "name": "Số lần tham dự hội thảo khoa học",
               "weight": 20,
               "target": 3,
@@ -279,6 +321,7 @@
       "weight": 75,
       "kpis": [
         {
+          "id": "template-1",
           "name": "Số giờ giảng dạy",
           "weight": 50,
           "target": 120,
@@ -286,6 +329,7 @@
           "frequency": "Hàng tuần"
         },
         {
+          "id": "template-2",
           "name": "Điểm đánh giá môn học",
           "weight": 25,
           "target": 8.5,
@@ -293,6 +337,7 @@
           "frequency": "1 lần"
         },
         {
+          "id": "template-3",
           "name": "Tỷ lệ sinh viên hài lòng",
           "weight": 25,
           "target": 90,
@@ -308,6 +353,7 @@
       "weight": 15,
       "kpis": [
         {
+          "id": "template-1",
           "name": "Số bài báo khoa học xuất bản",
           "weight": 50,
           "target": 2,
@@ -315,6 +361,7 @@
           "frequency": "Hàng tháng"
         },
         {
+          "id": "template-2",
           "name": "Chỉ số H-index",
           "weight": 30,
           "target": 30,
@@ -322,6 +369,7 @@
           "frequency": "Hàng tháng"
         },
         {
+          "id": "template-3",
           "name": "Số lần tham dự hội thảo khoa học",
           "weight": 20,
           "target": 3,
@@ -337,6 +385,7 @@
       "weight": 15,
       "kpis": [
         {
+          "id": "template-1",
           "name": "Số giờ hướng dẫn sinh viên",
           "weight": 40,
           "target": 20,
@@ -344,6 +393,7 @@
           "frequency": "Hàng tuần"
         },
         {
+          "id": "template-2",
           "name": "Số sinh viên hướng dẫn",
           "weight": 30,
           "target": 30,
@@ -351,6 +401,7 @@
           "frequency": "1 lần"
         },
         {
+          "id": "template-3",
           "name": "Tỷ lệ sinh viên hài lòng",
           "weight": 30,
           "target": 95,
