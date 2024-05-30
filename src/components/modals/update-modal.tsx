@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 
-const updateModal: React.FC = () => {
+const UpdateModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
@@ -39,4 +39,4 @@ const updateModal: React.FC = () => {
   );
 };
 
-export default updateModal;
+export default UpdateModal;
