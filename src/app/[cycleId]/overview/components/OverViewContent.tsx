@@ -312,7 +312,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
               </p>
             </section>
             {Goals.map((d, j) => (
-              <Accordion type="single" collapsible key={d.id}>
+              <Accordion key={d.id} type="single" collapsible>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>
                     <div className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2  justify-between md:grid-cols-4">
@@ -326,6 +326,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             thickness={8}
                             chartLabel={d.weight}
                             data={d.kpis.map((kpi, i) => ({
+                              key: kpi.id,
                               name: kpi.name,
                               value: kpi.weight,
                               color: getProgressColor(
