@@ -312,7 +312,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
               </p>
             </section>
             {Goals.map((d, j) => (
-              <Accordion type="single" collapsible key={j}>
+              <Accordion type="single" collapsible key={d.id}>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>
                     <div className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2  justify-between md:grid-cols-4">
@@ -390,7 +390,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                       {d.kpis.map((kpi, i) => (
                         <div
                           className="grid grid-cols-12  items-center"
-                          key={i}
+                          key={kpi.id}
                         >
                           <p className="truncate col-span-3">{kpi.name}</p>
                           <p className="text-right col-start-4 hidden md:block">
