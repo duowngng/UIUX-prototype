@@ -2,12 +2,12 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import { Trash } from "lucide-react";
-import { Calendar as CalendarIcon } from "lucide-react"
-import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +15,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { Heading } from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "@/components/ui/calendar";
 import { Separator } from "@/components/ui/separator";
 import { 
   Form,
@@ -30,11 +30,12 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { FancyMultiSelect } from "./fancy-multi-select";
 import data from "@/app/data.json";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name must be at least 1 characters." }),
@@ -57,6 +58,9 @@ const formSchema = z.object({
           z.object({
             name: z.string(),
             weight: z.number(),
+            target: z.number(),
+            unit: z.string(),
+            frequency: z.string(),
           })
         ),
       })
@@ -78,6 +82,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
 }) => {
   const params = useParams();
   const router = useRouter();
+  const scrollableRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -99,11 +104,11 @@ export const CycleForm: React.FC<CycleFormProps> = ({
     },
   });
 
-
   const onSubmit = async (data: CycleFormValues) => {
     try {
       setLoading(true);
       let cycleId;
+      console.log(data);
       if (initialData) {
         await axios.patch(`/api/cycles/${params.cycleId}`, data);
       } else {
@@ -112,7 +117,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       }
       router.refresh();
       if (cycleId) {
-        window.location.assign(`/cycles/${cycleId}`);
+        window.location.assign(`/${cycleId}/overview`);
       } else {
         window.location.assign(`/cycles`);
       }
@@ -137,7 +142,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       setLoading(false);
       setOpen(false);
     }
-  }
+  };
 
   const templates = data.templates;
 
@@ -149,7 +154,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
         onConfirm={onDelete}
         loading={loading}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between min-h-full">
         <Heading
           title={title}
           description={description}
@@ -168,7 +173,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       <Separator/>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8">
             <FormField
               control={form.control}
               name="name"
@@ -183,7 +188,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
               )}
             />
           </div>
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="dateRange"
@@ -204,8 +209,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                       {field.value.from ? (
                         field.value.to ? (
                           <>
-                            {field.value.from} -{" "}
-                            {field.value.to}
+                            {format(field.value.from, "dd/MM/yyyy")} - {format(field.value.to, "dd/MM/yyyy")}
                           </>
                         ) : (
                           format(field.value.from, "dd/MM/yyyy")
@@ -216,6 +220,8 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="center">
+                  {/* <div ref={scrollableRef} className="max-h-[400px] overflow-y-auto"> */}
+                  <ScrollArea className="max-h-[400px]">
                     <Calendar
                       initialFocus
                       mode="range"
@@ -227,6 +233,9 @@ export const CycleForm: React.FC<CycleFormProps> = ({
                       onSelect={field.onChange}
                       numberOfMonths={2}
                     />
+                  <ScrollBar />
+                  </ScrollArea>
+                  {/* </div> */}
                   </PopoverContent>
                 </Popover>
                 <FormDescription>Lựa chọn thời gian bắt đầu và kết thúc</FormDescription>
@@ -235,7 +244,7 @@ export const CycleForm: React.FC<CycleFormProps> = ({
             )}
           />
           </div>
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8">
             <FormField
                 control={form.control}
                 name="goals"
@@ -260,4 +269,4 @@ export const CycleForm: React.FC<CycleFormProps> = ({
       </Form>
     </>
   );
-} ;
+};

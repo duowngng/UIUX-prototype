@@ -212,11 +212,11 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                           </div>
                           <p className= 'col-start-6 text-xs '>{progressData[i].progressKPIs[j].progressKPI.toFixed(1)}%</p>
                           <div className= " col-span-1 col-end-8 justify-self-end text-right"> 
-                          <Group>
-                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="gray.2" onClick={showModal}>
-                              <Edit size={15} />
-                            </ActionIcon>
-                          </Group>
+                          
+                          <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="gray.2" onClick={showModal}>
+                            <Edit size={15} />
+                          </ActionIcon>
+                          
                        
                         </div>
                       </div>
@@ -304,11 +304,9 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             </div>
                             <p className = 'hidden'>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
                             <div className= " col-span-1 col-end-13 text-right justify-self-end"> 
-                            <Group>
-                              <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="gray.2"  onClick={showModal}>
-                                <Edit size={15} />
-                              </ActionIcon>
-                            </Group>
+                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="gray.2"  onClick={showModal}>
+                              <Edit size={15} />
+                            </ActionIcon>
                             
                            
                           </div>

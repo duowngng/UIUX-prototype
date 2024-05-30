@@ -4,8 +4,8 @@
       "id": "HK1-2023-2024",
       "name": "Học kỳ 1 năm 2023-2024",
       "dateRange": {
-        "from": "05/09/2023",
-        "to": "31/01/2024"
+        "from": "2023-09-05",
+        "to": "2024-01-31"
       },
       "goals": [
         {
@@ -102,8 +102,8 @@
       "id": "HK2-2023-2024",
       "name": "Học kỳ 2 năm 2023-2024",
       "dateRange": {
-        "from": "01/02/2024",
-        "to": "30/06/2024"
+        "from": "2024-02-01",
+        "to": "2024-06-30"
       },
       "goals": [
         {
@@ -195,6 +195,80 @@
         }
       ],
       "history": []
+    },
+    {
+      "name": "errwerwr",
+      "dateRange": {
+        "from": "2024-05-30T13:14:23.675Z",
+        "to": "2024-06-18T17:00:00.000Z"
+      },
+      "goals": [
+        {
+          "id": "template-1",
+          "name": "Giảng dạy",
+          "description": "Nâng cao chất lượng giảng dạy và truyền đạt kiến thức hiệu quả.",
+          "weight": 75,
+          "kpis": [
+            {
+              "name": "Số giờ giảng dạy",
+              "weight": 50,
+              "target": 120,
+              "unit": "Giờ",
+              "frequency": "Hàng tuần",
+              "actual": 0
+            },
+            {
+              "name": "Điểm đánh giá môn học",
+              "weight": 25,
+              "target": 8.5,
+              "unit": "Điểm",
+              "frequency": "1 lần",
+              "actual": 0
+            },
+            {
+              "name": "Tỷ lệ sinh viên hài lòng",
+              "weight": 25,
+              "target": 90,
+              "unit": "%",
+              "frequency": "1 lần",
+              "actual": 0
+            }
+          ]
+        },
+        {
+          "id": "template-2",
+          "name": "Nghiên cứu",
+          "description": "Xuất bản bài báo khoa học trên tạp chí uy tín.",
+          "weight": 15,
+          "kpis": [
+            {
+              "name": "Số bài báo khoa học xuất bản",
+              "weight": 50,
+              "target": 2,
+              "unit": "Bài báo",
+              "frequency": "Hàng tháng",
+              "actual": 0
+            },
+            {
+              "name": "Chỉ số H-index",
+              "weight": 30,
+              "target": 30,
+              "unit": "Điểm",
+              "frequency": "Hàng tháng",
+              "actual": 0
+            },
+            {
+              "name": "Số lần tham dự hội thảo khoa học",
+              "weight": 20,
+              "target": 3,
+              "unit": "Lần",
+              "frequency": "Hàng tháng",
+              "actual": 0
+            }
+          ]
+        }
+      ],
+      "id": "errwerwr-1717074872537"
     }
   ],
   "templates": [
@@ -208,19 +282,22 @@
           "name": "Số giờ giảng dạy",
           "weight": 50,
           "target": 120,
-          "unit": "Giờ"
+          "unit": "Giờ",
+          "frequency": "Hàng tuần"
         },
         {
           "name": "Điểm đánh giá môn học",
           "weight": 25,
           "target": 8.5,
-          "unit": "Điểm"
+          "unit": "Điểm",
+          "frequency": "1 lần"
         },
         {
           "name": "Tỷ lệ sinh viên hài lòng",
           "weight": 25,
           "target": 90,
-          "unit": "%"
+          "unit": "%",
+          "frequency": "1 lần"
         }
       ]
     },
@@ -234,19 +311,22 @@
           "name": "Số bài báo khoa học xuất bản",
           "weight": 50,
           "target": 2,
-          "unit": "Bài báo"
+          "unit": "Bài báo",
+          "frequency": "Hàng tháng"
         },
         {
           "name": "Chỉ số H-index",
           "weight": 30,
           "target": 30,
-          "unit": "Điểm"
+          "unit": "Điểm",
+          "frequency": "Hàng tháng"
         },
         {
           "name": "Số lần tham dự hội thảo khoa học",
           "weight": 20,
           "target": 3,
-          "unit": "Lần"
+          "unit": "Lần",
+          "frequency": "Hàng tháng"
         }
       ]
     },
@@ -260,19 +340,22 @@
           "name": "Số giờ hướng dẫn sinh viên",
           "weight": 40,
           "target": 20,
-          "unit": "Giờ"
+          "unit": "Giờ",
+          "frequency": "Hàng tuần"
         },
         {
           "name": "Số sinh viên hướng dẫn",
           "weight": 30,
           "target": 30,
-          "unit": "Sinh viên"
+          "unit": "Sinh viên",
+          "frequency": "1 lần"
         },
         {
           "name": "Tỷ lệ sinh viên hài lòng",
           "weight": 30,
           "target": 95,
-          "unit": "%"
+          "unit": "%",
+          "frequency": "1 lần"
         }
       ]
     }

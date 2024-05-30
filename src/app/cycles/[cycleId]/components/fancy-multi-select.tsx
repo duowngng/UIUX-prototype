@@ -96,7 +96,7 @@ export function FancyMultiSelect({
             onValueChange={setInputValue}
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
-            placeholder={selectables.length === 0 ? "Chọn mẫu mục tiêu" : ""}
+            placeholder={selectables.length === 0 ? "" : "Chọn mẫu mục tiêu"}
             className="bg-transparent outline-none placeholder:text-muted-foreground flex-1"
           />
         </div>
