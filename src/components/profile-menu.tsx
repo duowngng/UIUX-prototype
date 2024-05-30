@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { HelpCircle, LogOut } from "lucide-react";
+import { Book, HelpCircle, LogOut } from "lucide-react";
 
 import ChevronUp from "@/components/shared/icons/chevron-up";
 import {
@@ -67,9 +67,14 @@ const ProfileMenu = ({ className, size }: ProfileMenuProps) => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="!my-2" />
                 <ModeToggle />
-
                 <a
-                  href="mailto:support@papermark.io"
+                  className="my-1 flex items-center px-3 py-2 text-sm duration-200 hover:bg-gray-200 dark:hover:bg-muted"
+                >
+                  <Book className="mr-2 h-4 w-4" />
+                  Hướng dẫn
+                </a>
+                <a
+                  href="mailto:support@kapiota.com"
                   className="my-1 flex items-center px-3 py-2 text-sm duration-200 hover:bg-gray-200 dark:hover:bg-muted"
                 >
                   <HelpCircle className="mr-2 h-4 w-4" />
