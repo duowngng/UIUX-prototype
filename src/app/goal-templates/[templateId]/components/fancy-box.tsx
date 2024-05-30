@@ -55,13 +55,13 @@ export function FancyBox({
   value,
 }: {
   onChange: (value: Unit) => void;
-  value: Unit;
+  value: Unit | undefined;
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [units, setUnits] = React.useState<Unit[]>(UNITS);
   const [openCombobox, setOpenCombobox] = React.useState(false);
   const [inputValue, setInputValue] = React.useState<string>("");
-  const [selectedValue, setSelectedValue] = React.useState<Unit | null>(value);
+  const [selectedValue, setSelectedValue] = React.useState<Unit | undefined>(value);
 
   const createUnit = (name: string) => {
     const newUnit = {
