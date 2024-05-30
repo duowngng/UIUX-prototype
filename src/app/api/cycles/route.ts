@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import fs from 'fs-extra'; // Import for file system access
 import { NextResponse } from "next/server";
+import { v4 as uuidv4 } from 'uuid';
 
 type Cycle = {
   id: string;
@@ -23,6 +24,7 @@ export async function POST(
     newData.goals.forEach((goal: any) => {
       goal.kpis.forEach((kpi: any) => {
         kpi.actual = 0; 
+        kpi.id = uuidv4(); // Generate and assign a UUID to each KPI
       });
     });
     const id = `${newData?.name.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, '')}-${timestamp}`;
