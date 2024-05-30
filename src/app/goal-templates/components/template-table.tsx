@@ -141,7 +141,7 @@ export default function TemplatesTable() {
           ),
         },
     ],
-    [openStates]
+    [openStates, toggleOpenState]
   );
 
   const table = useReactTable({
