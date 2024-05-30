@@ -456,12 +456,14 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           // onCancel={handleCancel}
           footer={[
             <Button
+              key={1}
               style={{ backgroundColor: "rgb(75,85,99)" }}
               className="mr-3"
             >
               Hủy
             </Button>,
             <Button
+              key={2}
               style={{ backgroundColor: "rgb(13,148,136)" }}
               className="mr-3"
             >
