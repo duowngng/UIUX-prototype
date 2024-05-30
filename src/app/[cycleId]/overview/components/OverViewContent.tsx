@@ -327,7 +327,20 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                                
                               ]}
                             >
-                              
+                               <Button 
+                                color="gray.6"
+                                autoContrast
+                                 onClick={handleCancel}>
+                                  Return
+                                </Button>,
+                                
+                                <Button
+                                  color="teal.6"
+                                  autoContrast
+                                  onClick={handleOk}
+                                >
+                                  Cập nhật
+                                </Button>,
                             </Modal>
       </>
       
