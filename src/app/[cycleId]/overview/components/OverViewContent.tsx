@@ -263,7 +263,10 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                 goal.kpis.map((kpi, j) => {
                   if (progressData[i].progressKPIs[j].dpk < 100)
                     return (
-                      <div className="grid grid-cols-7  items-center gap-0.5">
+                      <div
+                        className="grid grid-cols-7  items-center gap-0.5"
+                        key={`${i}-${j}`}
+                      >
                         <p className="truncate col-start-1 col-span-2">
                           {kpi.name}
                         </p>
@@ -309,7 +312,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
               </p>
             </section>
             {Goals.map((d, j) => (
-              <Accordion type="single" collapsible>
+              <Accordion type="single" collapsible key={j}>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>
                     <div className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2  justify-between md:grid-cols-4">
@@ -385,7 +388,10 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                         </p>
                       </div>
                       {d.kpis.map((kpi, i) => (
-                        <div className="grid grid-cols-12  items-center">
+                        <div
+                          className="grid grid-cols-12  items-center"
+                          key={i}
+                        >
                           <p className="truncate col-span-3">{kpi.name}</p>
                           <p className="text-right col-start-4 hidden md:block">
                             {kpi.actual}{" "}

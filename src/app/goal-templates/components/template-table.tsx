@@ -30,7 +30,7 @@ import { Input } from "@/components/ui/input";
 import { CellAction } from "./cell-action";
 
 import { ChevronDown, ChevronUp, X, ArrowUpDown, ChevronsLeftRightIcon, ArrowDownIcon, ArrowUpIcon } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Button } from "@/components/ui/button"; // Assuming you have a Button component
 
 import data from "@/app/data.json";
@@ -43,12 +43,12 @@ export default function TemplatesTable() {
   const [searchQuery, setSearchQuery] = useState('');
   const [openStates, setOpenStates] = useState({});
 
-  const toggleOpenState = (id: any) => {
-    setOpenStates({
-      ...openStates,
-      [id]: !openStates[id]
-    });
-  };
+  const toggleOpenState = useCallback((id: any) => {
+    setOpenStates(prevOpenStates => ({
+      ...prevOpenStates,
+      [id]: !prevOpenStates[id]
+    }));
+  }, []);
 
   const renderSortIcon = (column: any) => {
     const sort = column.getIsSorted();
