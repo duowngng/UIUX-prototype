@@ -35,7 +35,10 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
     const Goals = currentCycle.goals;
     
     const fromDate = new Date(currentCycle.dateRange.from.toString());
+  
     const toDate = new Date(currentCycle.dateRange.to.toString());
+    const fromDateFormatted = new Date(fromDate).toLocaleDateString('en-GB');
+   const toDateFormatted = new Date(toDate).toLocaleDateString('en-GB');
     const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
     const Currentime = new Date();
     const ctimeDiff = Math.abs(Currentime.getTime() - fromDate.getTime());
@@ -73,11 +76,12 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
-    const [loading, setLoading] = useState(false);
-    const showModal = () => {
-      setOpen(true);
-    };
-  
+    const [modalData, setModalData] = useState<any>(null); // dâta cho modal
+
+      const showModal = (data: any) => {
+        setModalData(data); 
+        setOpen(true);
+      };
     const handleOk = () => {
       setModalText('Đang phát triển chức năng cập nhật KPI');
       setConfirmLoading(true);
@@ -133,7 +137,8 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
         </div>
         <div className="flex gap-4 items-center">
           <Calendar className="h-4 w-4 text-gray-400" />
-          <p className="truncate text-xs">Chu kì :{currentCycle.dateRange.from} đến {currentCycle.dateRange.to}</p>
+
+          <p className="truncate text-xs">Chu kì: {fromDateFormatted} đến {toDateFormatted}</p>
         </div>
 
       </section>
@@ -260,7 +265,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                                 </p>
                       </div>
                         <div className='truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-4 md:col-start-2'>
-                      <p className='text-xs sm:text-sm text-gray-600 md:col-span-4 md:col-start-2'>{currentCycle.dateRange.from}:{currentCycle.dateRange.to}</p>
+                      <p className='text-xs sm:text-sm text-gray-600 md:col-span-4 md:col-start-2'>{new Date( currentCycle.dateRange.from).toLocaleDateString('en-GB')}:{new Date( currentCycle.dateRange.to).toLocaleDateString('en-GB')}</p>
                     </div>
                   </div>
                   <div className='md:col-end-5 md:col-span-2 md:self-center mr-4' >
