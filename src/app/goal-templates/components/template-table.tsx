@@ -41,9 +41,10 @@ export default function TemplatesTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [openStates, setOpenStates] = useState({});
+  const [openStates, setOpenStates] = useState<{ [key: string]: boolean }>({});
 
-  const toggleOpenState = useCallback((id: any) => {
+  
+  const toggleOpenState: (id: string) => void = useCallback((id: string) => {
     setOpenStates(prevOpenStates => ({
       ...prevOpenStates,
       [id]: !prevOpenStates[id]
@@ -137,7 +138,9 @@ export default function TemplatesTable() {
         {
           id: 'toggle',
           cell: ({ row }) => (
-            openStates[row.original.id] ? <ChevronUp size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} /> : <ChevronDown size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} />
+            openStates[row.original.id] 
+              ? <ChevronUp size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} /> 
+              : <ChevronDown size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} />
           ),
         },
     ],
