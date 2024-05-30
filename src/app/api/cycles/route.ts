@@ -20,13 +20,18 @@ export async function POST(
     const timestamp = Date.now();
     const cyclesData = await fs.readJson('./src/app/data.json'); // Read existing data
     const newData = await req.json(); // Type assertion for request body
+    newData.goals.forEach((goal: any) => {
+      goal.kpis.forEach((kpi: any) => {
+        kpi.actual = 0; 
+      });
+    });
     const id = `${newData?.name.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, '')}-${timestamp}`;
     cyclesData.cycles.push({ 
       ...newData,
       "id": id,
       "dateRange": {
-        from: format(newData?.dateRange.from, "dd/MM/yyyy"),
-        to: format(newData?.dateRange.to, "dd/MM/yyyy"), 
+        from: newData?.dateRange.from,
+        to: newData?.dateRange.to, 
       },
     });
     await fs.writeFile('./src/app/data.json', JSON.stringify(cyclesData, null, 2)); // Write updated data

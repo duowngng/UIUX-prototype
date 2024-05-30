@@ -1,7 +1,8 @@
 /** @format */
 "use client";
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider,TextInput } from '@mantine/core';
 import { CardContent } from "@/components/Card";
+import { useForm } from '@mantine/form';
 import { DonutChart } from '@mantine/charts';
 import { Progress} from '@mantine/core';
 import React, { useState } from 'react';
@@ -90,6 +91,13 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
       console.log('Clicked cancel button');
       setOpen(false);
     };
+    const form = useForm({
+      mode: 'uncontrolled',
+      initialValues: {
+        name: '',
+        email: '',
+      },
+    });
     return (
       <>
       <MantineProvider> 
@@ -188,13 +196,13 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           
           <CardContent className='row-start-1 h-60  md:col-start-3 md:h-64 '>
               <p className="text-sm  ">KPI đến lịch cập nhật</p>
-              <div className="grid grid-cols-12  items-center border-b-2 pb-2">
+              <div className="grid grid-cols-7  items-center border-b-2 pb-2">
               <p className= 'text-xs md:text-sm text-gray-400 col-start-1 col-span-2'>Tên KPI</p>
-              <p className= 'text-xs md:text-sm text-gray-400 col-end-13 col-span-3 text-right'>Cập nhật</p>
+              <p className= 'text-xs md:text-sm text-gray-400 col-end-8 col-span-3 text-right'>Cập nhật</p>
               </div>
             <div className=' overflow-y-scroll text-sm'>
              {Goals.map((goal,i) => goal.kpis.map((kpi,j)=>{if(progressData[i].progressKPIs[j].dpk<100) return(
-            <div className="grid grid-cols-8  items-center gap-0.5">
+            <div className="grid grid-cols-7  items-center gap-0.5">
                           <p className='truncate col-start-1 col-span-2'>{kpi.name}</p>
                           <div className='col-span-2 col-start-4'>
                           <Progress 
@@ -202,13 +210,13 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                           color= {getProgressColor(progressData[i].progressKPIs[j].dpk)}
                           />
                           </div>
-                          <p className= 'col-start-6 text-xs'>{progressData[i].progressKPIs[j].progressKPI.toFixed(1)}%</p>
-                          <div className= " col-span-1 col-end-9 text-right"> 
-                          <Group>
-                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="teal.4" onClick={showModal}>
-                              <Edit size={20} />
-                            </ActionIcon>
-                          </Group>
+                          <p className= 'col-start-6 text-xs '>{progressData[i].progressKPIs[j].progressKPI.toFixed(1)}%</p>
+                          <div className= " col-span-1 col-end-8 justify-self-end text-right"> 
+                          
+                          <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="gray.2" onClick={showModal}>
+                            <Edit size={15} />
+                          </ActionIcon>
+                          
                        
                         </div>
                       </div>
@@ -270,20 +278,22 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                     
                     <div className="grid grid-cols-12 border-b-2 pb-2">
                           <p className="text-xs text-nowrap md:text-sm text-gray-400">Thang đo KPI</p>
-                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-5 hidden">Đã đạt</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-4 hidden md:block">Đã đạt</p>
                           <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-5">Chỉ tiêu</p>
-                          <p className=" text-xs text-nowrap md:text-sm text-gray-400 text-center col-start-7 hidden">Đơn vị đo</p>
+                          <p className=" text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-6 hidden md:block">Đơn vị</p>
+                          <p className=" text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-7 hidden md:block">Tần suất</p>
                           <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-start-8">Trọng số</p>
-                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-left col-start-13">Cập nhật</p>
+                          <p className="text-xs text-nowrap md:text-sm text-gray-400 text-right col-end-13">Cập nhật</p>
 
                     </div>
                       {d.kpis.map((kpi,i) => (
                         <div className="grid grid-cols-12  items-center">
                           
                             <p className='truncate col-span-3'>{kpi.name}</p>
-                            <p className="text-right col-start-5 hidden">{kpi.actual} </p>
+                            <p className="text-right col-start-4 hidden md:block">{kpi.actual} </p>
                             <p className="text-right col-start-5">{kpi.target} </p>
-                            <p className="text-center col-start-7 hidden ">_</p>
+                            <p className="text-right col-start-6 hidden md:block">_</p>
+                            <p className="text-right col-start-7 hidden md:block">_</p>
                             <p className="text-right col-start-8">{kpi.weight} </p>
                             
                             <div className='col-span-1 col-start-11'>
@@ -293,12 +303,10 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             />
                             </div>
                             <p className = 'hidden'>{progressData[j].progressKPIs[i].progressKPI.toFixed(1)}%</p>
-                            <div className= " col-span-1 col-start-13 text-right"> 
-                            <Group>
-                              <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="teal.4"  onClick={showModal}>
-                                <Edit size={20} />
-                              </ActionIcon>
-                            </Group>
+                            <div className= " col-span-1 col-end-13 text-right justify-self-end"> 
+                            <ActionIcon autoContrast aria-label="autoContrast action icon" size="lg" color="gray.2"  onClick={showModal}>
+                              <Edit size={15} />
+                            </ActionIcon>
                             
                            
                           </div>
@@ -313,9 +321,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           </CardContent>
           {/*  */}
         </section>
-                           
-      </MantineProvider>
-      <Modal
+        <Modal
                               title="Title"
                               open={open}
                               closable ={false}
@@ -324,24 +330,23 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
 
                               // onCancel={handleCancel}
                               footer={[
+                     <Button style= {{backgroundColor:"rgb(75,85,99)"}}className="mr-3">Hủy</Button>,
+                     <Button style= {{backgroundColor:"rgb(13,148,136)"}} className="mr-3">Cập nhật</Button> 
+                     
+
                                
                               ]}
-                            >
-                               <Button 
-                                color="gray.6"
-                                autoContrast
-                                 onClick={handleCancel}>
-                                  Return
-                                </Button>,
-                                
-                                <Button
-                                  color="teal.6"
-                                  autoContrast
-                                  onClick={handleOk}
-                                >
-                                  Cập nhật
-                                </Button>,
-                            </Modal>
+                            ><div>
+                            <TextInput
+                
+                            />
+                            <TextInput
+                        
+                            />               
+                          </div>
+                            </Modal>  
+      </MantineProvider>
+      
       </>
       
     );

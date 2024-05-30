@@ -11,8 +11,8 @@ const CyclesPage = () => {
   const formattedCycles: CycleColumn[] = cycles.map((item) => ({
     id: item.id,
     name: item.name,
-    startDate: format(item.dateRange.from, "dd/MM/yyyy"),
-    endDate: format(item.dateRange.to, "dd/MM/yyyy"),
+    startDate: format(item?.dateRange.from, "dd/MM/yyyy"),
+    endDate: format(item?.dateRange.to, "dd/MM/yyyy"), 
     goals: item.goals,
   }))
 
