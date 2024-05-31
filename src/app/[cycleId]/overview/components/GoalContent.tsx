@@ -109,7 +109,7 @@ export default function OverviewContent(props: CycleProps) {
                     </div>
                     <div className="col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-5">
                       <p>
-                        {d.id}-{d.name}
+                        {d.name}
                       </p>
                       <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                         {d.description}

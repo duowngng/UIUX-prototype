@@ -101,29 +101,29 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
 
   const handleFileChange = () => {
     const sampleData = {
-      name: "Kiếm người yêu",
-      description: "Tìm người yêu trong vòng 1 tháng",
+      name: "Hướng dẫn đồ án sinh viên",
+      description: "",
       weight: 50,
       kpis: [
         {
-          name: "Đăng status lên Facebook mỗi ngày",
+          name: "Số lượng sinh viên đăng ký đồ án",
           weight: 50,
           target: 30,
           unit: {
-            value: "bai",
-            label: "Bài",
+            value: "sinhvien",
+            label: "Sinh viên",
           },
-          frequency: "Hàng ngày"
+          frequency: "1 lần"
         },
         {
-          name: "Chạy quảng cáo tìm người yêu",
+          name: "Số lượng sinh viên hoàn thành đồ án",
           weight: 50,
           target: 30,
           unit: {
-            value: "ngay",
-            label: "ngày",
+            value: "sinhvien",
+            label: "Sinh viên",
           },
-          frequency: "Hàng tuần"
+          frequency: "Hàng tháng"
         }
       ]
     
