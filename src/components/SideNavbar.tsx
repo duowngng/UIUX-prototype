@@ -5,6 +5,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
+  Bell,
   CalendarRange,
   FolderIcon as FolderLucideIcon,
   FolderOpenIcon,
@@ -49,6 +50,7 @@ export default function Sidebar() {
             </SheetContent>
           </Sheet>
           <div className="flex flex-1 items-center justify-end gap-x-4 self-stretch lg:gap-x-6">
+            <Bell className="h-5 w-5 shrink-0" aria-hidden="true"/>
             <ProfileMenu size="small" className="mr-3 mt-1.5" />
           </div>
         </div>
