@@ -57,6 +57,7 @@ export function FancyBox({
   onChange: (value: Unit) => void;
   value: Unit | undefined;
 }) {
+  value = value?.value === "" && value?.label === "" ? undefined : value;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [units, setUnits] = React.useState<Unit[]>(UNITS);
   const [openCombobox, setOpenCombobox] = React.useState(false);

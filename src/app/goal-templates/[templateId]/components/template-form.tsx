@@ -444,7 +444,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
                   variant="secondary"
                   size="icon"
                   type="button"
-                  onClick={() => append({ name: "", weight: NaN, target: NaN, unit:undefined, frequency: ""})}
+                  onClick={() => append({ name: "", weight: NaN, target: NaN, unit: { value: "", label: "" }, frequency: ""})}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
