@@ -115,7 +115,7 @@ export const SidebarComponent = ({ className }: { className?: string }) => {
 
         <div  className="flex h-16 shrink-0 items-center space-x-3">
         
-        <iframe src="https://drive.google.com/file/d/1cT3QhGBUh8NNXh7-gNgXkWpuL6X_JwvN/preview" width="640" height="480" allow="autoplay"></iframe>
+        <img></img>
           <p className="flex items-center text-3xl font-bold  tracking-tighter text-black dark:text-white">
             Kapiota{" "}
           </p>

@@ -36,8 +36,8 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
 
   const fromDate = new Date(currentCycle.dateRange.from.toString());
   const toDate = new Date(currentCycle.dateRange.to.toString());
-  const fromDateFormatted = new Date(fromDate).toLocaleDateString('en-GB');
-  const toDateFormatted = new Date(toDate).toLocaleDateString('en-GB');
+  const fromDateFormatted = new Date(fromDate).toLocaleDateString("en-GB");
+  const toDateFormatted = new Date(toDate).toLocaleDateString("en-GB");
   const timeDiff = Math.abs(toDate.getTime() - fromDate.getTime());
   const Currentime = new Date();
   const ctimeDiff = Math.abs(Currentime.getTime() - fromDate.getTime());
@@ -97,7 +97,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
   const [selectedKPI, setSelectedKPI] = useState<any>(null); // dâta cho modal
   const [additionalValue, setAdditionalValue] = useState("");
   const showModal = (data: any) => {
-    setSelectedKPI(data); 
+    setSelectedKPI(data);
     setOpen(true);
   };
   const handleUpdate = () => {
@@ -109,7 +109,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
     console.log("Clicked cancel button");
     setOpen(false);
   };
- 
+
   return (
     <>
       <MantineProvider>
@@ -239,7 +239,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
             </div>
           </CardContent>
 
-          <CardContent className="row-start-1 h-60  md:col-start-3 md:h-64 ">
+          <CardContent className="row-start-1  md:col-start-3 ">
             <p className="text-sm md:text-md ">KPI đến lịch cập nhật</p>
             <div className="grid grid-cols-7  items-center border-b-2 pb-2">
               <p className="text-xs md:text-sm text-gray-400 col-start-1 col-span-2">
@@ -299,7 +299,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
             <section>
               <p>Mục tiêu</p>
               <p className="text-sm text-gray-400">
-                Cập nhật lần cuối lúc 15:50  31-05-2024
+                Cập nhật lần cuối lúc 15:50 31-05-2024
               </p>
             </section>
             {Goals.map((d, j) => (
@@ -327,16 +327,20 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                           />
                         </div>
                         <div className="text-sm md:text-md col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-7 md:col-start-2">
-                          <p>
-                          {d.name}
-                          </p>
+                          <p>{d.name}</p>
                           <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                             {d.description}
                           </p>
                         </div>
                         <div className="truncate text-left row-start-3 row-span-1 col-span-3 md:col-span-4 md:col-start-2">
                           <p className="text-xs sm:text-sm text-gray-600 md:col-span-4 md:col-start-2">
-                          {new Date( currentCycle.dateRange.from).toLocaleDateString('en-GB')}:{new Date( currentCycle.dateRange.to).toLocaleDateString('en-GB')}
+                            {new Date(
+                              currentCycle.dateRange.from
+                            ).toLocaleDateString("en-GB")}
+                            :
+                            {new Date(
+                              currentCycle.dateRange.to
+                            ).toLocaleDateString("en-GB")}
                           </p>
                         </div>
                       </div>
@@ -436,75 +440,75 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           </CardContent>
           {/*  */}
         </section>
-    
-             
 
-                      <Modal
-                        title={"Cập nhật KPI: " + selectedKPI?.name}
-                        open={open}
-                        closable={false}
-                        onCancel={handleCancel}
-                        footer={[
-                          <Button
-                            key={1}
-                            style={{ backgroundColor: "rgb(75,85,99)" }}
-                            className="mr-3"
-                            onClick={handleCancel}
-                          >
-                            Hủy
-                          </Button>,
-                          <Button
-                            key={2}
-                            style={{ backgroundColor: "rgb(13,148,136)" }}
-                            className="mr-3"
-                            onClick={handleUpdate}
-                          >
-                            Cập nhật
-                          </Button>,
-                        ]}
-                      >
-                        <div>
-                          <div
-                            style={{ display: "flex", flexDirection: "column" }}
-                            className="gap-4"
-                          >
-                            <div>
-                              <label htmlFor="progress">
-                                Tiến độ: {((selectedKPI?.actual * 100.0) / selectedKPI?.target).toFixed(1)}%
-                              </label>{" "}
-                              <Progress
-                                value={(selectedKPI?.actual * 100.0) / selectedKPI?.target}
-                                size={"md"}
-                                color={getProgressColor(
-                                  (100.0 * selectedKPI?.actual) / selectedKPI?.target
-                                )}
-                                id="progressBar"
-                              />
-                            </div>
+        <Modal
+          title={"Cập nhật KPI: " + selectedKPI?.name}
+          open={open}
+          closable={false}
+          onCancel={handleCancel}
+          footer={[
+            <Button
+              key={1}
+              style={{ backgroundColor: "rgb(75,85,99)" }}
+              className="mr-3"
+              onClick={handleCancel}
+            >
+              Hủy
+            </Button>,
+            <Button
+              key={2}
+              style={{ backgroundColor: "rgb(13,148,136)" }}
+              className="mr-3"
+              onClick={handleUpdate}
+            >
+              Cập nhật
+            </Button>,
+          ]}
+        >
+          <div>
+            <div
+              style={{ display: "flex", flexDirection: "column" }}
+              className="gap-4"
+            >
+              <div>
+                <label htmlFor="progress">
+                  Tiến độ:{" "}
+                  {(
+                    (selectedKPI?.actual * 100.0) /
+                    selectedKPI?.target
+                  ).toFixed(1)}
+                  %
+                </label>{" "}
+                <Progress
+                  value={(selectedKPI?.actual * 100.0) / selectedKPI?.target}
+                  size={"md"}
+                  color={getProgressColor(
+                    (100.0 * selectedKPI?.actual) / selectedKPI?.target
+                  )}
+                  id="progressBar"
+                />
+              </div>
 
-                            <label htmlFor="actual">Đã đạt:{selectedKPI?.actual}</label>
+              <label htmlFor="actual">Đã đạt:{selectedKPI?.actual}</label>
 
-                            <label htmlFor="target">Mục tiêu: {selectedKPI?.target}</label>
-                            <label htmlFor="target">Đơn vị: {selectedKPI?.unit}</label>
-                            
+              <label htmlFor="target">Mục tiêu: {selectedKPI?.target}</label>
+              <label htmlFor="target">Đơn vị: {selectedKPI?.unit}</label>
 
-                            <label htmlFor="weight">Trọng số: {selectedKPI?.weight}</label>
+              <label htmlFor="weight">Trọng số: {selectedKPI?.weight}</label>
 
-                            <label htmlFor="additionalValue">Giá trị tăng thêm</label>
-                            <TextInput
-                              placeholder="Giá trị tăng thêm"
-                              id="additionalValue"
-                              value={additionalValue}
-                              onChange={(e) => setAdditionalValue(e.target.value)}
-                            />
+              <label htmlFor="additionalValue">Giá trị tăng thêm</label>
+              <TextInput
+                placeholder="Giá trị tăng thêm"
+                id="additionalValue"
+                value={additionalValue}
+                onChange={(e) => setAdditionalValue(e.target.value)}
+              />
 
-                            <label htmlFor="note">Ghi chú:</label>
-                            <TextInput placeholder="Ghi chú" id="note" />
-                          </div>
-                        </div>
-                      </Modal>
-                    
-            
+              <label htmlFor="note">Ghi chú:</label>
+              <TextInput placeholder="Ghi chú" id="note" />
+            </div>
+          </div>
+        </Modal>
       </MantineProvider>
     </>
   );
