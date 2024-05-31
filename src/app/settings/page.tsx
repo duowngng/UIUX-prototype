@@ -21,44 +21,39 @@ import { cn } from "@/lib/utils";
 
 type Props = {};
 
-interface Setting {
-  category: string;
-  value: string | number | boolean;
-}
-
-const columns: ColumnDef<Setting>[] = [
+const columns = [
   {
     accessorKey: "category",
-    header: "Category"
+    header: ""
   },
   {
     accessorKey: "value",
-    header: "Value"
+    header: ""
   }
 ];
-const data: Setting[] = [
+const data = [
   {
-    category: "Account",
+    category: "Tài khoản",
     value: true
   },
   {
-    category: "Notifications",
+    category: "Thông báo",
     value: false
   },
   {
-    category: "Language",
-    value: "English"
+    category: "Ngôn ngữ",
+    value: "Tiếng Việt"
   },
   {
-    category: "Theme",
-    value: "Dark"
+    category: "Giao diện",
+    value: "Tối"
   }
 ];
 
-export default function SettingsPage({}: Props) {
+export default function TrangCàiĐặt({}: Props) {
   return (
     <div className="flex flex-col gap-5 p-8 pt-6 w-full">
-      <PageTitle title="Settings" />
+      <PageTitle title="Cài đặt" />
       <DataTable columns={columns} data={data} />
     </div>
   );
