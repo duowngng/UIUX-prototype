@@ -25,6 +25,7 @@ import {
 } from "@tabler/icons-react";
 import { ActionIcon, Group, Button } from "@mantine/core";
 import { Edit } from "lucide-react";
+import toast from "react-hot-toast";
 
 export type Cycle = (typeof data.cycles)[0];
 export type CycleProps = {
@@ -103,6 +104,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
   const handleUpdate = () => {
     const newActual = selectedKPI.actual + parseFloat(additionalValue);
     selectedKPI.actual = newActual;
+    toast.success("Cập nhật thành công");
     setOpen(false);
   };
   const handleCancel = () => {
