@@ -29,7 +29,7 @@ import data from "@/app/data.json";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Plus } from "lucide-react";
 import { Heading } from "@/components/ui/heading";
-
+import { saveAs } from 'file-saver';
 import { useRouter } from "next/navigation";
 
 
@@ -74,7 +74,13 @@ const Home = ({
               <DropdownMenuLabel>Kết quả chu kỳ </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>CSV</DropdownMenuItem>
-              <DropdownMenuItem>PDF</DropdownMenuItem>
+
+              <DropdownMenuItem onClick={() => {
+                const fileUrl = 'https://drive.google.com/file/d/1F4qi8R29fbziJza6Pxkgc86T21LYNkeH/view?usp=drive_link'; // Replace with the actual file URL
+                saveAs(fileUrl, 'Báo Cáo Học Kỳ 1 Năm 2023-2024.pdf');
+              }}>
+                PDF
+              </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
         </div>

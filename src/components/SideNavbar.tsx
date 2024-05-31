@@ -90,7 +90,7 @@ export const SidebarComponent = ({ className }: { className?: string }) => {
       disabled: false,
     },
     {
-      name: "Settings",
+      name: "Cài đặt",
       href: "/settings",
       icon: SettingsIcon,
       current:

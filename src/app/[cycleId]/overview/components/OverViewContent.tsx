@@ -327,7 +327,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           {/*  */}
         </section>
         <Modal
-                              title="Title"
+                              title="Cập nhật KPI"
                               open={open}
                               closable ={false}
                               // onOk={handleOk}
@@ -343,9 +343,12 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                               ]}
                             ><div>
                             <TextInput
+                            placeholder="Giá trị tăng thêm"
                 
                             />
                             <TextInput
+                            className="mt-4"
+                            placeholder="Ghi chú"
                         
                             />               
                           </div>
