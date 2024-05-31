@@ -491,7 +491,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                 />
               </div>
 
-              <label htmlFor="actual">Đã đạt:{selectedKPI?.actual}</label>
+              <label htmlFor="actual">Đã đạt: {selectedKPI?.actual}</label>
 
               <label htmlFor="target">Mục tiêu: {selectedKPI?.target}</label>
               <label htmlFor="target">Đơn vị: {selectedKPI?.unit}</label>
