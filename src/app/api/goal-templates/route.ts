@@ -7,7 +7,7 @@ export async function POST(
   try {
     const templatesData = await fs.readJson('./src/app/data.json'); // Read existing data
     const newData = await req.json(); // Type assertion for request body
-    newData.kpis = newData.kpis.map(kpi => ({
+    newData.kpis = newData.kpis.map((kpi: any) => ({
       ...kpi,
       unit: kpi.unit.label // Extract only the 'label' value from the unit object
   }));

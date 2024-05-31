@@ -30,7 +30,7 @@ import { Input } from "@/components/ui/input";
 import { CellAction } from "./cell-action";
 
 import { ChevronDown, ChevronUp, X, ArrowUpDown, ChevronsLeftRightIcon, ArrowDownIcon, ArrowUpIcon } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Button } from "@/components/ui/button"; // Assuming you have a Button component
 
 import data from "@/app/data.json";
@@ -41,14 +41,15 @@ export default function TemplatesTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [openStates, setOpenStates] = useState({});
+  const [openStates, setOpenStates] = useState<{ [key: string]: boolean }>({});
 
-  const toggleOpenState = (id: any) => {
-    setOpenStates({
-      ...openStates,
-      [id]: !openStates[id]
-    });
-  };
+  
+  const toggleOpenState: (id: string) => void = useCallback((id: string) => {
+    setOpenStates(prevOpenStates => ({
+      ...prevOpenStates,
+      [id]: !prevOpenStates[id]
+    }));
+  }, []);
 
   const renderSortIcon = (column: any) => {
     const sort = column.getIsSorted();
@@ -137,11 +138,13 @@ export default function TemplatesTable() {
         {
           id: 'toggle',
           cell: ({ row }) => (
-            openStates[row.original.id] ? <ChevronUp size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} /> : <ChevronDown size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} />
+            openStates[row.original.id] 
+              ? <ChevronUp size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} /> 
+              : <ChevronDown size={24} className="cursor-pointer" onClick={() => toggleOpenState(row.original.id)} />
           ),
         },
     ],
-    [openStates]
+    [openStates, toggleOpenState]
   );
 
   const table = useReactTable({

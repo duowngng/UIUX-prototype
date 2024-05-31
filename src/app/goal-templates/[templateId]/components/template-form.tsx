@@ -53,7 +53,7 @@ const formSchema = z.object({
       unit: z.object({
         value: z.string().min(1),
         label: z.string().min(1),
-      }),
+      }).optional(),
       frequency: z.string().min(1),
     })
   ),
@@ -98,8 +98,6 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
     control,
     name: "kpis",
   });
-  
-  const fileInputRef = useRef(null);
 
   const handleFileChange = () => {
     const sampleData = {
@@ -137,8 +135,10 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
     toast.success("Đã nhập dữ liệu từ file");
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null); 
+
   const handleOpenFileChooser = () => {
-    fileInputRef.current.click();
+    fileInputRef.current?.click(); 
   };
 
   const onSubmit = async (data: TemplateFormValues) => {
