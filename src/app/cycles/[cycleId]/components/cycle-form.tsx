@@ -38,14 +38,14 @@ import data from "@/app/data.json";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const formSchema = z.object({
-  name: z.string().min(1, { message: "Name must be at least 1 characters." }),
+  name: z.string().min(1, { message: "Tên không được để trống" }),
   dateRange: z.object(
       {
         from: z.date(),
         to: z.date(),
       },
       {
-        required_error: "Please select a date range",
+        required_error: "Ngày bắt đầu và kết thúc không được để trống",
       }
     ),
     goals: z.array(
@@ -68,7 +68,7 @@ const formSchema = z.object({
   })
   .refine((data) => data.dateRange.from < data.dateRange.to, {
     path: ["dateRange"],
-    message: "From date must be before to date",
+    message: "Ngày bắt đầu phải trước ngày kết thúc",
   });
 
 type CycleFormValues = z.infer<typeof formSchema>;

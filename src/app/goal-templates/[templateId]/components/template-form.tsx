@@ -42,19 +42,31 @@ import {
 import { FancyBox } from "./fancy-box";
 
 const formSchema = z.object({
-  name: z.string().min(1),
-  description: z.string().min(1),
-  weight: z.coerce.number().min(1).max(100),
+  name: z.string().min(1, "Tên không được để trống"),
+  description: z.string().min(1, "Mô tả không được để trống"),
+  weight: z.coerce.number({
+    invalid_type_error: "Trọng số không được để trống",
+    required_error: "Trọng số không được để trống",
+  }).min(1).max(100, "Trọng số phải từ 1 đến 100"),
   kpis: z.array(
     z.object({
-      name: z.string().min(1),
-      weight: z.coerce.number().min(1).max(100),
-      target: z.coerce.number().min(1),
+      name: z.string().min(1, "Tên không được để trống"),
+      weight: z.coerce.number({
+        invalid_type_error: "Trọng số không được để trống",
+        required_error: "Trọng số không được để trống",
+      }).min(1).max(100, "Trọng số phải từ 1 đến 100"),
+      target: z.coerce.number({
+        invalid_type_error: "Trọng số không được để trống",
+        required_error: "Trọng số không được để trống",
+      }).min(1),
       unit: z.object({
         value: z.string().min(1),
         label: z.string().min(1),
-      }).optional(),
-      frequency: z.string().min(1),
+      }).refine(data => data.value && data.label, {
+        message: "Đơn vị không được để trống",
+        path: ["unit"]
+      }),
+      frequency: z.string().min(1, "Tần suất không được để trống"),
     })
   ),
 
@@ -432,7 +444,7 @@ export const TemplateForm: React.FC<TemplateFormProps> = ({
                   variant="secondary"
                   size="icon"
                   type="button"
-                  onClick={() => append({ name: "", weight: NaN, target: NaN, unit:undefined, frequency: ""})}
+                  onClick={() => append({ name: "", weight: NaN, target: NaN, unit: { value: "", label: "" }, frequency: ""})}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
