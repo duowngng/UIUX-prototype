@@ -56,7 +56,12 @@ const Home = ({ params }: { params: { cycleId: string } }) => {
                   <DropdownMenuLabel>Kết quả chu kỳ </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>CSV</DropdownMenuItem>
-                  <DropdownMenuItem>PDF</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => {
+                const fileUrl = 'https://drive.google.com/uc?export=download&id=1F4qi8R29fbziJza6Pxkgc86T21LYNkeH'; 
+                saveAs(fileUrl, 'Báo Cáo Học Kỳ 1 Năm 2023-2024.pdf');
+              }}>
+                PDF
+              </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

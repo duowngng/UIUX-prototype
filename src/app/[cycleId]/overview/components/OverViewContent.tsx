@@ -23,7 +23,6 @@ import {
   IconCircle,
   IconCircleCheck,
 } from "@tabler/icons-react";
-// import { Edit } from '@tabler/icons-react';
 import { ActionIcon, Group, Button } from "@mantine/core";
 import { Edit } from "lucide-react";
 
@@ -95,13 +94,13 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
-  const [modalData, setModalData] = useState<any>(null); // dâta cho modal
+  const [selectedKPI, setSelectedKPI] = useState<any>(null); // dâta cho modal
 
   const showModal = (data: any) => {
-    setModalData(data); 
+    setSelectedKPI(data); 
     setOpen(true);
   };
-  const handleOk = () => {
+  const handleUpdate = () => {
     setModalText("Đang phát triển chức năng cập nhật KPI");
     setConfirmLoading(true);
     setTimeout(() => {
@@ -114,21 +113,15 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
     console.log("Clicked cancel button");
     setOpen(false);
   };
-  const form = useForm({
-    mode: "uncontrolled",
-    initialValues: {
-      name: "",
-      email: "",
-    },
-  });
+ 
   return (
     <>
       <MantineProvider>
-        <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between ">
+        <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-3 justify-between mb-4">
           <CardContent className="grid content-between">
             <section className="flex justify-between ">
               {/* label */}
-              <p className="text-sm">Tổng quan mục tiêu</p>
+              <p className="text-sm md:text-md">Tổng quan mục tiêu</p>
             </section>
             <div>
               <section className="flex flex-col py-4">
@@ -174,7 +167,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
             </section>
           </CardContent>
           <CardContent>
-            <p className="text-sm">Trạng thái mục tiêu </p>
+            <p className="text-sm md:text-md">Trạng thái mục tiêu </p>
             <div className="flex gap-10 items-center flex-wrap justify-center">
               {/* <div className='absolute text-5xl font-black ml-16'>{cycleProgress} </div> */}
               <div>
@@ -251,7 +244,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           </CardContent>
 
           <CardContent className="row-start-1 h-60  md:col-start-3 md:h-64 ">
-            <p className="text-sm  ">KPI đến lịch cập nhật</p>
+            <p className="text-sm md:text-md ">KPI đến lịch cập nhật</p>
             <div className="grid grid-cols-7  items-center border-b-2 pb-2">
               <p className="text-xs md:text-sm text-gray-400 col-start-1 col-span-2">
                 Tên KPI
@@ -293,7 +286,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             aria-label="autoContrast action icon"
                             size="lg"
                             color="gray.2"
-                            onClick={showModal}
+                            onClick={() => showModal(kpi)}
                           >
                             <Edit size={15} />
                           </ActionIcon>
@@ -310,7 +303,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
             <section>
               <p>Mục tiêu</p>
               <p className="text-sm text-gray-400">
-                Cập nhật lần cuối lúc 12:00 PM 27-05-2024
+                Cập nhật lần cuối lúc 15:50  31-05-2024
               </p>
             </section>
             {Goals.map((d, j) => (
@@ -337,9 +330,9 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
                             }))}
                           />
                         </div>
-                        <div className="col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-7 md:col-start-2">
+                        <div className="text-sm md:text-md col-span-2 row-start-1 row-span-2 truncate text-left md:col-span-7 md:col-start-2">
                           <p>
-                            {d.id}-{d.name}
+                          {d.name}
                           </p>
                           <p className="text-xs sm:text-sm text-gray-600 truncate hover:text-clip">
                             {d.description}
@@ -447,43 +440,66 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
           </CardContent>
           {/*  */}
         </section>
-        <Modal
-                              title="Cập nhật KPI"
-                              open={open}
-                              closable ={false}
-                              // onOk={handleOk}
-                              // confirmLoading={confirmLoading}
+    
+                {/* Modal */}
+                <Modal
+                  title={"Cập nhật KPI: "+selectedKPI?.name}
+                  open={open}
+                  closable={false}
+                  onCancel={handleCancel}
+                  footer={[
+                    <Button
+                      key={1}
+                      style={{ backgroundColor: "rgb(75,85,99)" }}
+                      className="mr-3"
+                      onClick={handleCancel}
+                    >
+                      Hủy
+                    </Button>,
+                    <Button
+                      key={2}
+                      style={{ backgroundColor: "rgb(13,148,136)" }}
+                      className="mr-3"
+                      onClick={handleUpdate}
+                    >
+                      Cập nhật
+                    </Button>,
+                  ]}
+                >
+                  <div>
+                    <div style={{ display: "flex", flexDirection: "column"}} className="gap-4">
+                      <div>
+                      <label htmlFor="progress">Tiến độ:  {((selectedKPI?.actual * 100.0) / selectedKPI?.target).toFixed(1)}%</label>  <Progress
+                        value={(selectedKPI?.actual * 100.0) / selectedKPI?.target}
+                        size={"md"}
+                        color={getProgressColor((100.0 * selectedKPI?.actual) / selectedKPI?.target)}
+                        id="progressBar"
+                      />
+                      </div>
 
-          // onCancel={handleCancel}
-          footer={[
-            <Button
-              key={1}
-              style={{ backgroundColor: "rgb(75,85,99)" }}
-              className="mr-3"
-            >
-              Hủy
-            </Button>,
-            <Button
-              key={2}
-              style={{ backgroundColor: "rgb(13,148,136)" }}
-              className="mr-3"
-            >
-              Cập nhật
-            </Button>,
-          ]}
-        >
-          <div>
-          <TextInput
-                            placeholder="Giá trị tăng thêm"
-                
-                            />
-                            <TextInput
-                            className="mt-4"
-                            placeholder="Ghi chú"
-                        
-                            />       
-          </div>
-        </Modal>
+                      <label htmlFor="actual">Đã đạt:{selectedKPI?.actual}</label>
+
+                      <label htmlFor="target">Mục tiêu: {selectedKPI?.target}</label>
+
+                      <label htmlFor="weight">Trọng số: {selectedKPI?.weight}</label>
+                    
+                      <label htmlFor="additionalValue">Giá gị tăng thêm</label>
+                      <TextInput
+                        placeholder="Giá trị tăng thêm"
+                        id="additionalValue"
+                        value={additionalValue}
+                        onChange={handleAdditionalValueChange}
+                      />
+                      <label htmlFor="note">Ghi chú:</label>
+                      <TextInput
+                        placeholder="Ghi chú"
+                        value={selectedKPI?.note} // Use the selected KPI note here
+                        id="note"
+                      />
+                    </div>
+                  </div>
+                </Modal>
+            
       </MantineProvider>
     </>
   );
