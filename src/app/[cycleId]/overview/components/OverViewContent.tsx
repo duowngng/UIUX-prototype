@@ -239,7 +239,7 @@ const OverviewContent: React.FC<CycleProps> = (props) => {
             </div>
           </CardContent>
 
-          <CardContent className="row-start-1  md:col-start-3 ">
+          <CardContent className="row-start-1 h-60  md:col-start-3 md:h-64 ">
             <p className="text-sm md:text-md ">KPI đến lịch cập nhật</p>
             <div className="grid grid-cols-7  items-center border-b-2 pb-2">
               <p className="text-xs md:text-sm text-gray-400 col-start-1 col-span-2">
